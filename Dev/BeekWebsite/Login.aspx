@@ -9,8 +9,18 @@
 <body>
     <form id="form1" runat="server">
     <div>
+        <asp:Login ID="Login1" runat="server">
+        </asp:Login>
     
     </div>
+        <asp:CreateUserWizard ID="CreateUserWizard1" runat="server">
+            <WizardSteps>
+                <asp:CreateUserWizardStep runat="server">
+                </asp:CreateUserWizardStep>
+                <asp:CompleteWizardStep runat="server">
+                </asp:CompleteWizardStep>
+            </WizardSteps>
+        </asp:CreateUserWizard>
     </form>
 </body>
 </html>
