@@ -4,6 +4,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head runat="server">
     <title>Beek - Login</title>
+<script language="javascript" type="text/javascript">
+</script>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -14,7 +16,7 @@
             <WizardSteps>
                 <asp:CreateUserWizardStep runat="server">
                     <ContentTemplate>
-                        <table border="0">
+                        <table border="0" id="TABLE1" onclick="return TABLE1_onclick()">
                             <tr>
                                 <td align="center" colspan="2">
                                     Sign Up for Your New Account</td>
