@@ -5,15 +5,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head runat="server">
     <title>Welcome</title>
-    
+    <link href="./css/default.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
     <form id="form1" runat="server">
-        <div id="Header">
+        <div id="header">
             <div id="logo">
+                logologo
             </div>   
         </div>
-        <div id="Content">
+        <div id="content">
             here comes loads of content y'all want to read!
         </div>
     </form>
