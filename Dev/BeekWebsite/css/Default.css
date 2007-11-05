@@ -6,13 +6,24 @@
 	width: 100%;
 	height: 100%;
 	background-color: #272222;
-	background-image: url(pics/bgndStripes.png);
+	background-image: url(../pics/bgndStripes.png);
 	font-family: "century gothic";
 }
+#centerWrapper
+{
+	margin-left: auto;
+	margin-right: auto;
+	width: 600px;
+}
 
+#header
+{
+	height: 150px;
+}
 #logo
 {
+	background-color: white;
 	background-image: url(".\App_GlobalResources.png");
 	width: 100px;
-	height:100px;
+	height:150px;
 }
