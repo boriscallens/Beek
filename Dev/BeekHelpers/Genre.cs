@@ -1,8 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace BeekHelpers
+namespace Beek.Helpers
 {
     public struct Genres
     {
