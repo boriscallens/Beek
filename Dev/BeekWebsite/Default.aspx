@@ -9,13 +9,26 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <div id="header">
-            <div id="logo">
-                logologo
-            </div>   
-        </div>
-        <div id="content">
-            here comes loads of content y'all want to read!
+        <div id="centerWrapper">
+            <div id="header">
+                <div id="logo" class="shadow">
+                    <img src="pics/logo.jpg" width="150" height="150" alt="Beek Logo depicting a red letter B" />
+                </div>
+                <div id="navBlocks">
+                    <div class="navblock">
+                        Home
+                    </div>
+                    <div class="navblock">
+                        Search
+                    </div>
+                    <div class="navblock">
+                        My Stuff
+                    </div>
+                </div>
+            </div>
+            <div id="content">
+                here comes loads of content y'all want to read!
+            </div>
         </div>
     </form>
 </body>
