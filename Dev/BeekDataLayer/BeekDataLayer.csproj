@@ -30,19 +30,18 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Beek.cs" />
+    <Compile Include="Beekl\Beek.cs" />
+    <Compile Include="Beekl\Writer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BeekHelpers\BeekHelpers.csproj">
+    <ProjectReference Include="..\BeekHelpers\Helpers.csproj">
       <Project>{ECC817DC-8B68-4F5D-B2C3-B33800E5FBF9}</Project>
-      <Name>BeekHelpers</Name>
+      <Name>Helpers</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Beekl\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

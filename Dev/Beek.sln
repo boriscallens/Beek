@@ -24,7 +24,7 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "D:\...\BeekWebsite\", "Beek
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeekDataLayer", "BeekDataLayer\BeekDataLayer.csproj", "{3156EA15-4684-48E7-909E-437C3C55ED08}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeekHelpers", "BeekHelpers\BeekHelpers.csproj", "{ECC817DC-8B68-4F5D-B2C3-B33800E5FBF9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helpers", "BeekHelpers\Helpers.csproj", "{ECC817DC-8B68-4F5D-B2C3-B33800E5FBF9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
