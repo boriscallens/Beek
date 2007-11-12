@@ -8,13 +8,20 @@ namespace Beek.DataLayer
         private string isbn = string.Empty;
         private string title = string.Empty;
         private List<Writer> writers;
-        private bool fiction;
+        private Fiction fiction = Fiction.Unspecified;
         private List<Genre> genres;
+        private WritingStyle writingStyle = WritingStyle.Unspecified;
+        private int pages = 0;
+        private List<Publisher> publishers;
 
         public Beek()
         {
             genres = new List<Genre>();
             genres.Add(Genre.Unspecified);
+            writers = new List<Writer>();
         }
+
+
+
     }
 }
