@@ -33,8 +33,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Beekl\Beek.cs" />
-    <Compile Include="Beekl\Writer.cs" />
+    <Compile Include="Beek.cs" />
+    <Compile Include="Illustrator.cs" />
+    <Compile Include="Print.cs" />
+    <Compile Include="Publisher.cs" />
+    <Compile Include="Writer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
