@@ -13,6 +13,7 @@ namespace Beek.DataLayer
         private WritingStyle writingStyle = WritingStyle.Unspecified;
         private List<Beek> restOfSeries;
         private List<Print> prints;
+        private int targetAgeUsers;
 
         public Beek()
         {
@@ -21,7 +22,6 @@ namespace Beek.DataLayer
             restOfSeries = new List<Beek>();
             prints = new List<Print>();
         }
-
         
     }
 }

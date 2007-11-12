@@ -31,4 +31,21 @@ namespace Beek.Helpers
         German,
         Unlisted
     }
+    public enum Category
+    {
+        Unspecified,
+        Book,
+        Comic,
+        ShortStory,
+        Poem,
+        Unlisted
+    }
+    public enum Format
+    {
+        Unspecified,
+        HardCover,
+        Pocket,
+        BiblePaper,
+        Unlisted
+    }
 }
