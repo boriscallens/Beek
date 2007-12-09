@@ -18,9 +18,11 @@ namespace Beek.DataLayer
         private List<string> quotes;
         private Category category = Category.Unspecified;
         private List<Format> formats;
+        private Beek myBeek;
 
         public Print(Beek beek)
         {
+            myBeek = beek;
             writers = new List<Writer>();
             publishers = new List<Publisher>();
             illustrators = new List<Illustrator>();
