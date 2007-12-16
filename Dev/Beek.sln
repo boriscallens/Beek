@@ -24,6 +24,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeekDataLayer", "BeekDataLa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeekHelpers", "BeekHelpers\BeekHelpers.csproj", "{ECC817DC-8B68-4F5D-B2C3-B33800E5FBF9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeekControls", "BeekControls\BeekControls.csproj", "{F4E638B0-D26E-47F1-9AD5-A7A6F2FB715A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|.NET = Debug|.NET
@@ -63,6 +65,16 @@ Global
 		{ECC817DC-8B68-4F5D-B2C3-B33800E5FBF9}.Release|Any CPU.Build.0 = Release|Any CPU
 		{ECC817DC-8B68-4F5D-B2C3-B33800E5FBF9}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{ECC817DC-8B68-4F5D-B2C3-B33800E5FBF9}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{F4E638B0-D26E-47F1-9AD5-A7A6F2FB715A}.Debug|.NET.ActiveCfg = Debug|Any CPU
+		{F4E638B0-D26E-47F1-9AD5-A7A6F2FB715A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4E638B0-D26E-47F1-9AD5-A7A6F2FB715A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4E638B0-D26E-47F1-9AD5-A7A6F2FB715A}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{F4E638B0-D26E-47F1-9AD5-A7A6F2FB715A}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{F4E638B0-D26E-47F1-9AD5-A7A6F2FB715A}.Release|.NET.ActiveCfg = Release|Any CPU
+		{F4E638B0-D26E-47F1-9AD5-A7A6F2FB715A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4E638B0-D26E-47F1-9AD5-A7A6F2FB715A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4E638B0-D26E-47F1-9AD5-A7A6F2FB715A}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{F4E638B0-D26E-47F1-9AD5-A7A6F2FB715A}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
