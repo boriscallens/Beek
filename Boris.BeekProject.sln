@@ -1,0 +1,48 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "00 Dependencies", "00 Dependencies", "{A9F2056D-93F5-41FD-9CCB-AEF81A302D7B}"
+	ProjectSection(SolutionItems) = preProject
+		dependencies\Microsoft.Web.Mvc.dll = dependencies\Microsoft.Web.Mvc.dll
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01 Libs", "01 Libs", "{671EA85F-5F9A-4C59-8C25-0649DE02C6D3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02 Utils", "02 Utils", "{D14A770C-1B48-4E98-A494-19345CCF37CC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "03 Guis", "03 Guis", "{F61C7CC3-C439-466A-8113-BD196F9A2A4D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boris.Utils.NHaml", "..\Boris.Utils\Boris.Utils.NHaml\Boris.Utils.NHaml.csproj", "{55F3B8DE-22BA-4632-BAFD-CB4AB3A210BB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boris.BeekProject.Model", "Boris.BeekProject.Model\Boris.BeekProject.Model.csproj", "{7A10D58A-1F92-462E-B722-034EF25AE2F3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boris.BeekProject.Website", "Boris.BeekProject.Website\Boris.BeekProject.Website.csproj", "{31E3787F-876A-43FC-93EF-D0715DF4B486}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{55F3B8DE-22BA-4632-BAFD-CB4AB3A210BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55F3B8DE-22BA-4632-BAFD-CB4AB3A210BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55F3B8DE-22BA-4632-BAFD-CB4AB3A210BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55F3B8DE-22BA-4632-BAFD-CB4AB3A210BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A10D58A-1F92-462E-B722-034EF25AE2F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A10D58A-1F92-462E-B722-034EF25AE2F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A10D58A-1F92-462E-B722-034EF25AE2F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A10D58A-1F92-462E-B722-034EF25AE2F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31E3787F-876A-43FC-93EF-D0715DF4B486}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31E3787F-876A-43FC-93EF-D0715DF4B486}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31E3787F-876A-43FC-93EF-D0715DF4B486}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31E3787F-876A-43FC-93EF-D0715DF4B486}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{31E3787F-876A-43FC-93EF-D0715DF4B486} = {F61C7CC3-C439-466A-8113-BD196F9A2A4D}
+		{7A10D58A-1F92-462E-B722-034EF25AE2F3} = {671EA85F-5F9A-4C59-8C25-0649DE02C6D3}
+		{55F3B8DE-22BA-4632-BAFD-CB4AB3A210BB} = {D14A770C-1B48-4E98-A494-19345CCF37CC}
+	EndGlobalSection
+EndGlobal
