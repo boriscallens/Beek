@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 10.00
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "00 Dependencies", "00 Dependencies", "{A9F2056D-93F5-41FD-9CCB-AEF81A302D7B}"
 	ProjectSection(SolutionItems) = preProject
 		dependencies\Microsoft.Web.Mvc.dll = dependencies\Microsoft.Web.Mvc.dll
+		dependencies\NHaml.dll = dependencies\NHaml.dll
+		dependencies\NHaml.Web.Mvc.dll = dependencies\NHaml.Web.Mvc.dll
+		dependencies\System.Web.Mvc.dll = dependencies\System.Web.Mvc.dll
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01 Libs", "01 Libs", "{671EA85F-5F9A-4C59-8C25-0649DE02C6D3}"
@@ -41,8 +44,8 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{31E3787F-876A-43FC-93EF-D0715DF4B486} = {F61C7CC3-C439-466A-8113-BD196F9A2A4D}
 		{7A10D58A-1F92-462E-B722-034EF25AE2F3} = {671EA85F-5F9A-4C59-8C25-0649DE02C6D3}
 		{55F3B8DE-22BA-4632-BAFD-CB4AB3A210BB} = {D14A770C-1B48-4E98-A494-19345CCF37CC}
+		{31E3787F-876A-43FC-93EF-D0715DF4B486} = {F61C7CC3-C439-466A-8113-BD196F9A2A4D}
 	EndGlobalSection
 EndGlobal
