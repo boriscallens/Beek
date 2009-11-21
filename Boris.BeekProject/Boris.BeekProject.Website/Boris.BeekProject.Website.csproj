@@ -92,7 +92,6 @@
     <Content Include="views\Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="ClassDiagram1.cd" />
     <None Include="views\home\index.haml" />
     <None Include="views\home\_partial.haml" />
     <None Include="views\home\_test.haml" />

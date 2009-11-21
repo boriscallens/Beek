@@ -2,7 +2,7 @@
 using System.Web.Routing;
 using NHaml.Web.Mvc;
 
-namespace MvcApplication4
+namespace Boris.BeekProject.Website
 {
     // Note: For instructions on enabling IIS6 or IIS7 classic mode, 
     // visit http://go.microsoft.com/?LinkId=9394801
