@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Text;
 
-namespace Boris.NHaml.Helpers
+namespace Boris.Utils.NHaml.Helpers
 {
     public static class StyleSheetHelper
     {

@@ -5,7 +5,7 @@ using NHaml.Rules;
 using NHaml.TemplateResolution;
 using System.IO;
 
-namespace Boris.NHaml.Rules
+namespace Boris.Utils.NHaml.Rules
 {
     public class BuildupPlaceHolderRule : MarkupRule
     {
