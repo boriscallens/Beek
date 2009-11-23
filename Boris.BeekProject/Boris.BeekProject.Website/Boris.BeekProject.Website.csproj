@@ -44,37 +44,20 @@
       <HintPath>..\dependencies\NHaml.Web.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Data" />
     <Reference Include="System.ComponentModel.DataAnnotations">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
-    <Reference Include="System.Data.DataSetExtensions">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
     <Reference Include="System.Web.Mvc, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\dependencies\System.Web.Mvc.dll</HintPath>
     </Reference>
-    <Reference Include="System.Xml.Linq">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
-    <Reference Include="System.Web.Abstractions" />
     <Reference Include="System.Web.Routing" />
-    <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
-    <Reference Include="System.Web.Services" />
-    <Reference Include="System.EnterpriseServices" />
-    <Reference Include="System.Web.Mobile" />
-    <Reference Include="xVal, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f8fbed92c68c4006, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\dependencies\xVal.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="controllers\HomeController.cs" />
@@ -108,6 +91,10 @@
     <ProjectReference Include="..\..\Boris.Utils\Boris.Utils.NHaml\Boris.Utils.NHaml.csproj">
       <Project>{55F3B8DE-22BA-4632-BAFD-CB4AB3A210BB}</Project>
       <Name>Boris.Utils.NHaml</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Boris.BeekProject.Model\Boris.BeekProject.Model.csproj">
+      <Project>{7A10D58A-1F92-462E-B722-034EF25AE2F3}</Project>
+      <Name>Boris.BeekProject.Model</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
