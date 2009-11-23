@@ -8,8 +8,8 @@
     <ProjectGuid>{55F3B8DE-22BA-4632-BAFD-CB4AB3A210BB}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Boris.NHaml</RootNamespace>
-    <AssemblyName>Boris.NHaml</AssemblyName>
+    <RootNamespace>Boris.Utils.NHaml</RootNamespace>
+    <AssemblyName>Boris.Utils.NHaml</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
