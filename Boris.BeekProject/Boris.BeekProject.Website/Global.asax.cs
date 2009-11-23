@@ -24,9 +24,8 @@ namespace Boris.BeekProject.Website
         protected void Application_Start()
         {
             RegisterRoutes(RouteTable.Routes);
-            var nHamlMvcViewEngine = new NHamlMvcViewEngine();
-            nHamlMvcViewEngine.TemplateEngine.Options.AddRule(new Boris.NHaml.Rules.BuildupPlaceHolderRule());
-            ViewEngines.Engines.Add(nHamlMvcViewEngine);
+            ViewEngines.Engines.Clear();
+            ViewEngines.Engines.Add(new NHamlMvcViewEngine());
         }
     }
 }
