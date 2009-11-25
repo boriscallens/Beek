@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Web.Mvc;
 
 namespace Boris.BeekProject.Model
 {
-    public interface IUser
+    public interface IUser: IPrinciple
     {
         Guid Id { get; set; }
         string Name { get; set; }

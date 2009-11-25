@@ -1,18 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using Boris.BeekProject.Model.Accounts;
 
-namespace Boris.BeekProject.Model
+namespace Boris.BeekProject.Model.DataAccess
 {
     public interface IUserRepository
     {
-        Guid AddUser(IUser);
+        Guid AddUser(IUser user);
         void RemoveUser(Guid id);
-        IUser GetUserDataForUserName(string name, string brandCode);
+        IUser GetUserDataForUserName(string name);
         IUser GetUserDataForUserId(Guid id);
         T GetSetting<T>(Guid userId) where T : ISetting, new();
         void SetSetting(ISetting setting);
-        IQueryable<T> GetDefaultSettings<T>(string brandCode) where T : ISetting, new();
+        IQueryable<T> GetDefaultSettings<T>() where T : ISetting, new();
     }
 }

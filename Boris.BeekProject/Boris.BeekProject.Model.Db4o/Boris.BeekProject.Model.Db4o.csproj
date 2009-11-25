@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{7A10D58A-1F92-462E-B722-034EF25AE2F3}</ProjectGuid>
+    <ProjectGuid>9990c197-e2cf-4e2b-8e62-86cd0409237d</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Boris.BeekProject.Model</RootNamespace>
-    <AssemblyName>Boris.BeekProject.Model</AssemblyName>
+    <RootNamespace>Boris.BeekProject.Model.Db4o</RootNamespace>
+    <AssemblyName>Boris.BeekProject.Model.Db4o</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -32,25 +32,20 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations">
+    <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
-    <Reference Include="System.Core">
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Accounts\IUser.cs" />
-    <Compile Include="Accounts\IUserRepository.cs" />
-    <Compile Include="Accounts\User.cs" />
-    <Compile Include="Beek\Beek.cs" />
-    <Compile Include="Beek\BluePrint.cs" />
-    <Compile Include="Beek\Genre.cs" />
-    <Compile Include="Beek\WritingStyle.cs" />
-    <Compile Include="DataAccess\ICatalogRepository.cs" />
-    <Compile Include="DataAccess\IUserRepository.cs" />
+    <Compile Include="Class1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
