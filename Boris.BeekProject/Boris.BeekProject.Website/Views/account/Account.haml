@@ -1,0 +1,6 @@
+﻿^title += "- account - subscribe"
+- StyleSheetHelper.AddStyleSheet("subscribe");
+- ScriptSheetHelper.AddScript("subscribe");
+%h2 Create Account
+  %form{method="post"}
+    = Html.FormField<OpenAccount>

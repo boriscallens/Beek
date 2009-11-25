@@ -60,6 +60,7 @@
     <Reference Include="System.Configuration" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="controllers\AccountController.cs" />
     <Compile Include="controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -78,6 +79,7 @@
     <Content Include="views\Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="views\account\Account.haml" />
     <None Include="views\home\index.haml" />
     <None Include="views\home\_partial.haml" />
     <None Include="views\home\_test.haml" />
@@ -99,7 +101,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="views\account\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v9.0\WebApplications\Microsoft.WebApplication.targets" />
