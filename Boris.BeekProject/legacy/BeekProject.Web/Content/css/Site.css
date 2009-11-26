@@ -1,0 +1,92 @@
+﻿html{
+	height: 100%;
+	overflow: hidden;}
+body{
+	background-color: #242020;
+	background-image: url(../pics/bgndStripes.png);
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+#page{
+	width: 80%;
+	margin-left: auto;
+	margin-right: auto;
+	height: 100%;
+	overflow: hidden;
+}
+#header {
+	overflow: hidden;
+	width: 100%;
+}
+#logo {
+	background-color: White;
+	float: left;
+	height: 149px;
+	border-bottom: solid 2px #000000;
+	width: 25%;
+	text-align: center;
+}
+.navBlock {	
+	padding: 0;
+	margin-top: 10px;
+	height: 129px;
+	float: left;
+	width: 25%;	
+	border-bottom: solid 2px #000000;
+	background-image: url(../pics/border.gif);
+	background-position: left;
+	background-repeat: repeat-y;
+	background-color: #e60505;
+	text-align: center;
+	font-size: x-large;
+	text-transform: uppercase;
+	vertical-align: top;
+	letter-spacing: 0.1em;
+	padding-top: 0.4em;
+	font-family: Arial;
+	text-decoration: none;
+	color: #ffffff;
+}
+.navBlock a {
+	text-decoration: none;
+	color: #ffffff;
+}
+.navBlock li{
+	list-style: none;
+	list-style-position: inside;
+}
+.navBlock ul{
+	font-size: small;
+	text-transform: lowercase;
+	list-style-position: outside;
+	text-align: center;
+	padding-top:0.3em;
+	text-align: left;
+	padding-left: 1.5em;
+}
+.activeNavBlock {
+	background-color: White;
+	height: 130px;
+	border: none;
+	color: #000000;
+}
+.activeNavBlock a {
+	text-decoration: none;
+	color: #000000;
+}
+
+#contentWrapper{
+	overflow: auto;
+	background-color: White;
+	position: absolute;
+	/*Use Conflicting Absolute Positions 
+	http://www.alistapart.com/articles/conflictingabsolutepositions/ */
+	top: 150px;
+	bottom: 0px;
+	/*Because of absolute pos: repeat width constraint*/
+	width: 80%;
+}
+#mainContent{
+	margin: 20px;
+}
