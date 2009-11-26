@@ -5,19 +5,12 @@ namespace Boris.BeekProject.Website.Controllers
     [HandleError]
     public class HomeController : Controller
     {
-        public ActionResult Index()
-        {
-            ViewData["Message"] = "Welcome to ASP.NET MVC!";
-
-            return Test();
-        }
-
-        public ActionResult About()
+        public ViewResult Index()
         {
             return View();
         }
 
-        public ActionResult Test()
+        public ActionResult About()
         {
             return View();
         }
