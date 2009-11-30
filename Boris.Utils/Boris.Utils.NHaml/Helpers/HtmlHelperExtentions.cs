@@ -34,6 +34,7 @@ namespace Boris.Utils.NHaml.Helpers
             return sb.ToString();
         }
     }
+
     public static class ScriptHelper
     {
         private const string scriptMask = @"<script src='/content/js/{0}.js' type='{1}'></script>";
