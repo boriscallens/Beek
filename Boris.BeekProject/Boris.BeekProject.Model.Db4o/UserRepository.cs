@@ -44,19 +44,43 @@ namespace Boris.BeekProject.Model.Db4o
                     select u).FirstOrDefault();
         }
 
-        public T GetSetting<T>(Guid userId) where T : ISetting, new()
+        public T GetSettingForUser<T>(Guid userId) where T : ISetting, new()
         {
-            throw new NotImplementedException();
+            return (from T s in client
+                    where s.UserId.Equals(userId)
+                    select s).FirstOrDefault();
+        }
+
+        public T GetSetting<T>(Guid settingId) where T : ISetting, new()
+        {
+            return (from T s in client
+                    where s.Id.Equals(settingId)
+                    select s).FirstOrDefault();
         }
 
         public void SetSetting(ISetting setting)
         {
-            throw new NotImplementedException();
+            if(setting.Id == default(Guid))
+            {
+                setting.Id = new Guid();
+            }
+
+        }
+
+        public void RemoveSetting<T>(Guid settingId) where T : ISetting, new()
+        {
+            var setting = GetSetting<T>(settingId);
+            if(setting.Id == settingId)
+            {
+                client.Delete(setting);
+            }
         }
 
         public IQueryable<T> GetDefaultSettings<T>() where T : ISetting, new()
         {
-            throw new NotImplementedException();
+            return (from T s in client
+                    where s.IsDefault
+                    select s).AsQueryable();
         }
     }
 }

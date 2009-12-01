@@ -1,4 +1,13 @@
 ﻿^title += "- home - index"
-- Boris.Utils.NHaml.Helpers.StyleSheetHelper.AddStyleSheet("index");
+- StyleSheetHelper.AddStyleSheet("index");
+- ScriptHelper.AddScript("search");
 %h1
+  search
+#searchForm
+  %form{action="#"}
+    %div
+      %label{for="titleStartsWith"}
+        Title:
+      %input{type="text" name="beekSearchbag.BeekTitleStartsWith" id="titleStartsWith"}
+    
   
