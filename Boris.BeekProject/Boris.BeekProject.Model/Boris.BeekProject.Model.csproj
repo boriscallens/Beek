@@ -39,18 +39,22 @@
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Data" />
+    <Reference Include="System.Web.Mvc, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\dependencies\System.Web.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Accounts\ISetting.cs" />
     <Compile Include="Accounts\IUser.cs" />
-    <Compile Include="Accounts\IUserRepository.cs" />
+    <Compile Include="DataAccess\IUserRepository.cs" />
     <Compile Include="Accounts\User.cs" />
     <Compile Include="Beek\Beek.cs" />
     <Compile Include="Beek\BluePrint.cs" />
     <Compile Include="Beek\Genre.cs" />
     <Compile Include="Beek\WritingStyle.cs" />
     <Compile Include="DataAccess\ICatalogRepository.cs" />
-    <Compile Include="DataAccess\IUserRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

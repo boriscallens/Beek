@@ -2,7 +2,7 @@
 
 namespace Boris.BeekProject.Model.Beek
 {
-    public class Beek
+    public class BaseBeek
     {
         public int Id { get; set; }
         public string Isbn { get; set; }

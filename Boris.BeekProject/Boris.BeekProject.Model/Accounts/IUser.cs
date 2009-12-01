@@ -3,7 +3,7 @@ using System.Web.Mvc;
 
 namespace Boris.BeekProject.Model
 {
-    public interface IUser: IPrinciple
+    public interface IUser
     {
         Guid Id { get; set; }
         string Name { get; set; }

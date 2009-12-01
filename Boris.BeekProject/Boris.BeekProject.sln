@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "00 Dependencies", "00 Dependencies", "{A9F2056D-93F5-41FD-9CCB-AEF81A302D7B}"
 	ProjectSection(SolutionItems) = preProject
+		dependencies\Db4objects.Db4o.dll = dependencies\Db4objects.Db4o.dll
+		dependencies\Db4objects.Db4o.Linq.dll = dependencies\Db4objects.Db4o.Linq.dll
 		dependencies\Microsoft.Web.Mvc.dll = dependencies\Microsoft.Web.Mvc.dll
 		dependencies\NHaml.dll = dependencies\NHaml.dll
 		dependencies\NHaml.Web.Mvc.dll = dependencies\NHaml.Web.Mvc.dll
@@ -24,6 +26,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NHaml", "..\External\nhaml\src\NHaml\NHaml.csproj", "{9B885FC4-45C0-4526-9253-A799238EDD66}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boris.BeekProject.Guis.Shared", "Boris.BeekProject.Guis.Shared\Boris.BeekProject.Guis.Shared.csproj", "{FC249D92-0447-4F58-8C3D-88300058957C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boris.BeekProject.Model.Db4o", "Boris.BeekProject.Model.Db4o\Boris.BeekProject.Model.Db4o.csproj", "{EAFB5F39-1D1B-48AB-B82D-637A383B56D8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +55,10 @@ Global
 		{FC249D92-0447-4F58-8C3D-88300058957C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FC249D92-0447-4F58-8C3D-88300058957C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FC249D92-0447-4F58-8C3D-88300058957C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EAFB5F39-1D1B-48AB-B82D-637A383B56D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EAFB5F39-1D1B-48AB-B82D-637A383B56D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EAFB5F39-1D1B-48AB-B82D-637A383B56D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EAFB5F39-1D1B-48AB-B82D-637A383B56D8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -58,6 +66,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{7A10D58A-1F92-462E-B722-034EF25AE2F3} = {671EA85F-5F9A-4C59-8C25-0649DE02C6D3}
 		{9B885FC4-45C0-4526-9253-A799238EDD66} = {671EA85F-5F9A-4C59-8C25-0649DE02C6D3}
+		{EAFB5F39-1D1B-48AB-B82D-637A383B56D8} = {671EA85F-5F9A-4C59-8C25-0649DE02C6D3}
 		{55F3B8DE-22BA-4632-BAFD-CB4AB3A210BB} = {D14A770C-1B48-4E98-A494-19345CCF37CC}
 		{31E3787F-876A-43FC-93EF-D0715DF4B486} = {F61C7CC3-C439-466A-8113-BD196F9A2A4D}
 		{FC249D92-0447-4F58-8C3D-88300058957C} = {F61C7CC3-C439-466A-8113-BD196F9A2A4D}

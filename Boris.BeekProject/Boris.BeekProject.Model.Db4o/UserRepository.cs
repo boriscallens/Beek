@@ -10,40 +10,38 @@ namespace Boris.BeekProject.Model.Db4o
 {
     public class UserRepository: IUserRepository
     {
-        private static IObjectServer server = Db4oFactory.OpenServer(
-            ConfigurationManager.AppSettings["db4o.userRepository.path"], 0);
-        private static IObjectContainer client = Db4oFactory.OpenClient("localhost", 0, string.Empty, string.Empty);
+        private static readonly IObjectServer server = 
+            Db4oFactory.OpenServer(ConfigurationManager.AppSettings["db4o.userRepository.path"], 0);
+        private static readonly IObjectContainer client = server.OpenClient();
 
         public Guid AddUser(IUser user)
         {
-            using (var db = GetDb())
-            {
-                Guid guid = new Guid();
-                user.Id = guid;
-                db.Store(user);
-                return guid;
-            }
+            user.Id = new Guid();
+            client.Store(user);
+            return user.Id;
         }
 
         public void RemoveUser(Guid id)
         {
-            using (var db = GetDb())
+            IUser user = GetUser(id);
+            if(user != null)
             {
-                Guid guid = new Guid();
-                user.Id = guid;
-                db.Store(user);
-                return guid;
+                client.Delete(user);
             }
         }
 
-        public IUser GetUserDataForUserName(string name)
+        public IUser GetUser(Guid id)
         {
-            throw new NotImplementedException();
+            return (from IUser u in client
+                    where u.Id.Equals(id)
+                    select u).SingleOrDefault();
         }
 
-        public IUser GetUserDataForUserId(Guid id)
+        public IUser GetUser(string name)
         {
-            throw new NotImplementedException();
+            return (from IUser u in client
+                    where u.Name.Equals(name)
+                    select u).FirstOrDefault();
         }
 
         public T GetSetting<T>(Guid userId) where T : ISetting, new()
@@ -59,11 +57,6 @@ namespace Boris.BeekProject.Model.Db4o
         public IQueryable<T> GetDefaultSettings<T>() where T : ISetting, new()
         {
             throw new NotImplementedException();
-        }
-    
-        private IObjectContainer GetDb()
-        {
-            return Db4oFactory.OpenFile();
         }
     }
 }
