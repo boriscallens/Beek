@@ -1,31 +1,27 @@
-﻿using System.Web.Mvc;
+﻿using System.Web;
+using System.Web.Mvc;
 using System.Web.Routing;
+using MvcTurbine.ComponentModel;
+using MvcTurbine.Unity;
 using NHaml.Web.Mvc;
+using MvcTurbine.Web;
 
 namespace Boris.BeekProject.Website
 {
     // Note: For instructions on enabling IIS6 or IIS7 classic mode, 
     // visit http://go.microsoft.com/?LinkId=9394801
 
-    public class MvcApplication : System.Web.HttpApplication
+    public class MvcApplication : TurbineApplication
     {
-        public static void RegisterRoutes(RouteCollection routes)
+        static MvcApplication()
         {
-            routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
-
-            routes.MapRoute(
-                "Default",                                              // Route name
-                "{controller}/{action}/{id}",                           // URL with parameters
-                new { controller = "Home", action = "Index", id = "" }  // Parameter defaults
-            );
-
+            ServiceLocatorManager.SetLocatorProvider(()=>new UnityServiceLocator());
         }
 
         protected void Application_Start()
         {
-            RegisterRoutes(RouteTable.Routes);
             ViewEngines.Engines.Clear();
-            ViewEngines.Engines.Add(new NHamlMvcViewEngine());
+            ViewEngines.Engines.Add(new NHamlMvcViewEngine());           
         }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Configuration;
 using System.Linq;
 using Boris.BeekProject.Model.Accounts;
 using Boris.BeekProject.Model.DataAccess;
@@ -10,9 +9,15 @@ namespace Boris.BeekProject.Model.Db4o
 {
     public class UserRepository: IUserRepository
     {
-        private static readonly IObjectServer server = 
-            Db4oFactory.OpenServer(ConfigurationManager.AppSettings["db4o.userRepository.path"], 0);
-        private static readonly IObjectContainer client = server.OpenClient();
+        private static IObjectServer server;
+
+        private static IObjectContainer client;
+
+        public UserRepository(string db4oFilePath)
+        {
+            server = Db4oFactory.OpenServer(db4oFilePath, 0);
+            client = server.OpenClient();
+        }
 
         public Guid AddUser(IUser user)
         {
