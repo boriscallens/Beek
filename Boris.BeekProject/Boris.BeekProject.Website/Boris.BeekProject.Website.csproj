@@ -68,6 +68,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="content\js\jquery.timer.idle.min.js" />
     <Content Include="content\js\search.js" />
     <Content Include="content\js\site.js" />
     <Content Include="content\js\xVal.jquery.validate.js" />
