@@ -1,11 +1,11 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
+//using System.ComponentModel.DataAnnotations;
 
 namespace Boris.BeekProject.Model.Accounts
 {
     public class User
     {
-        [Required]
+        //[Required]
         public Guid Id { get; set; }
         public string UserName { get; set; }
         private string Password { get; set; }

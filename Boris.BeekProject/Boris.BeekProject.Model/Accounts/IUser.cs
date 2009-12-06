@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Web.Mvc;
 
-namespace Boris.BeekProject.Model
+namespace Boris.BeekProject.Model.Accounts
 {
     public interface IUser
     {

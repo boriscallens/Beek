@@ -1,4 +1,4 @@
-﻿using Boris.BeekProject.Model;
+﻿using Boris.BeekProject.Model.Accounts;
 
 namespace Boris.BeekProject.Guis.Shared.ViewModels
 {
