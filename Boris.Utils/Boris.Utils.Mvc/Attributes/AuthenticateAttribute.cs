@@ -4,7 +4,7 @@ using Boris.BeekProject.Model.DataAccess;
 
 namespace Boris.Utils.Mvc.Attributes
 {
-    public class AuthenticateAttribute : AuthenticateAttribute
+    public class AuthenticateAttribute : AuthorizeAttribute
     {
         private IUserRepository userRepository;
 

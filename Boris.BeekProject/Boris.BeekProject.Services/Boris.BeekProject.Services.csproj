@@ -54,6 +54,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ISearchService.cs" />
     <Compile Include="SearchService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -61,6 +62,10 @@
     <ProjectReference Include="..\..\Boris.Utils\Boris.Utils.Strings\Boris.Utils.Strings.csproj">
       <Project>{460BCD98-0AD7-4536-9DFB-B38D33E1BF13}</Project>
       <Name>Boris.Utils.Strings</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Boris.BeekProject.Guis.Shared\Boris.BeekProject.Guis.Shared.csproj">
+      <Project>{FC249D92-0447-4F58-8C3D-88300058957C}</Project>
+      <Name>Boris.BeekProject.Guis.Shared</Name>
     </ProjectReference>
     <ProjectReference Include="..\Boris.BeekProject.Model\Boris.BeekProject.Model.csproj">
       <Project>{7A10D58A-1F92-462E-B722-034EF25AE2F3}</Project>

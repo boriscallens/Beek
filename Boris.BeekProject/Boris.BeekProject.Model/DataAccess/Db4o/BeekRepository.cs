@@ -1,13 +1,26 @@
 ﻿using System;
+using System.Configuration;
 using System.Linq;
 using Boris.BeekProject.Model.Beek;
+using Db4objects.Db4o;
 
 namespace Boris.BeekProject.Model.DataAccess.Db4o
 {
-    public class CatalogRepository: ICatalogRepository
+    public class BeekRepository: IBeekRepository
     {
-        public IQueryable<Genre> GetGenres()
+        private static IObjectServer server;
+        private static IObjectContainer client;
+
+        public BeekRepository(): this(ConfigurationManager.AppSettings["userRepository.path.db4o"]){}
+
+        public BeekRepository(string db4oFilePath)
         {
+            server = Db4oFactory.OpenServer(db4oFilePath, 0);
+            client = server.OpenClient();
+        }
+
+        public IQueryable<Genre> GetGenres()
+        { 
             throw new NotImplementedException();
         }
 
@@ -36,22 +49,22 @@ namespace Boris.BeekProject.Model.DataAccess.Db4o
             throw new NotImplementedException();
         }
 
-        public IQueryable<BluePrint> GetBluePrints()
+        public IQueryable<IBeek> GetBluePrints()
         {
             throw new NotImplementedException();
         }
 
-        public IQueryable<BaseBeek> GetBeek()
+        public IQueryable<IBeek> GetBeek()
         {
             throw new NotImplementedException();
         }
 
-        public bool AddBeek(BaseBeek b)
+        public bool AddBeek(IBeek b)
         {
             throw new NotImplementedException();
         }
 
-        public bool RemoveBeek(BaseBeek b)
+        public bool RemoveBeek(IBeek b)
         {
             throw new NotImplementedException();
         }

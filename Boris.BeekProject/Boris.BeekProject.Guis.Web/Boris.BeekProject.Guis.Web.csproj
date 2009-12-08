@@ -97,14 +97,16 @@
     <Reference Include="System.Web.Mobile" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseBeekController.cs" />
+    <Compile Include="Controllers\BeekController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Ioc\BeekRepositoryRegistration.cs" />
+    <Compile Include="Ioc\Copy of BeekRepositoryRegistration.cs" />
     <Compile Include="Ioc\DefaultRoutRegistration.cs" />
-    <Compile Include="Ioc\NhamlViewEngineRegistration.cs" />
     <Compile Include="Ioc\UserRepositoryRegistration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -143,17 +145,25 @@
     <Content Include="views\Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Boris.Utils\Boris.Utils.Mvc\Boris.Utils.Mvc.csproj">
+      <Project>{53B4AE97-8674-4A6D-96B5-42850DABF73D}</Project>
+      <Name>Boris.Utils.Mvc</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Boris.Utils\Boris.Utils.NHaml\Boris.Utils.NHaml.csproj">
       <Project>{55F3B8DE-22BA-4632-BAFD-CB4AB3A210BB}</Project>
       <Name>Boris.Utils.NHaml</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Boris.BeekProject.Guis.Shared\Boris.BeekProject.Guis.Shared.csproj">
+      <Project>{FC249D92-0447-4F58-8C3D-88300058957C}</Project>
+      <Name>Boris.BeekProject.Guis.Shared</Name>
     </ProjectReference>
     <ProjectReference Include="..\Boris.BeekProject.Model\Boris.BeekProject.Model.csproj">
       <Project>{7A10D58A-1F92-462E-B722-034EF25AE2F3}</Project>
       <Name>Boris.BeekProject.Model</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Boris.Utils.Mvc\Boris.Utils.Mvc.csproj">
-      <Project>{53B4AE97-8674-4A6D-96B5-42850DABF73D}</Project>
-      <Name>Boris.Utils.Mvc</Name>
+    <ProjectReference Include="..\Boris.BeekProject.Services\Boris.BeekProject.Services.csproj">
+      <Project>{1F4C8DAC-4248-4FC3-8422-310D51851F31}</Project>
+      <Name>Boris.BeekProject.Services</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Linq;
 using Boris.BeekProject.Model.Accounts;
 using Db4objects.Db4o;
@@ -11,6 +12,8 @@ namespace Boris.BeekProject.Model.DataAccess.Db4o
         private static IObjectServer server;
 
         private static IObjectContainer client;
+
+        public UserRepository(): this(ConfigurationManager.AppSettings["userRepository.path.db4o"]){}
 
         public UserRepository(string db4oFilePath)
         {

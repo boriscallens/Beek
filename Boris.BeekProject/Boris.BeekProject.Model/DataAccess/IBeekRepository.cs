@@ -4,7 +4,7 @@ using Boris.BeekProject.Model.Beek;
 
 namespace Boris.BeekProject.Model.DataAccess
 {
-    public interface ICatalogRepository
+    public interface IBeekRepository
     {
         IQueryable<Genre> GetGenres();
         Boolean AddGenre(Genre g);
@@ -14,10 +14,9 @@ namespace Boris.BeekProject.Model.DataAccess
         Boolean AddWritingStyle(WritingStyle w);
         Boolean RemoveWritingStyle(WritingStyle w);
 
-        IQueryable<BluePrint> GetBluePrints();
-
-        IQueryable<BaseBeek> GetBeek();
-        Boolean AddBeek(BaseBeek b);
-        Boolean RemoveBeek(BaseBeek b);
+        IQueryable<IBeek> GetBluePrints();
+        IQueryable<IBeek> GetBeek();
+        Boolean AddBeek(IBeek b);
+        Boolean RemoveBeek(IBeek b);
     }
 }

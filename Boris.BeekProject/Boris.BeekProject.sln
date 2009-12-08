@@ -31,7 +31,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boris.Utils.Strings", "..\B
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boris.BeekProject.Guis.Web", "Boris.BeekProject.Guis.Web\Boris.BeekProject.Guis.Web.csproj", "{AC119B83-2502-4AE5-883C-644AD1B172E3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boris.Utils.Mvc", "Boris.Utils.Mvc\Boris.Utils.Mvc.csproj", "{53B4AE97-8674-4A6D-96B5-42850DABF73D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boris.Utils.Mvc", "..\Boris.Utils\Boris.Utils.Mvc\Boris.Utils.Mvc.csproj", "{53B4AE97-8674-4A6D-96B5-42850DABF73D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

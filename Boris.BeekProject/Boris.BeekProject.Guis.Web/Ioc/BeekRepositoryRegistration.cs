@@ -8,7 +8,7 @@ namespace Boris.BeekProject.Guis.Web.Ioc
     {
         public void Register(IServiceLocator locator)
         {
-            locator.Register<ICatalogRepository, CatalogRepository>();
+            locator.Register<IBeekRepository, BeekRepository>();
         }
     }
 }

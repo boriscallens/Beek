@@ -1,19 +1,19 @@
 ﻿using System.Web.Mvc;
 using Boris.BeekProject.Model.Accounts;
 using Boris.BeekProject.Model.DataAccess;
-using Boris.Utils.Mvc.Attributes;
+//using Boris.Utils.Mvc.Attributes;
 
 namespace Boris.BeekProject.Guis.Web.Controllers
 {
-    [Authenticate]
+    //[Authenticate]
     public class BaseBeekController: Controller
     {
-        private IUserRepository repository;
+        internal IUserRepository userRepository;
 
-        public BaseBeekController(){}
+        //public BaseBeekController(){}
         protected BaseBeekController(IUserRepository repository)
         {
-            this.repository = repository;    
+            this.userRepository = repository;    
         }
         public new IUser User { get; set; }
     }
