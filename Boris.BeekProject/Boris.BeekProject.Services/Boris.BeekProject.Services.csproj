@@ -54,9 +54,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ISearchService.cs" />
-    <Compile Include="SearchService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Search\SearchBags\BeekSearchbag.cs" />
+    <Compile Include="Search\ISearchService.cs" />
+    <Compile Include="Search\SearchService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Boris.Utils\Boris.Utils.Strings\Boris.Utils.Strings.csproj">
@@ -71,6 +72,9 @@
       <Project>{7A10D58A-1F92-462E-B722-034EF25AE2F3}</Project>
       <Name>Boris.BeekProject.Model</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Accounts\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

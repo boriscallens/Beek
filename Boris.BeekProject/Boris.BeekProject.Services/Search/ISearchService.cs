@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using Boris.BeekProject.Guis.Shared.SearchBags;
 using Boris.BeekProject.Model.Beek;
+using Boris.BeekProject.Services.Search;
 
 namespace Boris.BeekProject.Services
 {

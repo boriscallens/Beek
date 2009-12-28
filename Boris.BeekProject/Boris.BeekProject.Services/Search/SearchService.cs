@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Boris.BeekProject.Guis.Shared.SearchBags;
 using Boris.BeekProject.Model.Beek;
 using Boris.BeekProject.Model.DataAccess;
+using Boris.BeekProject.Services.Search;
 using Boris.Utils.Strings;
 
 namespace Boris.BeekProject.Services
