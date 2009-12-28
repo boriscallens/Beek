@@ -49,7 +49,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="SearchBags\BeekSearchbag.cs" />
     <Compile Include="ViewModels\BeekViewModel.cs" />
     <Compile Include="ViewModels\ViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
