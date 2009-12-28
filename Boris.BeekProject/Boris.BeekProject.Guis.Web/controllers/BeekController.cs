@@ -1,17 +1,18 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
-using Boris.BeekProject.Guis.Shared.SearchBags;
 using Boris.BeekProject.Model.Beek;
+using Boris.BeekProject.Model.DataAccess;
 using Boris.BeekProject.Services;
+using Boris.BeekProject.Services.Search;
 
 namespace Boris.BeekProject.Guis.Web.Controllers
 {
-    public class BeekController : Controller
+    public class BeekController : BaseBeekController
     {
         private readonly ISearchService searchService;
 
-        public BeekController(ISearchService searchService)
+        public BeekController(IUserRepository userRepository, ISearchService searchService):base(userRepository)
         {
             this.searchService = searchService;
         }

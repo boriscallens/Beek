@@ -1,0 +1,5 @@
+﻿^title += "- account - edit profile"
+- StyleSheetHelper.AddStyleSheet("profile");
+- ScriptSheetHelper.AddScript("profile");
+%h2= Model.User.Name
+    = Html.DisplayFor(Model.User.Email)

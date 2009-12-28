@@ -1,28 +1,21 @@
 ﻿using System.Web.Mvc;
-using Boris.BeekProject.Model.Accounts;
 using Boris.BeekProject.Model.DataAccess;
 
 namespace Boris.BeekProject.Guis.Web.Controllers
 {
     [HandleError]
-    public class HomeController : Controller
+    public class HomeController : BaseBeekController
     {
-        private readonly IUserRepository userRepository;
         private readonly IBeekRepository beekRepository;
         
-        public HomeController(IUserRepository userRepository, IBeekRepository beekrepository)
+        public HomeController(IUserRepository userRepository, IBeekRepository beekrepository): base(userRepository)
         {
-            userRepository = userRepository;
-            beekRepository = beekRepository;
+            this.beekRepository = beekRepository;
         }
 
         public ActionResult Index()
         {
             return View();
         }
-        //public ActionResult About()
-        //{
-        //    return View();
-        //}
     }
 }

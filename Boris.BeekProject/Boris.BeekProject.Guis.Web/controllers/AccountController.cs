@@ -1,17 +1,12 @@
 using System.Web.Mvc;
-using Boris.BeekProject.Model.DataAccess;
 using Boris.BeekProject.Model.Accounts;
+using Boris.BeekProject.Model.DataAccess;
 
 namespace Boris.BeekProject.Guis.Web.Controllers
 {
-    public class AccountController : Controller
+    public class AccountController : BaseBeekController
     {
-        private readonly IUserRepository userRepository;
-
-        public AccountController(IUserRepository userRepository)
-        {
-            this.userRepository = userRepository;
-        }
+        public AccountController(IUserRepository userRepository) : base(userRepository){}
 
         // GET: /accounts/login
         public ActionResult LogIn()
@@ -40,12 +35,15 @@ namespace Boris.BeekProject.Guis.Web.Controllers
             return View();
         }
         // GET: /accounts/boris
-        public ActionResult Index(IUser user)
+        public ActionResult Profile(IUser user)
         {
-            //If the user is the same as the current user, show an editable view
-            //else it will be the public profile
-            return View();
+            // If the user is the same as the current user, show an editable view
+            // else it will be the public profile
+            if(user == User)
+            {
+                return View("EditProfile");
+            }
+            return View("Profile");
         }
-
     }
 }

@@ -1,0 +1,7 @@
+﻿^title += "- account - edit profile"
+- StyleSheetHelper.AddStyleSheet("editProfile");
+- ScriptSheetHelper.AddScript("editProfile");
+%h2 Edit Profile
+  %form{method="post"}
+    = Html.EditFor(Model.User.Name)
+    = Html.EditFor(Model.User.Email)

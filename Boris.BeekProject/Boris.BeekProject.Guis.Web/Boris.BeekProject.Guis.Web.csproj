@@ -132,7 +132,8 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="views\account\Account.haml" />
+    <None Include="views\account\Profile.haml" />
+    <None Include="views\account\EditProfile.haml" />
     <None Include="views\Home\index.haml" />
     <None Include="views\Home\test.haml" />
     <None Include="views\Home\_partial.haml" />
