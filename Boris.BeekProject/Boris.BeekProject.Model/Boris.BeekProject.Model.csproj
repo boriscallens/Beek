@@ -66,6 +66,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Accounts\AnonymousRole.cs" />
+    <Compile Include="Accounts\BeekSetting.cs" />
     <Compile Include="Accounts\IRole.cs" />
     <Compile Include="Accounts\Role.cs" />
     <Compile Include="Beek\IBeek.cs" />
