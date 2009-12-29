@@ -1,47 +1,75 @@
-using System.Collections.Generic;
-using System.Linq;
 using System.Web.Mvc;
+using Boris.BeekProject.Guis.Shared.ViewModels;
 using Boris.BeekProject.Model.Beek;
 using Boris.BeekProject.Model.DataAccess;
-using Boris.BeekProject.Services;
-using Boris.BeekProject.Services.Search;
+using System.Linq;
 
 namespace Boris.BeekProject.Guis.Web.Controllers
 {
     public class BeekController : BaseBeekController
     {
-        private readonly ISearchService searchService;
+        private readonly IBeekRepository beeks;
+        private readonly BeekViewModel viewModel;
 
-        public BeekController(IUserRepository userRepository, ISearchService searchService):base(userRepository)
+        protected BeekController(IUserRepository repository, IBeekRepository beekRepository) : base(repository)
         {
-            this.searchService = searchService;
+            beeks = beekRepository;
+            viewModel = new BeekViewModel();
         }
 
         //
-        // GET: /Beek/123456
-        public ActionResult Index(int beekId)
+        // GET: /Beek/Details/5
+        public ActionResult Details(int id)
         {
-            BeekSearchbag bag = new BeekSearchbag() {BeekId = beekId};
-            IBeek beek = searchService.SearchBeek(bag).FirstOrDefault();
-            if ( beek != null )
-            {
-                return View(beek);
-            }
-            // ToDo: return "beekNotFound" view
-            return View("beekNotFound");
+            viewModel.Beek = beeks.GetBeek().Where(b => b.Id == id).SingleOrDefault();
+            return View(viewModel);
         }
 
         //
-        // GET: /Beek/Search?name=1984&author=george+orwell
-        public ActionResult Search(BeekSearchbag bag, int skip, int take)
+        // GET: /Beek/Create
+        public ActionResult Create()
         {
-            IEnumerable<IBeek> beek = searchService.SearchBeek(bag, skip, take);
-            if(beek.Any())
+            return View();
+        } 
+
+        //
+        // POST: /Beek/Create
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult Create(IBeek beek)
+        {
+            try
             {
-                return View(beek);
+                beeks.AddBeek(beek);
+                return RedirectToAction("Index");
             }
-            // ToDo: return "noBeekFound" view
-            return View("noBeekFound");
+            catch
+            {
+                return View();
+            }
+        }
+
+        //
+        // GET: /Beek/Edit/5
+        public ActionResult Edit(int id)
+        {
+            viewModel.Beek = beeks.GetBeek().Where(b => b.Id == id).SingleOrDefault();
+            return View();
+        }
+
+        //
+        // POST: /Beek/Edit/5
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult Edit(IBeek updatedBeek)
+        {
+            try
+            {
+                beeks.UpdateBeek(updatedBeek);
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
         }
     }
 }

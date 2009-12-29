@@ -1,9 +1,6 @@
-﻿using Boris.BeekProject.Model.Accounts;
-
-namespace Boris.BeekProject.Guis.Shared.ViewModels
+﻿namespace Boris.BeekProject.Guis.Shared.ViewModels
 {
-    public class AccountViewModel: BeekViewModel
+    public class AccountViewModel: BaseBeekViewModel
     {
-        public new IUser User { get; set; }
     }
 }

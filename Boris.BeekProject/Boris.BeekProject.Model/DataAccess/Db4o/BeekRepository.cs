@@ -34,6 +34,11 @@ namespace Boris.BeekProject.Model.DataAccess.Db4o
             throw new NotImplementedException();
         }
 
+        public bool UpdateGenre(Genre g)
+        {
+            throw new NotImplementedException();
+        }
+
         public IQueryable<WritingStyle> GetWritingStyles()
         {
             throw new NotImplementedException();
@@ -45,6 +50,11 @@ namespace Boris.BeekProject.Model.DataAccess.Db4o
         }
 
         public bool RemoveWritingStyle(WritingStyle w)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool UpdateWritingStyle(WritingStyle w)
         {
             throw new NotImplementedException();
         }
@@ -65,6 +75,11 @@ namespace Boris.BeekProject.Model.DataAccess.Db4o
         }
 
         public bool RemoveBeek(IBeek b)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool UpdateBeek(IBeek b)
         {
             throw new NotImplementedException();
         }

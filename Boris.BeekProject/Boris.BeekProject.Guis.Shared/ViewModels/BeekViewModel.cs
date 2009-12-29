@@ -1,11 +1,9 @@
-﻿using System.Web.Mvc;
-using Boris.BeekProject.Model.Accounts;
+﻿using Boris.BeekProject.Model.Beek;
 
 namespace Boris.BeekProject.Guis.Shared.ViewModels
 {
-    public class BeekViewModel : ViewDataDictionary
+    public class BeekViewModel: BaseBeekViewModel
     {
-        public IUser User { get; set; }
-        public ISetting Setting { get; set; }
+        public IBeek Beek { get; set; }
     }
 }
