@@ -18,12 +18,14 @@ namespace Boris.BeekProject.Model.Accounts
         public DateTime? LastLoginAttempt { get; set; }
         public bool IsApproved { get; set; }
         public bool IsLockedOut { get; set; }
+        public IList<IRole> Roles { get; set; }
+        public bool IsDefault { get; set; }
         public bool IsAnonymous { 
-            get{
+            get
+            {
                 return IsInRole("Anonymous");
             }
         }
-        private IList<IRole> Roles { get; set; }
 
         public User()
         {
@@ -83,6 +85,11 @@ namespace Boris.BeekProject.Model.Accounts
         {
             //ToDo, md5 hash this bitch
             return string.Empty;
+        }
+
+        public bool Equals(IUser other)
+        {
+            return Id.Equals(other.Id);
         }
     }
 }

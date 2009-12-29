@@ -10,6 +10,11 @@ namespace Boris.BeekProject.Model.Beek
 
         public IEnumerable<IUser> Writers { get { return writers; } }
 
+        public ShortStory()
+        {
+            writers = new List<IUser>();
+        }
+
         public void AddWriter(IUser writer)
         {
             lock (writers)

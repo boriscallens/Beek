@@ -31,27 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Db4objects.Db4o, Version=7.4.121.14026, Culture=neutral, PublicKeyToken=6199cd4f203aa8eb, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\dependencies\Db4objects.Db4o.dll</HintPath>
-    </Reference>
-    <Reference Include="Db4objects.Db4o.Linq, Version=7.4.121.14026, Culture=neutral, PublicKeyToken=6199cd4f203aa8eb, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\dependencies\Db4objects.Db4o.Linq.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Configuration" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
-    <Reference Include="System.Xml.Linq">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Data.DataSetExtensions">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -63,10 +45,6 @@
     <ProjectReference Include="..\..\Boris.Utils\Boris.Utils.Strings\Boris.Utils.Strings.csproj">
       <Project>{460BCD98-0AD7-4536-9DFB-B38D33E1BF13}</Project>
       <Name>Boris.Utils.Strings</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Boris.BeekProject.Guis.Shared\Boris.BeekProject.Guis.Shared.csproj">
-      <Project>{FC249D92-0447-4F58-8C3D-88300058957C}</Project>
-      <Name>Boris.BeekProject.Guis.Shared</Name>
     </ProjectReference>
     <ProjectReference Include="..\Boris.BeekProject.Model\Boris.BeekProject.Model.csproj">
       <Project>{7A10D58A-1F92-462E-B722-034EF25AE2F3}</Project>
