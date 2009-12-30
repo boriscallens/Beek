@@ -62,6 +62,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Accounts\Roles.cs" />
+    <Compile Include="Beek\BeekCollection.cs" />
+    <Compile Include="Beek\BeekRelationTypes\Republishing.cs" />
+    <Compile Include="Beek\BeekRelationTypes\Translation.cs" />
+    <Compile Include="Beek\BeekRelationTypes\IBeekRelationType.cs" />
+    <Compile Include="Beek\BeekRelationTypes\Original.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

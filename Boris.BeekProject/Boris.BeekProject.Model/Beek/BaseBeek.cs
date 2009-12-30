@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
+using System.Collections.Generic;
 using Boris.BeekProject.Model.Accounts;
 
 namespace Boris.BeekProject.Model.Beek
@@ -10,22 +10,37 @@ namespace Boris.BeekProject.Model.Beek
         private List<Genre> genres;
         private List<WritingStyle> writingStyles;
         private IList<KeyValuePair<IUser, Roles>> involvements;
-        //private IList<KeyValuePair<BaseBeek, BeekRelationType>> relations;
+        private IList<KeyValuePair<BaseBeek, IBeekRelationType>> relations;
 
         public int Id { get; set; }
         public string Isbn { get; set; }
         public string Title { get; set; }
         public BeekTypes Type { get; set; }
         public bool IsFiction { get; set; }
+        public BeekCollection Collection { get; set; }
+        public int VolumeNumber { get; set; }
+        public int TotalVolumes { get
+            {
+                if(Collection == null)
+                {
+                    return 1;
+                }
+                return Collection.Count;
+            }
+        }
         public IEnumerable<KeyValuePair<IUser, Roles>> Involvements { get { return involvements; } }
         public IEnumerable<Genre> Genres { get{ return genres;} }
         public IEnumerable<WritingStyle> WritingStyles { get { return writingStyles; } }
-
+        public IEnumerable<KeyValuePair<BaseBeek, IBeekRelationType>> Relations;
+        
         public BaseBeek(BeekTypes type)
         {
             involvements = new List<KeyValuePair<IUser, Roles>>();
+            relations = new List<KeyValuePair<BaseBeek, IBeekRelationType>>();
+            writingStyles = new List<WritingStyle>();
             genres = new List<Genre>();
             Type = type;
+            VolumeNumber = 1;
         }
 
         public void AddGenre(Genre genre)
@@ -92,6 +107,37 @@ namespace Boris.BeekProject.Model.Beek
             }
         }
         
+        public void RelateTo(BaseBeek relatedBeek, IBeekRelationType relationType)
+        {
+            if (relatedBeek.Equals(this))
+            {
+                throw new ArgumentException("Cannot relate a beek to itself", "relatedBeek");
+            }
+            lock (relations)
+            {
+                if (IsBeekRelatedAs(relatedBeek, relationType))
+                {
+                    relations.Add(new KeyValuePair<BaseBeek, IBeekRelationType>(relatedBeek, relationType));
+                }
+            }
+        }
+        public void UnrelateTo(BaseBeek relatedBeek, IBeekRelationType relationType)
+        {
+            lock (relations)
+            {
+                relations = relations.Where(r => !(r.Key.Equals(relatedBeek) && r.Value.Equals(relationType))).ToList();
+            }
+        }
+        public IEnumerable<BaseBeek> GetRelatedBeekForRelationType(IBeekRelationType relationType)
+        {
+            return relations.Where(r => r.Value.GetType().Equals(relationType.GetType()))
+                .Select(r=>r.Key);
+        }
+        public bool IsBeekRelatedAs(BaseBeek relatedBeek, IBeekRelationType relationType)
+        {
+            return relations.Any(r => r.Key.Equals(relatedBeek) && r.Value.Equals(relationType));
+        }
+
         public void InvolveUser(IUser user, Roles role)
         {
             if(!user.IsInRole(role))
@@ -135,7 +181,7 @@ namespace Boris.BeekProject.Model.Beek
         }
         public bool IsUserInvolvedAs(IUser user, Roles role)
         {
-            return involvements.Any(i => i.Value.Equals(role) && i.Key.Equals(user));
+            return involvements.Any(i => i.Key.Equals(user) && i.Value.Equals(role));
         }
     }
 
@@ -144,6 +190,7 @@ namespace Boris.BeekProject.Model.Beek
         ShortStory,
         LongStory,
         Comic,
-        Poem
+        Poem,
+        Omnibus
     }
 }
