@@ -54,7 +54,7 @@ namespace Boris.BeekProject.Model.Tests
         [TestMethod]
         public void CanInvolveUser()
         {
-            ShortStory story = new ShortStory();
+            BaseBeek story = new BaseBeek(BeekTypes.ShortStory);
             IUser writer = GenerateWriters().First();
 
             story.InvolveUser(writer, Roles.Writer);
@@ -68,7 +68,7 @@ namespace Boris.BeekProject.Model.Tests
         [TestMethod]
         public void CanInvolveUsers()
         {
-            ShortStory story = new ShortStory();
+            BaseBeek story = new BaseBeek(BeekTypes.ShortStory);
             List<IUser> writers = GenerateWriters().ToList();
 
             story.InvolveUsers(writers, Roles.Writer);
@@ -81,7 +81,7 @@ namespace Boris.BeekProject.Model.Tests
         [TestMethod]
         public void CanDisinvolveUser()
         {
-            ShortStory story = new ShortStory();
+            BaseBeek story = new BaseBeek(BeekTypes.ShortStory);
             IUser writer = GenerateWriters().First();
 
             // Removing without adding first should not throw an exception
@@ -106,7 +106,7 @@ namespace Boris.BeekProject.Model.Tests
         [ExpectedException(typeof(ArgumentException))]
         public void CantAddNonWriterToWriters()
         {
-            ShortStory story = new ShortStory();
+            BaseBeek story = new BaseBeek(BeekTypes.ShortStory);
             IUser notWriter = GenerateUsers().First();
             Assert.IsFalse(notWriter.IsInRole(Roles.Writer));
             story.InvolveUser(notWriter, Roles.Writer);

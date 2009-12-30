@@ -6,7 +6,7 @@ namespace Boris.BeekProject.Services
 {
     public interface ISearchService
     {
-        IEnumerable<IBeek> SearchBeek(BeekSearchbag bag, int skip, int take);
-        IEnumerable<IBeek> SearchBeek(BeekSearchbag bag);
+        IEnumerable<BaseBeek> SearchBeek(BeekSearchbag bag, int skip, int take);
+        IEnumerable<BaseBeek> SearchBeek(BeekSearchbag bag);
     }
 }

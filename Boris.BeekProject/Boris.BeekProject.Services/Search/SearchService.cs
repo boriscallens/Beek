@@ -17,12 +17,12 @@ namespace Boris.BeekProject.Services
             this.beekRepository = beekRepository;
         }
 
-        public IEnumerable<IBeek> SearchBeek(BeekSearchbag bag, int skip, int take)
+        public IEnumerable<BaseBeek> SearchBeek(BeekSearchbag bag, int skip, int take)
         {
             return SearchBeek(bag).Skip(skip).Take(take);
         }
 
-        public IEnumerable<IBeek> SearchBeek(BeekSearchbag bag)
+        public IEnumerable<BaseBeek> SearchBeek(BeekSearchbag bag)
         {
             var q = beekRepository.GetBeek();
             if(bag.BeekId.HasValue)
