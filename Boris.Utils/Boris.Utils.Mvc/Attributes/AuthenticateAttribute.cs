@@ -1,5 +1,4 @@
-﻿using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using Boris.BeekProject.Model.DataAccess;
 
 namespace Boris.Utils.Mvc.Attributes
@@ -15,10 +14,6 @@ namespace Boris.Utils.Mvc.Attributes
         public AuthenticateAttribute(IUserRepository userRepository)
         {
             this.userRepository = userRepository;
-        }
-        protected override bool AuthorizeCore(HttpContextBase httpContext)
-        {
-            return base.AuthorizeCore(httpContext);
         }
     }
 }
