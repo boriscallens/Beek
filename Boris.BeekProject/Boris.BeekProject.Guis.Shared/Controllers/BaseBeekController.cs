@@ -3,9 +3,11 @@ using System.Web;
 using System.Web.Mvc;
 using Boris.BeekProject.Model.Accounts;
 using Boris.BeekProject.Model.DataAccess;
+using Boris.Utils.Mvc.Attributes;
 
 namespace Boris.BeekProject.Guis.Shared.Controllers
 {
+    [Logging]
     public class BaseBeekController : Controller
     {
         internal IUserRepository userRepository;

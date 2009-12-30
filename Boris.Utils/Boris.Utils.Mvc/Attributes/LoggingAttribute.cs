@@ -3,7 +3,7 @@ using MvcTurbine.Web.Controllers;
 
 namespace Boris.Utils.Mvc.Attributes
 {
-    public class CustomActionAttribute : InjectableFilterAttribute
+    public class LoggingAttribute : InjectableFilterAttribute
     {
         public override Type FilterType
         {
