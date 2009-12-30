@@ -59,27 +59,27 @@ namespace Boris.BeekProject.Model.DataAccess.Db4o
             throw new NotImplementedException();
         }
 
-        public IQueryable<IBeek> GetBluePrints()
+        public IQueryable<BaseBeek> GetBluePrints()
         {
             throw new NotImplementedException();
         }
 
-        public IQueryable<IBeek> GetBeek()
+        public IQueryable<BaseBeek> GetBeek()
         {
             throw new NotImplementedException();
         }
 
-        public bool AddBeek(IBeek b)
+        public bool AddBeek(BaseBeek b)
         {
             throw new NotImplementedException();
         }
 
-        public bool RemoveBeek(IBeek b)
+        public bool RemoveBeek(BaseBeek b)
         {
             throw new NotImplementedException();
         }
 
-        public bool UpdateBeek(IBeek b)
+        public bool UpdateBeek(BaseBeek b)
         {
             throw new NotImplementedException();
         }

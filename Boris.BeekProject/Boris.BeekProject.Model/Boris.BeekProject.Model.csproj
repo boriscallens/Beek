@@ -54,7 +54,7 @@
     <Compile Include="DataAccess\Db4o\UserRepository.cs" />
     <Compile Include="DataAccess\IUserRepository.cs" />
     <Compile Include="Accounts\impl\User.cs" />
-    <Compile Include="Beek\impl\BaseBeek.cs" />
+    <Compile Include="Beek\BaseBeek.cs" />
     <Compile Include="Beek\Genre.cs" />
     <Compile Include="Beek\WritingStyle.cs" />
     <Compile Include="DataAccess\IBeekRepository.cs" />
@@ -62,9 +62,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Accounts\Roles.cs" />
-    <Compile Include="Beek\IBeek.cs" />
-    <Compile Include="Beek\impl\BluePrint.cs" />
-    <Compile Include="Beek\impl\ShortStory.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

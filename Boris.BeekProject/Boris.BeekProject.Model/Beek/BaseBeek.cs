@@ -5,25 +5,27 @@ using Boris.BeekProject.Model.Accounts;
 
 namespace Boris.BeekProject.Model.Beek
 {
-    public class BaseBeek: IBeek
+    public class BaseBeek
     {
-        private IList<KeyValuePair<IUser, Roles>> involvements;
         private List<Genre> genres;
         private List<WritingStyle> writingStyles;
+        private IList<KeyValuePair<IUser, Roles>> involvements;
+        //private IList<KeyValuePair<BaseBeek, BeekRelationType>> relations;
 
         public int Id { get; set; }
         public string Isbn { get; set; }
         public string Title { get; set; }
+        public BeekTypes Type { get; set; }
         public bool IsFiction { get; set; }
-        public BluePrint BluePrint { get; set; }
         public IEnumerable<KeyValuePair<IUser, Roles>> Involvements { get { return involvements; } }
         public IEnumerable<Genre> Genres { get{ return genres;} }
         public IEnumerable<WritingStyle> WritingStyles { get { return writingStyles; } }
 
-        protected BaseBeek()
+        public BaseBeek(BeekTypes type)
         {
             involvements = new List<KeyValuePair<IUser, Roles>>();
             genres = new List<Genre>();
+            Type = type;
         }
 
         public void AddGenre(Genre genre)
@@ -135,5 +137,13 @@ namespace Boris.BeekProject.Model.Beek
         {
             return involvements.Any(i => i.Value.Equals(role) && i.Key.Equals(user));
         }
+    }
+
+    public enum BeekTypes
+    {
+        ShortStory,
+        LongStory,
+        Comic,
+        Poem
     }
 }

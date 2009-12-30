@@ -16,10 +16,10 @@ namespace Boris.BeekProject.Model.DataAccess
         Boolean RemoveWritingStyle(WritingStyle w);
         Boolean UpdateWritingStyle(WritingStyle w);
 
-        IQueryable<IBeek> GetBluePrints();
-        IQueryable<IBeek> GetBeek();
-        Boolean AddBeek(IBeek b);
-        Boolean RemoveBeek(IBeek b);
-        Boolean UpdateBeek(IBeek b);
+        IQueryable<BaseBeek> GetBluePrints();
+        IQueryable<BaseBeek> GetBeek();
+        Boolean AddBeek(BaseBeek b);
+        Boolean RemoveBeek(BaseBeek b);
+        Boolean UpdateBeek(BaseBeek b);
     }
 }
