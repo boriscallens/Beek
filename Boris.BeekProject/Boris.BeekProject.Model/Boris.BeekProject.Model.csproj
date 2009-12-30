@@ -55,17 +55,15 @@
     <Compile Include="DataAccess\IUserRepository.cs" />
     <Compile Include="Accounts\impl\User.cs" />
     <Compile Include="Beek\impl\BaseBeek.cs" />
-    <Compile Include="Beek\impl\BluePrint.cs" />
     <Compile Include="Beek\Genre.cs" />
     <Compile Include="Beek\WritingStyle.cs" />
     <Compile Include="DataAccess\IBeekRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Accounts\impl\AnonymousRole.cs" />
-    <Compile Include="Accounts\IRole.cs" />
-    <Compile Include="Accounts\impl\Role.cs" />
+    <Compile Include="Accounts\Roles.cs" />
     <Compile Include="Beek\IBeek.cs" />
+    <Compile Include="Beek\impl\BluePrint.cs" />
     <Compile Include="Beek\impl\ShortStory.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

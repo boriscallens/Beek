@@ -8,17 +8,20 @@ namespace Boris.BeekProject.Model.Accounts
 {
     public class User: IUser
     {
+        private IList<Roles> roles;
+        private string HashedPassword { get; set; }
+
         [Required]
         public Guid Id { get; set; }
         public string Name { get; set; }
         public string Salt { get; set; }
-        private string HashedPassword { get; set; }
+        
         public string Email { get; set; }
         public DateTime CreationTime { get; set; }
         public DateTime? LastLoginAttempt { get; set; }
         public bool IsApproved { get; set; }
         public bool IsLockedOut { get; set; }
-        public IList<IRole> Roles { get; set; }
+        public IEnumerable<Roles> Roles { get{ return roles;}}
         public bool IsDefault { get; set; }
         public bool IsAnonymous { 
             get
@@ -29,7 +32,7 @@ namespace Boris.BeekProject.Model.Accounts
 
         public User()
         {
-            Roles = new List<IRole>();
+            roles = new List<Roles>{Accounts.Roles.Anonymous};
             Salt = GetSalt();
         }
         public User(string userName, string password, string email):this()
@@ -37,38 +40,39 @@ namespace Boris.BeekProject.Model.Accounts
             Name = userName;
             HashedPassword = GetHashedPassword(Salt, password);
             Email = email;
+            roles.Remove(Accounts.Roles.Anonymous);
         }
 
-        public bool IsInRole (IRole role)
+        public bool IsInRole (Roles role)
         {
-            return Roles.Contains(role);
+            return roles.Contains(role);
         }
         public bool IsInRole (string roleName)
         {
-            return Roles.Any(r => r.Equals(roleName));
+            return roles.Any(r => r.ToString().Equals(roleName, StringComparison.InvariantCultureIgnoreCase));
         }
-        public void AddRole(IRole role)
+        public void AddRole(Roles role)
         {
-            lock (Roles)
+            lock (roles)
             {
                 if (!IsInRole(role))
                 {
-                    Roles.Add(role);
+                    roles.Add(role);
                 }
             }
         }
-        public void AddRoles (IEnumerable<IRole> roles)
+        public void AddRoles (IEnumerable<Roles> newRoles)
         {
-            lock (Roles)
+            lock (roles)
             {
-                Roles = Roles.Union(roles).ToList();
+                roles = roles.Union(newRoles).ToList();
             }
         }
-        public void RemoveRole(IRole role)
+        public void RemoveRole(Roles role)
         {
-            lock (Roles)
+            lock (roles)
             {
-                Roles = Roles.Where(r => !r.Equals(role)).ToList();
+                roles = roles.Where(r => !r.Equals(role)).ToList();
             }
         }
 
