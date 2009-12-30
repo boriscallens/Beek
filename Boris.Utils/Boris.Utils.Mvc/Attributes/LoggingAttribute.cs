@@ -7,7 +7,7 @@ namespace Boris.Utils.Mvc.Attributes
     {
         public override Type FilterType
         {
-            get { return typeof(CustomActionFilter); }
+            get { return typeof(LoggingFilter); }
         }
     }
 }

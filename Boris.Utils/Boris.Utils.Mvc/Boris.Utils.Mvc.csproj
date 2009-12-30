@@ -35,24 +35,35 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\dependencies\MvcTurbine.Web.dll</HintPath>
     </Reference>
-    <Reference Include="System.Web.Abstractions">
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\dependencies\System.Web.Abstractions.dll</HintPath>
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Web.Mvc, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\dependencies\System.Web.Mvc.dll</HintPath>
     </Reference>
+    <Reference Include="System.Web.Routing, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\dependencies\System.Web.Routing.dll</HintPath>
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Attributes\AuthenticateAttribute.cs" />
     <Compile Include="Attributes\LoggingAttribute.cs" />
     <Compile Include="Attributes\LoggingFilter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Boris.BeekProject\Boris.BeekProject.Model\Boris.BeekProject.Model.csproj">
-      <Project>{7A10D58A-1F92-462E-B722-034EF25AE2F3}</Project>
-      <Name>Boris.BeekProject.Model</Name>
+    <ProjectReference Include="..\Boris.Utils.Logging\Boris.Utils.Logging.csproj">
+      <Project>{3484159B-CFAC-44D3-A670-0DA875F44BF8}</Project>
+      <Name>Boris.Utils.Logging</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

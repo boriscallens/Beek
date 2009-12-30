@@ -32,7 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="ILoggingService.cs" />
-    <Compile Include="NLog\NlogLoggerService.cs" />
+    <Compile Include="NLog\NlogLoggingService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
