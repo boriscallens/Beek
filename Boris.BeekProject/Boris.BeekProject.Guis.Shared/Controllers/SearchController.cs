@@ -22,7 +22,7 @@ namespace Boris.BeekProject.Guis.Shared.Controllers
         public ActionResult Index(int beekId)
         {
             BeekSearchbag bag = new BeekSearchbag {BeekId = beekId};
-            IBeek beek = searchService.SearchBeek(bag).FirstOrDefault();
+            BaseBeek beek = searchService.SearchBeek(bag).FirstOrDefault();
             if ( beek != null )
             {
                 return View(beek);
@@ -35,7 +35,7 @@ namespace Boris.BeekProject.Guis.Shared.Controllers
         // GET: /Beek/Search?name=1984&author=george+orwell
         public ActionResult Search(BeekSearchbag bag, int skip, int take)
         {
-            IEnumerable<IBeek> beek = searchService.SearchBeek(bag, skip, take);
+            IEnumerable<BaseBeek> beek = searchService.SearchBeek(bag, skip, take);
             if(beek.Any())
             {
                 return View(beek);

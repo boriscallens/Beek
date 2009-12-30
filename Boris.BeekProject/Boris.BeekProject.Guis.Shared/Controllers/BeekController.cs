@@ -35,7 +35,7 @@ namespace Boris.BeekProject.Guis.Shared.Controllers
         //
         // POST: /Beek/Create
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult Create(IBeek beek)
+        public ActionResult Create(BaseBeek beek)
         {
             try
             {
@@ -59,7 +59,7 @@ namespace Boris.BeekProject.Guis.Shared.Controllers
         //
         // POST: /Beek/Edit/5
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult Edit(IBeek updatedBeek)
+        public ActionResult Edit(BaseBeek updatedBeek)
         {
             try
             {

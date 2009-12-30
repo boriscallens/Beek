@@ -4,6 +4,6 @@ namespace Boris.BeekProject.Guis.Shared.ViewModels
 {
     public class BeekViewModel: BaseBeekViewModel
     {
-        public IBeek Beek { get; set; }
+        public BaseBeek Beek { get; set; }
     }
 }
