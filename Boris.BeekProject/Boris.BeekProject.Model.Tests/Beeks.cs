@@ -11,6 +11,7 @@ namespace Boris.BeekProject.Model.Tests
     public class Beeks
     {
         public TestContext TestContext { get; set; }
+        private static readonly GenreFactory genreFactory = new GenreFactory(null);
 
         #region Additional test attributes
         //
@@ -50,7 +51,8 @@ namespace Boris.BeekProject.Model.Tests
                 yield return new User("user" + i, "password", string.Empty){Id = Guid.NewGuid()};
             }
         }
-
+        
+        // Relations to users
         [TestMethod]
         public void CanInvolveUser()
         {
@@ -111,5 +113,187 @@ namespace Boris.BeekProject.Model.Tests
             Assert.IsFalse(notWriter.IsInRole(Roles.Writer));
             story.InvolveUser(notWriter, Roles.Writer);
         }
+
+        [TestMethod]
+        public void IsRelatedWorks()
+        {
+            BaseBeek original = new BaseBeek(BeekTypes.ShortStory);
+            BaseBeek copy = new BaseBeek(BeekTypes.ShortStory);
+            copy.RelateTo(original, BeekRelationTypes.Original);
+            Assert.IsTrue(copy.IsBeekRelatedToMeAs(original, BeekRelationTypes.Original));
+        }
+
+        // Relations to other beek
+        [TestMethod]
+        public void CanRelateExactlyOnceToOriginalPerType()
+        {
+            BaseBeek original = new BaseBeek(BeekTypes.ShortStory);
+            BaseBeek copy = new BaseBeek(BeekTypes.ShortStory);
+            copy.RelateTo(original, BeekRelationTypes.Original);
+            Assert.IsTrue(copy.Relations.Contains(new KeyValuePair<BaseBeek, BeekRelationTypes>(original, BeekRelationTypes.Original)));
+            // Second time should be ignored as there is already one
+            copy.RelateTo(original, BeekRelationTypes.Original);
+            Assert.IsTrue(
+                copy.Relations.Where(r=>r.Key == original && r.Value == BeekRelationTypes.Original).Count()==1);
+        }
+
+        [TestMethod]
+        public void CanUnRelate()
+        {
+            BaseBeek original = new BaseBeek(BeekTypes.ShortStory);
+            BaseBeek copy = new BaseBeek(BeekTypes.ShortStory);
+            copy.RelateTo(original, BeekRelationTypes.Original);
+            copy.RelateTo(original, BeekRelationTypes.Original);
+            Assert.IsTrue(copy.IsBeekRelatedToMeAs(original, BeekRelationTypes.Original));
+            copy.UnrelateTo(original, BeekRelationTypes.Original);
+            Assert.IsFalse(copy.IsBeekRelatedToMeAs(original, BeekRelationTypes.Original));
+        }
+
+        [TestMethod]
+        public void GetRelatedBeek()
+        {
+            BaseBeek original = new BaseBeek(BeekTypes.ShortStory);
+            BaseBeek copy = new BaseBeek(BeekTypes.ShortStory);
+            BaseBeek copy2 = new BaseBeek(BeekTypes.ShortStory);
+            original.RelateTo(copy, BeekRelationTypes.Republishment);
+            original.RelateTo(copy2, BeekRelationTypes.Republishment);
+            Assert.IsTrue(original.GetRelatedBeekForRelationType(BeekRelationTypes.Republishment).Count() == 2);
+        }
+    
+        // Genres
+        [TestMethod]
+        public void CanGetGenreTree()
+        {
+            var genres = genreFactory.RebuildGenreTree();
+            Assert.IsTrue(genres != null);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void CantAddGenreToItself()
+        {
+            FantasyGenre genre = new FantasyGenre();
+            genre.AddSubGenre(genre);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void CantAddParentGenreAsSubGenre()
+        {
+            FantasyGenre fantasy = new FantasyGenre();
+            HistoricalFictionGenre history = new HistoricalFictionGenre();
+            history.AddSubGenre(fantasy);
+            fantasy.AddSubGenre(history);
+        }
+
+        [TestMethod]
+        public void IsParentWorksThroughEntireBranch()
+        {
+            HistoricalFictionGenre history = new HistoricalFictionGenre();
+            FantasyGenre fantasy = new FantasyGenre();
+            CostumeDramaGenre costume = new CostumeDramaGenre();
+            history.AddSubGenre(fantasy);
+            fantasy.AddSubGenre(costume);
+            Assert.IsTrue(history.IsParentOf(costume));
+        }
+
+        [TestMethod]
+        public void IsChildWorksThroughEntireTree()
+        {
+            HistoricalFictionGenre history = new HistoricalFictionGenre();
+            FantasyGenre fantasy = new FantasyGenre();
+            CostumeDramaGenre costume = new CostumeDramaGenre();
+            history.AddSubGenre(fantasy);
+            fantasy.AddSubGenre(costume);
+            Assert.IsTrue(costume.IsChildOf(history));
+        }
+
+        [TestMethod]
+        public void CanAddGenreExactlyOnce()
+        {
+            BaseBeek beek = new BaseBeek(BeekTypes.ShortStory);
+            FantasyGenre fantasy = new FantasyGenre();
+            beek.AddGenre(fantasy);
+            Assert.IsTrue(beek.Genres.Where(g => g.Equals(fantasy)).Count() == 1);
+            // Should be ignored as it is already added
+            beek.AddGenre(fantasy);
+            Assert.IsTrue(beek.Genres.Where(g => g.Equals(fantasy)).Count() == 1);
+        }
+
+        [TestMethod]
+        public void IsGenreDetectsGenre()
+        {
+            BaseBeek beek = new BaseBeek(BeekTypes.ShortStory);
+            var autoBiography = new AutoBiographyGenre();
+            beek.AddGenre(autoBiography);
+            Assert.IsTrue(beek.IsGenre(autoBiography));
+        }
+        
+        [TestMethod]
+        public void IsGenreDetectsChildGenre()
+        {
+            BaseBeek beek = new BaseBeek(BeekTypes.ShortStory);
+            var biography = new BiographyGenre();
+            var autoBiography = new AutoBiographyGenre();
+            biography.AddSubGenre(autoBiography);
+            beek.AddGenre(autoBiography);
+            Assert.IsTrue(beek.IsGenre(biography));
+        }
+    
+        [TestMethod]
+        public void CanRemoveGenre()
+        {
+            BaseBeek beek = new BaseBeek(BeekTypes.ShortStory);
+            var biography = new BiographyGenre();
+            var autoBiography = new AutoBiographyGenre();
+            biography.AddSubGenre(autoBiography);
+            beek.AddGenre(autoBiography);
+            Assert.IsTrue(beek.IsGenre(autoBiography));
+            beek.RemoveGenre(autoBiography);
+            Assert.IsFalse(beek.IsGenre(autoBiography));
+        }
+
+        // Volumes logic
+        [TestMethod]
+        public void CanAddToCollection()
+        {
+            BaseBeek vol1 = new BaseBeek(BeekTypes.ShortStory);
+            BaseBeek vol2 = new BaseBeek(BeekTypes.ShortStory);
+            BaseBeek vol3 = new BaseBeek(BeekTypes.ShortStory);
+            BaseBeek vol3Bis = new BaseBeek(BeekTypes.ShortStory);
+            BaseBeek vol3B = new BaseBeek(BeekTypes.ShortStory);
+
+            BeekCollection collection = new BeekCollection();
+            vol1.AddToCollection(collection, 1, null);
+            vol2.AddToCollection(collection, 2, null);
+            vol3.AddToCollection(collection, 3, null);
+            Assert.IsTrue(collection.Count == 3);
+            Assert.IsTrue(vol1.Collection == collection);
+            Assert.IsTrue(vol1.VolumeNumber == 1);
+            Assert.IsTrue(vol1.TotalVolumes == 3);
+
+            vol3Bis.AddToCollection(collection, 3, null);
+            Assert.IsTrue(vol1.TotalVolumes == 3);
+
+            vol3B.AddToCollection(collection, 3, 'B');
+            Assert.IsTrue(vol1.TotalVolumes == 4);
+        }
+
+        [TestMethod]
+        public void CanRemoveFromCollection()
+        {
+            BaseBeek vol1 = new BaseBeek(BeekTypes.ShortStory);
+            BaseBeek vol2a = new BaseBeek(BeekTypes.ShortStory);
+            BaseBeek vol2b = new BaseBeek(BeekTypes.ShortStory);
+            BeekCollection collection = new BeekCollection();
+            vol1.AddToCollection(collection, 1, null);
+            vol2a.AddToCollection(collection, 2, 'a');
+            vol2b.AddToCollection(collection, 2, 'b');
+            Assert.IsTrue(vol1.Collection.Contains(vol2b));
+            vol2b.RemoveFromCollection();
+            Assert.IsFalse(vol1.Collection.Contains(vol2b));
+            Assert.IsTrue(vol2b.VolumeNumber == 0);
+        }
+    
     }
 }

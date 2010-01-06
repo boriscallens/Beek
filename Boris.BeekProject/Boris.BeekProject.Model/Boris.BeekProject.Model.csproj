@@ -55,7 +55,7 @@
     <Compile Include="DataAccess\IUserRepository.cs" />
     <Compile Include="Accounts\impl\User.cs" />
     <Compile Include="Beek\BaseBeek.cs" />
-    <Compile Include="Beek\Genre.cs" />
+    <Compile Include="Beek\Genres\BaseGenre.cs" />
     <Compile Include="Beek\WritingStyle.cs" />
     <Compile Include="DataAccess\IBeekRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -63,10 +63,17 @@
   <ItemGroup>
     <Compile Include="Accounts\Roles.cs" />
     <Compile Include="Beek\BeekCollection.cs" />
-    <Compile Include="Beek\BeekRelationTypes\Republishing.cs" />
-    <Compile Include="Beek\BeekRelationTypes\Translation.cs" />
-    <Compile Include="Beek\BeekRelationTypes\IBeekRelationType.cs" />
-    <Compile Include="Beek\BeekRelationTypes\Original.cs" />
+    <Compile Include="Beek\Genres\BiographyGenre.cs" />
+    <Compile Include="Beek\Genres\AutoBiographyGenre.cs" />
+    <Compile Include="Beek\Genres\AlternateHistoryGenre.cs" />
+    <Compile Include="Beek\Genres\GenreFactory.cs" />
+    <Compile Include="Beek\Genres\JidaigekiGenre.cs" />
+    <Compile Include="Beek\Genres\CostumeDramaGenre.cs" />
+    <Compile Include="Beek\Genres\PeriodPieceGenre.cs" />
+    <Compile Include="Beek\Genres\HistoricalFictionGenre.cs" />
+    <Compile Include="Beek\Genres\MemoirGenre.cs" />
+    <Compile Include="Beek\Genres\HistoricalGenre.cs" />
+    <Compile Include="Beek\Genres\FantasyGenre.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -11,7 +11,7 @@ namespace Boris.BeekProject.Model.DataAccess.Db4o
         private static IObjectServer server;
         private static IObjectContainer client;
 
-        public BeekRepository(): this(ConfigurationManager.AppSettings["userRepository.path.db4o"]){}
+        public BeekRepository(): this(ConfigurationManager.AppSettings["beekRepository.path.db4o"]){}
 
         public BeekRepository(string db4oFilePath)
         {
@@ -19,22 +19,22 @@ namespace Boris.BeekProject.Model.DataAccess.Db4o
             client = server.OpenClient();
         }
 
-        public IQueryable<Genre> GetGenres()
+        public IQueryable<BaseGenre> GetGenres()
         { 
             throw new NotImplementedException();
         }
 
-        public bool AddGenre(Genre g)
+        public bool AddGenre(BaseGenre g)
         {
             throw new NotImplementedException();
         }
 
-        public bool RemoveGenre(Genre g)
+        public bool RemoveGenre(BaseGenre g)
         {
             throw new NotImplementedException();
         }
 
-        public bool UpdateGenre(Genre g)
+        public bool UpdateGenre(BaseGenre g)
         {
             throw new NotImplementedException();
         }

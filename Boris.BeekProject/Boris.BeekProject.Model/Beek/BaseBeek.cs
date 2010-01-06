@@ -7,43 +7,43 @@ namespace Boris.BeekProject.Model.Beek
 {
     public class BaseBeek
     {
-        private List<Genre> genres;
+        private List<BaseGenre> genres;
         private List<WritingStyle> writingStyles;
         private IList<KeyValuePair<IUser, Roles>> involvements;
-        private IList<KeyValuePair<BaseBeek, IBeekRelationType>> relations;
+        private IList<KeyValuePair<BaseBeek, BeekRelationTypes>> relations;
+        private BeekCollection collection;
 
         public int Id { get; set; }
         public string Isbn { get; set; }
         public string Title { get; set; }
         public BeekTypes Type { get; set; }
         public bool IsFiction { get; set; }
-        public BeekCollection Collection { get; set; }
+        public BeekCollection Collection { get { return collection; } }
         public int VolumeNumber { get; set; }
-        public int TotalVolumes { get
+        public char? SubVolume { get; set; }
+        public int TotalVolumes { 
+            get
             {
-                if(Collection == null)
-                {
-                    return 1;
-                }
-                return Collection.Count;
+                return Collection.GroupBy(b => String.Format("{0}{1}", b.VolumeNumber, b.SubVolume)).Count();
             }
         }
         public IEnumerable<KeyValuePair<IUser, Roles>> Involvements { get { return involvements; } }
-        public IEnumerable<Genre> Genres { get{ return genres;} }
+        public IEnumerable<BaseGenre> Genres { get { return genres; } }
         public IEnumerable<WritingStyle> WritingStyles { get { return writingStyles; } }
-        public IEnumerable<KeyValuePair<BaseBeek, IBeekRelationType>> Relations;
+        public IEnumerable<KeyValuePair<BaseBeek, BeekRelationTypes>> Relations { get { return relations; } }
         
         public BaseBeek(BeekTypes type)
         {
             involvements = new List<KeyValuePair<IUser, Roles>>();
-            relations = new List<KeyValuePair<BaseBeek, IBeekRelationType>>();
+            relations = new List<KeyValuePair<BaseBeek, BeekRelationTypes>>();
             writingStyles = new List<WritingStyle>();
-            genres = new List<Genre>();
+            genres = new List<BaseGenre>();
             Type = type;
-            VolumeNumber = 1;
+            collection = new BeekCollection();
+            AddToCollection(new BeekCollection(), 1, null);
         }
 
-        public void AddGenre(Genre genre)
+        public void AddGenre(BaseGenre genre)
         {
             lock (genres)
             {
@@ -53,26 +53,43 @@ namespace Boris.BeekProject.Model.Beek
                 }
             }
         }
-        public void AddGenre(IEnumerable<Genre> newGenres)
+        public void AddGenre(IEnumerable<BaseGenre> newGenres)
         {
             lock (genres)
             {
                 genres = genres.Union(newGenres).ToList();
             }
         }
-        public void RemoveGenre(Genre genre)
+        public void RemoveGenre(BaseGenre genre)
         {
             lock (genres)
             {
                 genres.Remove(genre);
             }
         }
-        public void RemoveGenre(IEnumerable<Genre> genresToRemove)
+        public void RemoveGenre(IEnumerable<BaseGenre> genresToRemove)
         {
             lock (genres)
             {
                 genres = genres.Where(g => !genresToRemove.Contains(g)).ToList();
             }
+        }
+        public bool IsGenre(BaseGenre genre)
+        {
+            bool isGenre = genres.Contains(genre);
+            if(!isGenre)
+            {
+                int i = 0;
+                lock (genres)
+                {
+                    while (!isGenre && i < genres.Count)
+                    {
+                        isGenre = genres[i].IsChildOf(genre);
+                        i++;
+                    }    
+                }
+            }
+            return isGenre;
         }
 
         public void AddWritingStyle(WritingStyle writingStyle)
@@ -106,8 +123,8 @@ namespace Boris.BeekProject.Model.Beek
                 writingStyles = writingStyles.Where(w => !writingStylesToRemove.Contains(w)).ToList();
             }
         }
-        
-        public void RelateTo(BaseBeek relatedBeek, IBeekRelationType relationType)
+
+        public void RelateTo(BaseBeek relatedBeek, BeekRelationTypes otherIsWhatOfMe)
         {
             if (relatedBeek.Equals(this))
             {
@@ -115,25 +132,25 @@ namespace Boris.BeekProject.Model.Beek
             }
             lock (relations)
             {
-                if (IsBeekRelatedAs(relatedBeek, relationType))
+                if (!IsBeekRelatedToMeAs(relatedBeek, otherIsWhatOfMe))
                 {
-                    relations.Add(new KeyValuePair<BaseBeek, IBeekRelationType>(relatedBeek, relationType));
+                    relations.Add(new KeyValuePair<BaseBeek, BeekRelationTypes>(relatedBeek, otherIsWhatOfMe));
                 }
             }
         }
-        public void UnrelateTo(BaseBeek relatedBeek, IBeekRelationType relationType)
+        public void UnrelateTo(BaseBeek relatedBeek, BeekRelationTypes relationType)
         {
             lock (relations)
             {
                 relations = relations.Where(r => !(r.Key.Equals(relatedBeek) && r.Value.Equals(relationType))).ToList();
             }
         }
-        public IEnumerable<BaseBeek> GetRelatedBeekForRelationType(IBeekRelationType relationType)
+        public IEnumerable<BaseBeek> GetRelatedBeekForRelationType(BeekRelationTypes relationType)
         {
             return relations.Where(r => r.Value.GetType().Equals(relationType.GetType()))
                 .Select(r=>r.Key);
         }
-        public bool IsBeekRelatedAs(BaseBeek relatedBeek, IBeekRelationType relationType)
+        public bool IsBeekRelatedToMeAs(BaseBeek relatedBeek, BeekRelationTypes relationType)
         {
             return relations.Any(r => r.Key.Equals(relatedBeek) && r.Value.Equals(relationType));
         }
@@ -183,6 +200,27 @@ namespace Boris.BeekProject.Model.Beek
         {
             return involvements.Any(i => i.Key.Equals(user) && i.Value.Equals(role));
         }
+    
+        public void AddToCollection(BeekCollection beekCollection, int volumeNumber, char? subVolume)
+        {
+            lock (Collection)
+            {
+                if (!beekCollection.Any(b => b.Equals(this)))
+                {
+                    beekCollection.AddLast(this);
+                }
+                collection = beekCollection;
+                VolumeNumber = volumeNumber;
+                SubVolume = subVolume;
+            }
+        }
+        public void RemoveFromCollection()
+        {
+            collection.Remove(this);
+            collection = new BeekCollection();
+            VolumeNumber = 0;
+            SubVolume = null;
+        }
     }
 
     public enum BeekTypes
@@ -192,5 +230,14 @@ namespace Boris.BeekProject.Model.Beek
         Comic,
         Poem,
         Omnibus
+    }
+    public enum BeekRelationTypes
+    {
+        Original,
+        Republishment,
+        Translation,
+        Adaptation,
+        Update,
+        Complement
     }
 }
