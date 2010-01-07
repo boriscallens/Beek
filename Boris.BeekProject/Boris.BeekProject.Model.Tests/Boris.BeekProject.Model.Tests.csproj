@@ -39,6 +39,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Accounts.cs" />
+    <Compile Include="BeekDataAccess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Beeks.cs" />
   </ItemGroup>
@@ -47,6 +48,12 @@
       <Project>{7A10D58A-1F92-462E-B722-034EF25AE2F3}</Project>
       <Name>Boris.BeekProject.Model</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\db4o\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

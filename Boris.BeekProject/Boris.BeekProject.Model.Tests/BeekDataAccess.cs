@@ -1,4 +1,8 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.Linq;
+using Boris.BeekProject.Model.Beek;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Boris.BeekProject.Model.DataAccess;
+using Boris.BeekProject.Model.DataAccess.Db4o;
 
 namespace Boris.BeekProject.Model.Tests
 {
@@ -8,6 +12,7 @@ namespace Boris.BeekProject.Model.Tests
     [TestClass]
     public class BeekDataAccess
     {
+        private static IBeekRepository beekRepos = new BeekRepository();
         public TestContext TestContext { get; set; }
 
         public BeekDataAccess()
@@ -38,9 +43,11 @@ namespace Boris.BeekProject.Model.Tests
         #endregion
 
         [TestMethod]
-        public void CanInitiateGenreTree()
+        public void CanAddGenre()
         {
-            
+            var genre = new AlternateHistoryGenre();
+            beekRepos.AddGenre(genre);
+            Assert.IsTrue(beekRepos.GetGenres().Any(g=>g.Equals(genre)));
         }
     }
 }
