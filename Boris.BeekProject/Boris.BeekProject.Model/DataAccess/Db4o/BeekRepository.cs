@@ -3,6 +3,7 @@ using System.Configuration;
 using System.Linq;
 using Boris.BeekProject.Model.Beek;
 using Db4objects.Db4o;
+using System.IO;
 
 namespace Boris.BeekProject.Model.DataAccess.Db4o
 {
@@ -15,6 +16,8 @@ namespace Boris.BeekProject.Model.DataAccess.Db4o
 
         public BeekRepository(string db4oFilePath)
         {
+            FileInfo file = new FileInfo(db4oFilePath);
+            if(file.)
             server = Db4oFactory.OpenServer(db4oFilePath, 0);
             client = server.OpenClient();
         }
