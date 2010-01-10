@@ -1,3 +1,4 @@
+using System;
 using System.Web.Mvc;
 using Boris.BeekProject.Model.Accounts;
 using Boris.BeekProject.Model.DataAccess;
@@ -17,7 +18,7 @@ namespace Boris.BeekProject.Guis.Shared.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult LogIn(string username, string password, string referer)
         {
-            IUser user = userRepository.GetUser(username);
+            IUser user = UserRepository.GetUser(username);
             if (user != null && user.Challenge(password))
             {
                 // ToDo: Set user to session stuff

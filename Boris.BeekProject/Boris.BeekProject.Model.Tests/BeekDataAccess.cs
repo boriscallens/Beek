@@ -12,7 +12,7 @@ namespace Boris.BeekProject.Model.Tests
     [TestClass]
     public class BeekDataAccess
     {
-        private static IBeekRepository beekRepos = new BeekRepository();
+        private static readonly IBeekRepository beekRepos = new BeekRepository();
         public TestContext TestContext { get; set; }
 
         public BeekDataAccess()

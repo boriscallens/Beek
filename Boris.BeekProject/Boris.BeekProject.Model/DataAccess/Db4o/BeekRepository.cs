@@ -4,6 +4,7 @@ using System.Linq;
 using Boris.BeekProject.Model.Beek;
 using Db4objects.Db4o;
 using System.IO;
+using Db4objects.Db4o.Linq;
 
 namespace Boris.BeekProject.Model.DataAccess.Db4o
 {
@@ -16,20 +17,31 @@ namespace Boris.BeekProject.Model.DataAccess.Db4o
 
         public BeekRepository(string db4oFilePath)
         {
+            if(db4oFilePath.StartsWith("\\"))
+            {
+                //db4oFilePath = Path.Combine(Application, db4oFilePath);
+            }
             FileInfo file = new FileInfo(db4oFilePath);
-            if(file.)
+            
+            if(!file.Directory.Exists)
+            {
+                file.Directory.Create();
+            }
             server = Db4oFactory.OpenServer(db4oFilePath, 0);
             client = server.OpenClient();
         }
 
         public IQueryable<BaseGenre> GetGenres()
-        { 
-            throw new NotImplementedException();
+        {
+            // ToDo: down the latest db4o and use client.AsQueryable() straight from the bottle
+            return client.Cast<BaseGenre>().AsQueryable();
         }
 
         public bool AddGenre(BaseGenre g)
         {
-            throw new NotImplementedException();
+            client.Store(g);
+            client.Commit();
+            return true;
         }
 
         public bool RemoveGenre(BaseGenre g)

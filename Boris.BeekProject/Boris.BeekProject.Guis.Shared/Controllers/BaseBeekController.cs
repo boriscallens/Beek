@@ -10,13 +10,13 @@ namespace Boris.BeekProject.Guis.Shared.Controllers
     [Logging]
     public class BaseBeekController : Controller
     {
-        internal IUserRepository userRepository;
+        internal readonly IUserRepository UserRepository;
 
         public new IUser User { get; set; }
 
         protected BaseBeekController(IUserRepository repository)
         {
-            userRepository = repository;
+            UserRepository = repository;
             // If the user is not logged in we will either restore him from the cookie, or create an anon one
             if (User == null)
             {
@@ -38,7 +38,7 @@ namespace Boris.BeekProject.Guis.Shared.Controllers
             {
                 try
                 {
-                    return userRepository.GetUser(new Guid(cookie.Values["id"]));
+                    return UserRepository.GetUser(new Guid(cookie.Values["id"]));
                 }
                 catch (Exception)
                 {
@@ -50,7 +50,7 @@ namespace Boris.BeekProject.Guis.Shared.Controllers
         private IUser CreateAnonymousUser()
         {
             IUser user = new User("Anonymous", "Anonymous", string.Empty);
-            user.Id = userRepository.AddUser(user);
+            user.Id = UserRepository.AddUser(user);
             return user;
         }
         private static HttpCookie CreateUserCookie(IUser user, string ip)
