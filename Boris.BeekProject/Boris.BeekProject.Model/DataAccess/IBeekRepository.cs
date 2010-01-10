@@ -7,19 +7,18 @@ namespace Boris.BeekProject.Model.DataAccess
     public interface IBeekRepository
     {
         IQueryable<BaseGenre> GetGenres();
-        Boolean AddGenre(BaseGenre g);
-        Boolean RemoveGenre(BaseGenre g);
-        Boolean UpdateGenre(BaseGenre g);
+        int AddGenre(BaseGenre g);
+        void RemoveGenre(BaseGenre g);
+        void UpdateGenre(BaseGenre g);
 
         IQueryable<WritingStyle> GetWritingStyles();
-        Boolean AddWritingStyle(WritingStyle w);
-        Boolean RemoveWritingStyle(WritingStyle w);
-        Boolean UpdateWritingStyle(WritingStyle w);
+        int AddWritingStyle(WritingStyle w);
+        void RemoveWritingStyle(WritingStyle w);
+        void UpdateWritingStyle(WritingStyle w);
 
-        IQueryable<BaseBeek> GetBluePrints();
         IQueryable<BaseBeek> GetBeek();
-        Boolean AddBeek(BaseBeek b);
-        Boolean RemoveBeek(BaseBeek b);
-        Boolean UpdateBeek(BaseBeek b);
+        int AddBeek(BaseBeek b);
+        void RemoveBeek(BaseBeek b);
+        void UpdateBeek(BaseBeek b);
     }
 }

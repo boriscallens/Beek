@@ -10,93 +10,108 @@ namespace Boris.BeekProject.Model.DataAccess.Db4o
 {
     public class BeekRepository: IBeekRepository
     {
-        private static IObjectServer server;
-        private static IObjectContainer client;
+        private readonly IObjectServer server;
+        private readonly IObjectContainer client;
+        private readonly object genreLock;
+        private readonly object beekLock;
 
         public BeekRepository(): this(ConfigurationManager.AppSettings["beekRepository.path.db4o"]){}
 
         public BeekRepository(string db4oFilePath)
         {
-            if(db4oFilePath.StartsWith("\\"))
-            {
-                //db4oFilePath = Path.Combine(Application, db4oFilePath);
-            }
             FileInfo file = new FileInfo(db4oFilePath);
-            
-            if(!file.Directory.Exists)
+            if (file.Directory != null && !file.Directory.Exists)
             {
                 file.Directory.Create();
             }
             server = Db4oFactory.OpenServer(db4oFilePath, 0);
-            client = server.OpenClient();
+            client = server.OpenClient(); 
+            genreLock = new object();
+            beekLock = new object();
         }
-
+        
         public IQueryable<BaseGenre> GetGenres()
         {
             // ToDo: down the latest db4o and use client.AsQueryable() straight from the bottle
             return client.Cast<BaseGenre>().AsQueryable();
         }
-
-        public bool AddGenre(BaseGenre g)
+        public int AddGenre(BaseGenre genre)
         {
-            client.Store(g);
-            client.Commit();
-            return true;
+            lock (genreLock)
+            {
+                if (!GetGenres().Any(g => g.Equals(genre)))
+                {
+                    genre.Id = client.Cast<BaseGenre>().Select(g => g.Id).DefaultIfEmpty(-1).Max() + 1;
+                    client.Store(genre);
+                    client.Commit();
+                }
+            }
+            return genre.Id;
         }
-
-        public bool RemoveGenre(BaseGenre g)
+        public void RemoveGenre(BaseGenre genre)
         {
-            throw new NotImplementedException();
+            lock (genreLock)
+            {
+                client.Delete(genre);    
+                client.Commit();
+            }
         }
-
-        public bool UpdateGenre(BaseGenre g)
+        public void UpdateGenre(BaseGenre g)
         {
-            throw new NotImplementedException();
+            // ToDo: should we create a private IObjectContainer to set the update depth?
+            lock(genreLock)
+            {
+                client.Store(g);
+                client.Commit();
+            }
         }
 
         public IQueryable<WritingStyle> GetWritingStyles()
         {
             throw new NotImplementedException();
         }
-
-        public bool AddWritingStyle(WritingStyle w)
+        public int AddWritingStyle(WritingStyle w)
         {
             throw new NotImplementedException();
         }
-
-        public bool RemoveWritingStyle(WritingStyle w)
+        public void RemoveWritingStyle(WritingStyle w)
         {
             throw new NotImplementedException();
         }
-
-        public bool UpdateWritingStyle(WritingStyle w)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IQueryable<BaseBeek> GetBluePrints()
+        public void UpdateWritingStyle(WritingStyle w)
         {
             throw new NotImplementedException();
         }
 
         public IQueryable<BaseBeek> GetBeek()
         {
-            throw new NotImplementedException();
+            return client.Cast<BaseBeek>().AsQueryable();
         }
-
-        public bool AddBeek(BaseBeek b)
+        public int AddBeek(BaseBeek beek)
         {
-            throw new NotImplementedException();
+            lock (beekLock)
+            {
+                beek.Id = GetBeek().Select(b => b.Id).DefaultIfEmpty(-1).Max() + 1;
+                client.Store(beek);
+                client.Commit();
+            }
+            return beek.Id;
         }
-
-        public bool RemoveBeek(BaseBeek b)
+        public void RemoveBeek(BaseBeek b)
         {
-            throw new NotImplementedException();
+            lock (beekLock)
+            {
+                client.Delete(b);
+                client.Commit();
+            }
         }
-
-        public bool UpdateBeek(BaseBeek b)
+        public void UpdateBeek(BaseBeek b)
         {
-            throw new NotImplementedException();
+            lock (beekLock)
+            {
+                client.Store(b);
+                client.Commit();
+            }
         }
     }
 }
