@@ -35,6 +35,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\dependencies\Db4objects.Db4o.dll</HintPath>
     </Reference>
+    <Reference Include="Db4objects.Db4o.CS, Version=7.12.126.14142, Culture=neutral, PublicKeyToken=6199cd4f203aa8eb, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\dependencies\Db4objects.Db4o.CS.dll</HintPath>
+    </Reference>
     <Reference Include="Db4objects.Db4o.Linq, Version=7.4.121.14026, Culture=neutral, PublicKeyToken=6199cd4f203aa8eb, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\dependencies\Db4objects.Db4o.Linq.dll</HintPath>
