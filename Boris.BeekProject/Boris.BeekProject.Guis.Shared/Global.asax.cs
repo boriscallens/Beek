@@ -1,17 +1,47 @@
-﻿using MvcTurbine.ComponentModel;
+﻿using Boris.BeekProject.Model.DataAccess;
+using Boris.BeekProject.Model.DataAccess.Db4o;
+using Microsoft.Practices.Unity;
+using MvcTurbine.ComponentModel;
 using MvcTurbine.Unity;
 using MvcTurbine.Web;
+using System.Web.Mvc;
+using NHaml.Web.Mvc;
 
 namespace Boris.BeekProject.Guis.Shared
 {
-    // Note: For instructions on enabling IIS6 or IIS7 classic mode, 
-    // visit http://go.microsoft.com/?LinkId=9394801
-
     public class MvcApplication : TurbineApplication
     {
+        private static IUnityContainer container;
+        private static readonly UnityServiceLocator provider;
+
         static MvcApplication()
         {
-            ServiceLocatorManager.SetLocatorProvider(() => new UnityServiceLocator());
+            container = CreateContainer();
+            provider = new UnityServiceLocator(CreateContainer());
+            
+            // ToDo: add this to view registerations once we can use MvcTurbine bits
+            ViewEngines.Engines.Clear();
+            ViewEngines.Engines.Add(new NHamlMvcViewEngine());
+
+            ServiceLocatorManager.SetLocatorProvider(() => provider);
+        }
+
+        private static IUnityContainer CreateContainer()
+        {
+            if (container != null)
+            {
+                return container;
+            }
+
+            container = new UnityContainer();
+
+            container.RegisterType<IUserRepository, UserRepository>(new ContainerControlledLifetimeManager());
+            container.Configure<InjectedMembers>()
+                .ConfigureInjectionFor<UserRepository>(
+                    new InjectionConstructor()
+                );
+
+            return container;
         }
     }
 }

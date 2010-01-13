@@ -5,6 +5,7 @@ using System.Linq;
 using Boris.BeekProject.Model.Accounts;
 using Db4objects.Db4o;
 using Db4objects.Db4o.Linq;
+using Boris.Utils.IO;
 
 namespace Boris.BeekProject.Model.DataAccess.Db4o
 {
@@ -14,8 +15,7 @@ namespace Boris.BeekProject.Model.DataAccess.Db4o
         private readonly IObjectContainer client;
         private readonly object userLock;
 
-        public UserRepository(): this(ConfigurationManager.AppSettings["userRepository.path.db4o"]){}
-
+        public UserRepository(): this(IOHelper.MakeAbsolute(ConfigurationManager.AppSettings["userRepository.path.db4o"])){}
         public UserRepository(string db4oFilePath)
         {
             FileInfo file = new FileInfo(db4oFilePath);
@@ -44,7 +44,7 @@ namespace Boris.BeekProject.Model.DataAccess.Db4o
         {
             lock (userLock)
             {
-                user.Id = new Guid();
+                user.Id = Guid.NewGuid();
                 client.Store(user);
                 client.Commit();
             }

@@ -11,7 +11,8 @@ namespace Boris.BeekProject.Guis.Shared.Controllers
         private readonly IBeekRepository beeks;
         private readonly BeekViewModel viewModel;
 
-        protected BeekController(IUserRepository repository, IBeekRepository beekRepository) : base(repository)
+        protected BeekController(IUserRepository repository, IBeekRepository beekRepository) 
+            : base(repository, new BeekViewModel() )
         {
             beeks = beekRepository;
             viewModel = new BeekViewModel();

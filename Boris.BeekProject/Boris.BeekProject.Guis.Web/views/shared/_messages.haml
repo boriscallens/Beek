@@ -1,0 +1,5 @@
+﻿- if(Model.Messages.Any())
+  %ul
+    - foreach(string message in Model.Messages)
+      %li
+        =message  

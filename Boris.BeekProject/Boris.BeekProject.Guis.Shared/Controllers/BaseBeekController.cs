@@ -1,35 +1,48 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Web;
 using System.Web.Mvc;
 using Boris.BeekProject.Model.Accounts;
 using Boris.BeekProject.Model.DataAccess;
 using Boris.Utils.Mvc.Attributes;
+using Boris.BeekProject.Guis.Shared.ViewModels;
 
 namespace Boris.BeekProject.Guis.Shared.Controllers
 {
     [Logging]
     public class BaseBeekController : Controller
     {
-        internal readonly IUserRepository UserRepository;
+        protected readonly IUserRepository userRepository;
+        protected readonly BaseBeekViewModel viewModel;
 
-        public new IUser User { get; set; }
-
-        protected BaseBeekController(IUserRepository repository)
+        protected BaseBeekController(IUserRepository repository, BaseBeekViewModel viewModel)
         {
-            UserRepository = repository;
+            userRepository = repository;
+            this.viewModel = viewModel;
+            this.viewModel.Messages = new List<string>();
+        }
+        
+        protected override void OnActionExecuting(ActionExecutingContext filterContext)
+        {
             // If the user is not logged in we will either restore him from the cookie, or create an anon one
-            if (User == null)
+            if (viewModel.User == null)
             {
                 // Can we get him back from a cookie?
-                User = RestoreUser(Request.Cookies["user"]);
+                viewModel.User = RestoreUser(Request.Cookies["user"]);
                 // Create an anon one and set the cookie with the id and ip
-                if(User == null)
+                if (viewModel.User == null)
                 {
-                    User = CreateAnonymousUser();
-                    Response.Cookies.Add(CreateUserCookie(User, Request.UserHostAddress));
-                    TempData["isFirstTimeVisitor"] = true;
+                    viewModel.User = CreateAnonymousUser();
+                    Response.Cookies.Add(CreateUserCookie(viewModel.User, Request.UserHostAddress));
+                    viewModel.Messages.Add("isFirstTimeVisitor");
                 }
             }
+            if (viewModel.User.IsAnonymous)
+            {
+                viewModel.Messages.Add("isAnonymous");
+            }
+            viewModel.Messages.Add("testmessage");
+            base.OnActionExecuting(filterContext);
         }
 
         private IUser RestoreUser(HttpCookie cookie)
@@ -38,7 +51,7 @@ namespace Boris.BeekProject.Guis.Shared.Controllers
             {
                 try
                 {
-                    return UserRepository.GetUser(new Guid(cookie.Values["id"]));
+                    return userRepository.GetUser(new Guid(cookie.Values["id"]));
                 }
                 catch (Exception)
                 {
@@ -50,7 +63,9 @@ namespace Boris.BeekProject.Guis.Shared.Controllers
         private IUser CreateAnonymousUser()
         {
             IUser user = new User("Anonymous", "Anonymous", string.Empty);
-            user.Id = UserRepository.AddUser(user);
+            user.Id = userRepository.AddUser(user);
+            user.AddRole(Roles.Anonymous);
+            user.Id = userRepository.AddUser(user);
             return user;
         }
         private static HttpCookie CreateUserCookie(IUser user, string ip)

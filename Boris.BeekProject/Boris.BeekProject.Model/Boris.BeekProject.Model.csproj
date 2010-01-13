@@ -75,6 +75,12 @@
     <Compile Include="Beek\Genres\HistoricalGenre.cs" />
     <Compile Include="Beek\Genres\FantasyGenre.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Boris.Utils\Boris.Utils.IO\Boris.Utils.IO.csproj">
+      <Project>{ED162812-90E3-4D4F-A47E-C5D0297D51D5}</Project>
+      <Name>Boris.Utils.IO</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

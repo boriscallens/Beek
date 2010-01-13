@@ -5,9 +5,9 @@
   %li
     %a{href="#"}
       Beek
-  %li
     %ul
       %li
+        %a{href="#"}
         Add
       
 %ul.navBlock
@@ -15,9 +15,10 @@
     %a{href="#"}
       Search
       
-      
 %ul.navBlock          
   %li
-    %a{href="#"}
-      My Stuff
+    -if (Model.User.IsAnonymous)
+      _myStuffAnonymous
+    -else
+      _myStuff
       

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using Boris.BeekProject.Guis.Shared.ViewModels;
 using Boris.BeekProject.Model.Beek;
 using Boris.BeekProject.Model.DataAccess;
 using Boris.BeekProject.Services;
@@ -12,7 +13,8 @@ namespace Boris.BeekProject.Guis.Shared.Controllers
     {
         private readonly ISearchService searchService;
 
-        public SearchController(IUserRepository userRepository, ISearchService searchService):base(userRepository)
+        public SearchController(IUserRepository userRepository, ISearchService searchService)
+            : base(userRepository, new SearchViewModel())
         {
             this.searchService = searchService;
         }

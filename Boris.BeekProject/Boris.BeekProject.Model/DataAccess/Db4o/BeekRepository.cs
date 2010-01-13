@@ -16,7 +16,6 @@ namespace Boris.BeekProject.Model.DataAccess.Db4o
         private readonly object beekLock;
 
         public BeekRepository (): this(ConfigurationManager.AppSettings["beekRepository.path.db4o"]){}
-
         public BeekRepository (string db4oFilePath) 
         {
             FileInfo file = new FileInfo(db4oFilePath);
