@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Configuration;
+using System.IO;
 using System.Linq;
 using Boris.BeekProject.Model.Beek;
 using Db4objects.Db4o;
-using System.IO;
 using Db4objects.Db4o.Linq;
 
 namespace Boris.BeekProject.Model.DataAccess.Db4o
@@ -15,9 +15,9 @@ namespace Boris.BeekProject.Model.DataAccess.Db4o
         private readonly object genreLock;
         private readonly object beekLock;
 
-        public BeekRepository(): this(ConfigurationManager.AppSettings["beekRepository.path.db4o"]){}
+        public BeekRepository (): this(ConfigurationManager.AppSettings["beekRepository.path.db4o"]){}
 
-        public BeekRepository(string db4oFilePath)
+        public BeekRepository (string db4oFilePath) 
         {
             FileInfo file = new FileInfo(db4oFilePath);
             if (file.Directory != null && !file.Directory.Exists)
@@ -35,7 +35,7 @@ namespace Boris.BeekProject.Model.DataAccess.Db4o
             // ToDo: down the latest db4o and use client.AsQueryable() straight from the bottle
             return client.Cast<BaseGenre>().AsQueryable();
         }
-        public int AddGenre(BaseGenre genre)
+        public int AddGenre (BaseGenre genre)
         {
             lock (genreLock)
             {
@@ -48,7 +48,7 @@ namespace Boris.BeekProject.Model.DataAccess.Db4o
             }
             return genre.Id;
         }
-        public void RemoveGenre(BaseGenre genre)
+        public void RemoveGenre (BaseGenre genre)
         {
             lock (genreLock)
             {
@@ -56,7 +56,7 @@ namespace Boris.BeekProject.Model.DataAccess.Db4o
                 client.Commit();
             }
         }
-        public void UpdateGenre(BaseGenre g)
+        public void UpdateGenre (BaseGenre g)
         {
             // ToDo: should we create a private IObjectContainer to set the update depth?
             lock(genreLock)
@@ -66,28 +66,28 @@ namespace Boris.BeekProject.Model.DataAccess.Db4o
             }
         }
 
-        public IQueryable<WritingStyle> GetWritingStyles()
+        public IQueryable<WritingStyle> GetWritingStyles ()
         {
             throw new NotImplementedException();
         }
-        public int AddWritingStyle(WritingStyle w)
+        public int AddWritingStyle (WritingStyle w)
         {
             throw new NotImplementedException();
         }
-        public void RemoveWritingStyle(WritingStyle w)
+        public void RemoveWritingStyle (WritingStyle w)
         {
             throw new NotImplementedException();
         }
-        public void UpdateWritingStyle(WritingStyle w)
+        public void UpdateWritingStyle (WritingStyle w)
         {
             throw new NotImplementedException();
         }
 
-        public IQueryable<BaseBeek> GetBeek()
+        public IQueryable<BaseBeek> GetBeek ()
         {
             return client.Cast<BaseBeek>().AsQueryable();
         }
-        public int AddBeek(BaseBeek beek)
+        public int AddBeek (BaseBeek beek)
         {
             lock (beekLock)
             {
@@ -97,7 +97,7 @@ namespace Boris.BeekProject.Model.DataAccess.Db4o
             }
             return beek.Id;
         }
-        public void RemoveBeek(BaseBeek b)
+        public void RemoveBeek (BaseBeek b)
         {
             lock (beekLock)
             {
@@ -105,7 +105,7 @@ namespace Boris.BeekProject.Model.DataAccess.Db4o
                 client.Commit();
             }
         }
-        public void UpdateBeek(BaseBeek b)
+        public void UpdateBeek (BaseBeek b)
         {
             lock (beekLock)
             {

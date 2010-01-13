@@ -17,11 +17,6 @@ namespace Boris.BeekProject.Model.Tests
         private static readonly IUserRepository userRepository = new UserRepository();
         public TestContext TestContext { get; set; }
 
-        public BeekDataAccess()
-        {
-
-        }
-
        #region Additional test attributes
         //
         // You can use the following additional attributes as you write your tests:
@@ -125,7 +120,6 @@ namespace Boris.BeekProject.Model.Tests
         public void CanUpdateUser()
         {
             IUser user = GenerateTestUser();
-            string before = user.Name;
             const string after = "after";
             userRepository.AddUser(user);
             user.Name = after;
