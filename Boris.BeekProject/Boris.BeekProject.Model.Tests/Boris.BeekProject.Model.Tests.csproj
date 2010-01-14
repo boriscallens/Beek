@@ -31,8 +31,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Db4objects.Db4o, Version=7.4.86.12797, Culture=neutral, PublicKeyToken=6199cd4f203aa8eb, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Boris.BeekProject.Guis.Web\Bin\Db4objects.Db4o.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -44,6 +49,10 @@
     <Compile Include="Beeks.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Boris.Utils\Boris.Utils.IO\Boris.Utils.IO.csproj">
+      <Project>{ED162812-90E3-4D4F-A47E-C5D0297D51D5}</Project>
+      <Name>Boris.Utils.IO</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Boris.BeekProject.Model\Boris.BeekProject.Model.csproj">
       <Project>{7A10D58A-1F92-462E-B722-034EF25AE2F3}</Project>
       <Name>Boris.BeekProject.Model</Name>

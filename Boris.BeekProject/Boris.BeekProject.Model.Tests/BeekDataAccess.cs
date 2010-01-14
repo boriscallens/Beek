@@ -1,9 +1,13 @@
-﻿using System.Linq;
+﻿using System.Configuration;
+using System.Linq;
 using Boris.BeekProject.Model.Accounts;
 using Boris.BeekProject.Model.Beek;
+using Boris.Utils.IO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Boris.BeekProject.Model.DataAccess;
 using Boris.BeekProject.Model.DataAccess.Db4o;
+using User=Boris.BeekProject.Model.Accounts.User;
+using Db4objects.Db4o;
 
 namespace Boris.BeekProject.Model.Tests
 {
@@ -13,8 +17,11 @@ namespace Boris.BeekProject.Model.Tests
     [TestClass]
     public class BeekDataAccess
     {
-        private static readonly IBeekRepository beekRepos = new BeekRepository();
-        private static readonly IUserRepository userRepository = new UserRepository();
+        private static readonly IObjectServer beekServer = Db4oFactory.OpenServer(IOHelper.MakeAbsolute(ConfigurationManager.AppSettings["beekRepository.path.db4o"]), 0);
+        private static readonly IBeekRepository beekRepos = new BeekRepository(beekServer);
+        private static readonly IObjectServer userServer = Db4oFactory.OpenServer(IOHelper.MakeAbsolute(ConfigurationManager.AppSettings["userRepository.path.db4o"]), 0);
+        private static readonly IUserRepository userRepository = new UserRepository(userServer);
+
         public TestContext TestContext { get; set; }
 
        #region Additional test attributes
@@ -125,6 +132,30 @@ namespace Boris.BeekProject.Model.Tests
             user.Name = after;
             userRepository.UpdateUser(user);
             Assert.IsTrue(userRepository.GetUser(user.Id).Name.Equals(after));
+        }
+        [TestMethod]
+        public void UserStaysInRoleAfterAddingAndRetrieving()
+        {
+            IUser expected = GenerateTestUser();
+            expected.AddRole(Roles.Anonymous);
+            userRepository.AddUser(expected);
+            IUser actual = userRepository.GetUser(expected.Id);
+            Assert.IsTrue(actual.IsInRole(Roles.Anonymous));
+        }
+        [TestMethod]
+        public void UserStaysInRoleAfterServerRestart()
+        {
+            IUser expected = GenerateTestUser();
+            expected.AddRole(Roles.Anonymous);
+            IObjectServer userServer2 = Db4oFactory.OpenServer(IOHelper.MakeAbsolute(ConfigurationManager.AppSettings["userRepository.path.db4o"]+"2"), 0);
+            IUserRepository repo = new UserRepository(userServer2);
+            repo.AddUser(expected);
+            userServer2.Close();
+
+            IObjectServer userServer3 = Db4oFactory.OpenServer(IOHelper.MakeAbsolute(ConfigurationManager.AppSettings["userRepository.path.db4o"]+"2"), 0);
+            IUserRepository repo2 = new UserRepository(userServer3);
+            IUser actual = repo2.GetUser(expected.Id);
+            Assert.IsTrue(actual.IsInRole(Roles.Anonymous));
         }
 
         private static IUser GenerateTestUser()

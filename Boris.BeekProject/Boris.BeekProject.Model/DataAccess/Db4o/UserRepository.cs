@@ -27,6 +27,12 @@ namespace Boris.BeekProject.Model.DataAccess.Db4o
             client = server.OpenClient();
             userLock = new object();
         }
+        public UserRepository(IObjectServer server)
+        {
+            this.server = server;
+            client = server.OpenClient();
+            userLock = new object();
+        }
 
         public void UpdateUser(IUser user)
         {

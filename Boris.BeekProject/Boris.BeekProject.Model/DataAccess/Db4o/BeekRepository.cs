@@ -28,7 +28,14 @@ namespace Boris.BeekProject.Model.DataAccess.Db4o
             genreLock = new object();
             beekLock = new object();
         }
-        
+        public BeekRepository (IObjectServer beekServer)
+        {
+            server = beekServer;
+            client = server.OpenClient();
+            genreLock = new object();
+            beekLock = new object();
+        }
+
         public IQueryable<BaseGenre> GetGenres()
         {
             // ToDo: down the latest db4o and use client.AsQueryable() straight from the bottle
