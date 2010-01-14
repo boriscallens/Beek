@@ -145,15 +145,17 @@ namespace Boris.BeekProject.Model.Tests
         [TestMethod]
         public void UserStaysInRoleAfterServerRestart()
         {
+            string filePath = IOHelper.MakeAbsolute(ConfigurationManager.AppSettings["userRepository.path.db4o"] + "1");
             IUser expected = GenerateTestUser();
             expected.AddRole(Roles.Anonymous);
-            IObjectServer userServer2 = Db4oFactory.OpenServer(IOHelper.MakeAbsolute(ConfigurationManager.AppSettings["userRepository.path.db4o"]+"2"), 0);
-            IUserRepository repo = new UserRepository(userServer2);
+            Assert.IsTrue(expected.Roles.Contains(Roles.Anonymous));
+            IObjectServer userServer1 = Db4oFactory.OpenServer(filePath, 0);
+            IUserRepository repo = new UserRepository(userServer1);
             repo.AddUser(expected);
-            userServer2.Close();
+            userServer1.Close();
 
-            IObjectServer userServer3 = Db4oFactory.OpenServer(IOHelper.MakeAbsolute(ConfigurationManager.AppSettings["userRepository.path.db4o"]+"2"), 0);
-            IUserRepository repo2 = new UserRepository(userServer3);
+            IObjectServer userServer2 = Db4oFactory.OpenServer(filePath, 0);
+            IUserRepository repo2 = new UserRepository(userServer2);
             IUser actual = repo2.GetUser(expected.Id);
             Assert.IsTrue(actual.IsInRole(Roles.Anonymous));
         }
