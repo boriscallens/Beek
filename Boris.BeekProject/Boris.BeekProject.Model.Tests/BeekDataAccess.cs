@@ -8,6 +8,7 @@ using Boris.BeekProject.Model.DataAccess;
 using Boris.BeekProject.Model.DataAccess.Db4o;
 using User=Boris.BeekProject.Model.Accounts.User;
 using Db4objects.Db4o;
+using System.IO;
 
 namespace Boris.BeekProject.Model.Tests
 {
@@ -17,12 +18,30 @@ namespace Boris.BeekProject.Model.Tests
     [TestClass]
     public class BeekDataAccess
     {
-        private static readonly IObjectServer beekServer = Db4oFactory.OpenServer(IOHelper.MakeAbsolute(ConfigurationManager.AppSettings["beekRepository.path.db4o"]), 0);
-        private static readonly IBeekRepository beekRepos = new BeekRepository(beekServer);
-        private static readonly IObjectServer userServer = Db4oFactory.OpenServer(IOHelper.MakeAbsolute(ConfigurationManager.AppSettings["userRepository.path.db4o"]), 0);
-        private static readonly IUserRepository userRepository = new UserRepository(userServer);
+        private static IObjectServer beekServer;
+        private static IBeekRepository beekRepos;
+        private static IObjectServer userServer;
+        private static IUserRepository userRepository;
 
         public TestContext TestContext { get; set; }
+
+        public BeekDataAccess()
+        {
+            string beekPath = IOHelper.MakeAbsolute(ConfigurationManager.AppSettings["beekRepository.path.db4o"]);
+            string userPath = IOHelper.MakeAbsolute(ConfigurationManager.AppSettings["userRepository.path.db4o"]);
+            if (!File.Exists(beekPath))
+            {
+                new FileInfo(beekPath).Directory.Create();
+            }
+            if (!File.Exists(userPath))
+            {
+                new FileInfo(userPath).Directory.Create();
+            }
+            beekServer = Db4oFactory.OpenServer(beekPath, 0);
+            userServer = Db4oFactory.OpenServer(userPath, 0);
+            beekRepos = new BeekRepository(beekServer);
+            userRepository = new UserRepository(userServer);
+        }
 
        #region Additional test attributes
         //
@@ -130,8 +149,10 @@ namespace Boris.BeekProject.Model.Tests
             const string after = "after";
             userRepository.AddUser(user);
             user.Name = after;
+            user.AddRole(Roles.Illustrator);
             userRepository.UpdateUser(user);
             Assert.IsTrue(userRepository.GetUser(user.Id).Name.Equals(after));
+            Assert.IsTrue(userRepository.GetUser(user.Id).IsInRole(Roles.Illustrator));
         }
         [TestMethod]
         public void UserStaysInRoleAfterAddingAndRetrieving()
@@ -143,21 +164,21 @@ namespace Boris.BeekProject.Model.Tests
             Assert.IsTrue(actual.IsInRole(Roles.Anonymous));
         }
         [TestMethod]
-        public void UserStaysInRoleAfterServerRestart()
+        public void UpdatingUserAlsoUpdatesRoles()
         {
-            string filePath = IOHelper.MakeAbsolute(ConfigurationManager.AppSettings["userRepository.path.db4o"] + "1");
+            // Generate a user without any roles
             IUser expected = GenerateTestUser();
-            expected.AddRole(Roles.Anonymous);
-            Assert.IsTrue(expected.Roles.Contains(Roles.Anonymous));
-            IObjectServer userServer1 = Db4oFactory.OpenServer(filePath, 0);
-            IUserRepository repo = new UserRepository(userServer1);
-            repo.AddUser(expected);
-            userServer1.Close();
+            userRepository.AddUser(expected);
 
-            IObjectServer userServer2 = Db4oFactory.OpenServer(filePath, 0);
-            IUserRepository repo2 = new UserRepository(userServer2);
-            IUser actual = repo2.GetUser(expected.Id);
-            Assert.IsTrue(actual.IsInRole(Roles.Anonymous));
+            // Get the previously saved user but now from this second server,
+            // add a role to it and update to the new repos
+            expected = userRepository.GetUser(expected.Id);
+            expected.AddRole(Roles.Illustrator);
+            userRepository.UpdateUser(expected);
+
+            // Get the user again and check if the roles are updated correctly
+            IUser actual = userRepository.GetUser(expected.Id);
+            Assert.IsTrue(actual.IsInRole(Roles.Illustrator));
         }
 
         private static IUser GenerateTestUser()

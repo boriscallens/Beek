@@ -32,7 +32,7 @@ namespace Boris.BeekProject.Guis.Shared.Controllers
                 // Create an anon one and set the cookie with the id and ip
                 if (viewModel.User == null)
                 {
-                    viewModel.User = CreateAnonymousUser();
+                    viewModel.User = userRepository.CreateAnonymousUser();
                     Response.Cookies.Add(CreateUserCookie(viewModel.User, Request.UserHostAddress));
                     viewModel.Messages.Add("isFirstTimeVisitor");
                 }
@@ -41,7 +41,6 @@ namespace Boris.BeekProject.Guis.Shared.Controllers
             {
                 viewModel.Messages.Add("isAnonymous");
             }
-            viewModel.Messages.Add("testmessage");
             base.OnActionExecuting(filterContext);
         }
 
@@ -59,14 +58,6 @@ namespace Boris.BeekProject.Guis.Shared.Controllers
                 }
             }
             return null;
-        }
-        private IUser CreateAnonymousUser()
-        {
-            IUser user = new User("Anonymous", "Anonymous", string.Empty);
-            user.Id = userRepository.AddUser(user);
-            user.AddRole(Roles.Anonymous);
-            user.Id = userRepository.AddUser(user);
-            return user;
         }
         private static HttpCookie CreateUserCookie(IUser user, string ip)
         {

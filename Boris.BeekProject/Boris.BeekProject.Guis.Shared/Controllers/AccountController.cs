@@ -1,3 +1,4 @@
+using System;
 using System.Web.Mvc;
 using Boris.BeekProject.Model.Accounts;
 using Boris.BeekProject.Model.DataAccess;
@@ -8,6 +9,25 @@ namespace Boris.BeekProject.Guis.Shared.Controllers
     public class AccountController : BaseBeekController
     {
         public AccountController(IUserRepository userRepository) : base(userRepository, new AccountViewModel()){}
+
+        // GET: /accounts/register
+        public ViewResult Register(Guid userId)
+        {
+            viewModel.User = userRepository.GetUser(userId) 
+                ?? userRepository.CreateAnonymousUser();
+            return View(viewModel);
+        }
+        // POST: /accounts/register
+        public ActionResult Register(IUser user)
+        {
+            if(ModelState.IsValid)
+            {
+                user.RemoveRole(Roles.Anonymous);
+                userRepository.UpdateUser(user);
+            }
+            viewModel.User = user;
+            return View(viewModel);
+        }
 
         // GET: /accounts/login
         public ActionResult LogIn()

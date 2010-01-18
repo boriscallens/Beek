@@ -13,5 +13,6 @@ namespace Boris.BeekProject.Model.DataAccess
         IQueryable<IUser> GetUsers();
         IUser GetUser(string name);
         IUser GetUser(Guid id);
+        IUser CreateAnonymousUser();
     }
 }

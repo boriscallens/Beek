@@ -4,5 +4,4 @@
     %a{href="#"}
       Log In
   %li
-    %a{href="#"}
-      Register
+    != Html.ActionLink<AccountController>(c=>c.Action(Model.User.Id), "Register")

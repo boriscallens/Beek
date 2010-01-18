@@ -6,6 +6,7 @@ using Boris.BeekProject.Model.Accounts;
 using Db4objects.Db4o;
 using Db4objects.Db4o.Linq;
 using Boris.Utils.IO;
+using User=Boris.BeekProject.Model.Accounts.User;
 
 namespace Boris.BeekProject.Model.DataAccess.Db4o
 {
@@ -82,6 +83,12 @@ namespace Boris.BeekProject.Model.DataAccess.Db4o
                 .Where(u => u.Name.Equals(name, StringComparison.InvariantCultureIgnoreCase))
                 .FirstOrDefault();
         }
-
+        public IUser CreateAnonymousUser()
+        {
+            IUser user = new User("Anonymous", "Anonymous", string.Empty);
+            user.AddRole(Roles.Anonymous);
+            user.Id = AddUser(user);
+            return user;
+        }
     }
 }
