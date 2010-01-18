@@ -9,20 +9,19 @@ namespace Boris.BeekProject.Guis.Shared.Controllers
     public class BeekController : BaseBeekController
     {
         private readonly IBeekRepository beeks;
-        private readonly BeekViewModel viewModel;
+        private BeekViewModel ViewModel { get { return viewModel as BeekViewModel; } }
 
-        protected BeekController(IUserRepository repository, IBeekRepository beekRepository) 
+        public BeekController(IUserRepository repository, IBeekRepository beekRepository) 
             : base(repository, new BeekViewModel() )
         {
             beeks = beekRepository;
-            viewModel = new BeekViewModel();
         }
 
         //
         // GET: /Beek/Details/5
         public ActionResult Details(int id)
         {
-            viewModel.Beek = beeks.GetBeek().Where(b => b.Id == id).SingleOrDefault();
+            ViewModel.Beek = beeks.GetBeek().Where(b => b.Id == id).SingleOrDefault();
             return View(viewModel);
         }
 
@@ -53,7 +52,7 @@ namespace Boris.BeekProject.Guis.Shared.Controllers
         // GET: /Beek/Edit/5
         public ActionResult Edit(int id)
         {
-            viewModel.Beek = beeks.GetBeek().Where(b => b.Id == id).SingleOrDefault();
+            ViewModel.Beek = beeks.GetBeek().Where(b => b.Id == id).SingleOrDefault();
             return View();
         }
 
