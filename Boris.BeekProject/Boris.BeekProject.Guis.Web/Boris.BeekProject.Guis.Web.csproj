@@ -31,6 +31,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Web.Mvc, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\dependencies\Microsoft.Web.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="NHaml, Version=1.5.0.2, Culture=neutral, PublicKeyToken=d603208bac452365, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\dependencies\NHaml.dll</HintPath>
@@ -73,12 +77,10 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="views\account\register.haml" />
     <None Include="views\account\Profile.haml" />
     <None Include="views\account\EditProfile.haml" />
     <None Include="views\home\index.haml" />
-    <None Include="views\home\test.haml" />
-    <None Include="views\home\_partial.haml" />
-    <None Include="views\home\_test.haml" />
     <None Include="views\shared\application.haml" />
     <None Include="views\shared\_myStuff.haml" />
     <None Include="views\shared\_myStuffAnonymous.haml" />
@@ -87,6 +89,7 @@
     <None Include="views\shared\_header.haml" />
     <None Include="views\shared\_scripts.haml" />
     <None Include="views\shared\_styles.haml" />
+    <Content Include="views\ViewPage1.aspx" />
     <Content Include="views\Web.config" />
   </ItemGroup>
   <ItemGroup>
