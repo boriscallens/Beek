@@ -3,11 +3,15 @@ using System.Web.Mvc;
 using Boris.BeekProject.Model.Accounts;
 using Boris.BeekProject.Model.DataAccess;
 using Boris.BeekProject.Guis.Shared.ViewModels;
+using MvcTurbine.ComponentModel;
 
 namespace Boris.BeekProject.Guis.Shared.Controllers
 {
     public class AccountController : BaseBeekController
     {
+        // ToDo: remove when mvcTurbine 3.5bits are out
+        public AccountController():this(ServiceLocatorManager.Current.Resolve<IUserRepository>()){}
+
         public AccountController(IUserRepository userRepository) : base(userRepository, new AccountViewModel()){}
 
         // GET: /accounts/register
@@ -18,6 +22,7 @@ namespace Boris.BeekProject.Guis.Shared.Controllers
             return View(viewModel);
         }
         // POST: /accounts/register
+        [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Register(IUser user)
         {
             if(ModelState.IsValid)
