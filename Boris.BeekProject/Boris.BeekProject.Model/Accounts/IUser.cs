@@ -16,7 +16,7 @@ namespace Boris.BeekProject.Model.Accounts
         bool IsLockedOut { get; set; }
         IEnumerable<Roles> Roles { get;}
         bool IsDefault { get; set; }
-        bool IsAnonymous { get;}
+        bool IsAnonymous { get; }
 
         bool Challenge(string password);
         bool IsInRole(Roles role);

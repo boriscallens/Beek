@@ -23,6 +23,10 @@
 	background-color: #272222;
 	background-image: url("/content/pics/bgndStripes.png");
 }
+#header a
+{
+	text-decoration: none;
+}
 #logo
 {
 	width: 150px;
@@ -48,18 +52,40 @@
 	width: 33%;
 	border-left: 1px solid black;
 }
-.navBlock h1
+.navTitle
 {
+	display: block;	
+	margin: 5px auto 5px auto;
 	text-align: center;
-	margin: 5px;	
+	
+	font: 2em black;
+	font-variant: small-caps;
+	color: Black;	
 }
+.navSubLink
+{
+	display: block;
+	display: block;	
+	margin: 5px auto 5px auto;
+	text-align: center;
+	color: Black;
+}
+.navSubLink:hover,.navTitle:hover
+{
+	color: Red;
+}
+
 .activeNavBlock
 {
 	background-color: #E70505;
 }
-.activeNavBlock h1
+.activeNavBlock .navTitle
 {
 	color: White;
+}
+.activeNavBlock .navTitle:hover, .activeNavBlock .navSubLink:hover
+{
+	color: Black;
 }
 /************CONTENT****************************/
 #content

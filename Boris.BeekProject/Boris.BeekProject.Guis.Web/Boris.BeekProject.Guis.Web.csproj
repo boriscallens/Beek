@@ -31,6 +31,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Web.Mvc, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\dependencies\Microsoft.Web.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.ComponentModel.DataAnnotations">
@@ -76,8 +80,10 @@
     <Content Include="content\css\site.css" />
     <Content Include="content\pics\bgndStripes.png" />
     <Content Include="content\pics\logo.jpg" />
+    <Content Include="views\account\Register.aspx" />
     <Content Include="views\home\Index.aspx" />
-    <Content Include="views\shared\header.aspx" />
+    <Content Include="views\shared\Header.ascx" />
+    <Content Include="views\shared\MyStuffAnonymous.ascx" />
     <Content Include="views\shared\Site.Master" />
   </ItemGroup>
   <ItemGroup>

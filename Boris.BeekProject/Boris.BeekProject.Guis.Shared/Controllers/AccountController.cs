@@ -22,10 +22,22 @@ namespace Boris.BeekProject.Guis.Shared.Controllers
             return View(viewModel);
         }
         // POST: /accounts/register
+
+        // again waiting for mvcTurbine
+        //public ActionResult Register(IUser user, string password)
+        //{
+        //    if(ModelState.IsValid)
+        //    {
+        //        user.RemoveRole(Roles.Anonymous);
+        //        userRepository.UpdateUser(user);
+        //    }
+        //    viewModel.User = user;
+        //    return View(viewModel);
+        //}
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult Register(IUser user)
+        public ActionResult Register(User user, string password)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 user.RemoveRole(Roles.Anonymous);
                 userRepository.UpdateUser(user);
@@ -34,7 +46,7 @@ namespace Boris.BeekProject.Guis.Shared.Controllers
             return View(viewModel);
         }
 
-        // GET: /accounts/login
+        // GET: /accounts/login        
         public ActionResult LogIn()
         {
             return View();

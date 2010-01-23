@@ -6,6 +6,7 @@ using MvcTurbine.Unity;
 using MvcTurbine.Web;
 using System.Web.Mvc;
 using NHaml.Web.Mvc;
+using Boris.BeekProject.Model.Accounts;
 
 namespace Boris.BeekProject.Guis.Shared
 {
@@ -40,7 +41,7 @@ namespace Boris.BeekProject.Guis.Shared
                 .ConfigureInjectionFor<UserRepository>(
                     new InjectionConstructor()
                 );
-
+            container.RegisterType<IUser, User>();
             return container;
         }
     }
