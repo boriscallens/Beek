@@ -1,0 +1,30 @@
+﻿html, body
+{
+	padding: 0;
+	margin: 0;
+	border: 0;
+	width: 100%;
+	height: 100%;
+	background-color: #272222;
+	background-image: url("/content/pics/bgndStripes.png");
+	height: 100%;
+}
+#page
+{
+	width: 800px;
+	height: 100%;
+	margin: 0 auto 0 auto;
+	background-color: White;
+}
+
+#header
+{
+	height: 100px;
+	background-color: Blue;
+}
+#content
+{
+	margin-top: -100px;
+	padding: 100px 10px 10px 10px;	
+	background-color: Orange;
+}

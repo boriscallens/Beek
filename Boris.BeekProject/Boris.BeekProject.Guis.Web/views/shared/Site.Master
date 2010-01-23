@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<%@ Master Language="C#" Inherits="System.Web.Mvc.ViewMasterPage<BaseBeekViewModel>" %>
+<%
+  Html.AddTitlePart("Beek");
+%>
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head runat="server">
+  <title>Beek <asp:ContentPlaceHolder ID="Title" runat="server"/></title>
+  <%=Html.PrintStyleSheet("site")%>
+  <asp:ContentPlaceHolder ID="Css" runat="server"/>  
+</head>
+<body>
+  <div id="page">
+    <div id="header">
+      <!--#include file="header.aspx"-->
+    </div>
+    <div id="content">
+      <asp:ContentPlaceHolder ID="Main" runat="server"/>
+    </div>    
+  </div>
+  <%=Html.PrintScript("jquery-1.3.2.min.js")%>
+</body>
+</html>
