@@ -7,21 +7,61 @@
 	height: 100%;
 	background-color: #272222;
 	background-image: url("/content/pics/bgndStripes.png");
-	height: 100%;
+	font-family: "century gothic";
 }
 #page
 {
-	width: 800px;
+	width: 780px;
 	height: 100%;
 	margin: 0 auto 0 auto;
 	background-color: White;
 }
-
+/***********HEADER****************/
 #header
 {
-	height: 100px;
-	background-color: Blue;
+	height: 150px;
+	background-color: #272222;
+	background-image: url("/content/pics/bgndStripes.png");
 }
+#logo
+{
+	width: 150px;
+	height:150px;
+	float: left;
+	background-image: url("/content/pics/logo.jpg");
+	border-bottom: 1px solid black;
+}
+#navBlocks
+{
+	margin-top: 10px;
+	width: 630px; /*780-150 = 630*/
+	height: 140px;
+	background-color: White;
+	float: left;
+	z-index: -1;
+	border-bottom: 1px solid black;
+}
+.navBlock
+{
+	float: left;
+	height: 140px;
+	width: 33%;
+	border-left: 1px solid black;
+}
+.navBlock h1
+{
+	text-align: center;
+	margin: 5px;	
+}
+.activeNavBlock
+{
+	background-color: #E70505;
+}
+.activeNavBlock h1
+{
+	color: White;
+}
+/************CONTENT****************************/
 #content
 {
 	margin-top: -100px;

@@ -75,6 +75,7 @@
   <ItemGroup>
     <Content Include="content\css\site.css" />
     <Content Include="content\pics\bgndStripes.png" />
+    <Content Include="content\pics\logo.jpg" />
     <Content Include="views\home\Index.aspx" />
     <Content Include="views\shared\header.aspx" />
     <Content Include="views\shared\Site.Master" />
