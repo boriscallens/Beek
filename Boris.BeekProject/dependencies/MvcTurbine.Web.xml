@@ -4,19 +4,6 @@
         <name>MvcTurbine.Web</name>
     </assembly>
     <members>
-        <member name="T:MvcTurbine.Web.Blades.BladeExtensions">
-            <summary>
-            Helper class for <see cref="T:MvcTurbine.Blades.IBlade"/> types.
-            </summary>
-        </member>
-        <member name="M:MvcTurbine.Web.Blades.BladeExtensions.IsCoreBlade(MvcTurbine.Blades.IBlade)">
-            <summary>
-            Checks whether the specified <see cref="T:MvcTurbine.Blades.IBlade"/> is a core blade, <see cref="T:MvcTurbine.Web.Blades.MvcBlade"/> 
-            or <see cref="T:MvcTurbine.Web.Blades.RoutingBlade"/>.
-            </summary>
-            <param name="blade"></param>
-            <returns></returns>
-        </member>
         <member name="T:MvcTurbine.Web.Blades.CoreBlades">
             <summary>
             Static gateway for the core blades of MVC Turbine.
@@ -38,55 +25,50 @@
             Gets or sets the <see cref="T:MvcTurbine.Web.Blades.RoutingBlade"/> instance to use.
             </summary>
         </member>
-        <member name="T:MvcTurbine.Web.Blades.MvcBlade">
+        <member name="T:MvcTurbine.Web.Blades.BladeExtensions">
             <summary>
-            Default <see cref="T:MvcTurbine.Blades.IBlade"/> that supports all ASP.NET MVC components.
+            Helper class for <see cref="T:MvcTurbine.Blades.IBlade"/> types.
             </summary>
         </member>
-        <member name="M:MvcTurbine.Web.Blades.MvcBlade.AddRegistrations(MvcTurbine.ComponentModel.AutoRegistrationList)">
+        <member name="M:MvcTurbine.Web.Blades.BladeExtensions.IsCoreBlade(MvcTurbine.Blades.IBlade)">
             <summary>
-            Provides the auto-registration of MVC related components (controllers, view engines, filters, etc).
+            Checks whether the specified <see cref="T:MvcTurbine.Blades.IBlade"/> is a core blade, <see cref="T:MvcTurbine.Web.Blades.MvcBlade"/> 
+            or <see cref="T:MvcTurbine.Web.Blades.RoutingBlade"/>.
             </summary>
-            <param name="registrationList"></param>
-        </member>
-        <member name="M:MvcTurbine.Web.Blades.MvcBlade.Spin(MvcTurbine.IRotorContext)">
-            <summary>
-            Executes the setup of controller factories, view engines and model binders.
-            </summary>
-            <param name="context"></param>
-        </member>
-        <member name="M:MvcTurbine.Web.Blades.MvcBlade.SetupModelBinders(MvcTurbine.IRotorContext)">
-            <summary>
-             Changes the <see cref="P:System.Web.Mvc.ModelBinderDictionary.DefaultBinder"/> instance to be <see cref="T:MvcTurbine.Web.Models.TurbineModelBinder"/>.
-            </summary>
-            <param name="context">Current <see cref="T:MvcTurbine.IRotorContext"/> performing the execution.</param>
-        </member>
-        <member name="M:MvcTurbine.Web.Blades.MvcBlade.SetupControllerFactory(MvcTurbine.IRotorContext)">
-            <summary>
-            Sets the instance of <see cref="T:System.Web.Mvc.IControllerFactory"/> to use.  If one is not registered,
-            <see cref="T:MvcTurbine.Web.Controllers.TurbineControllerFactory"/> is used.
-            </summary>
-        </member>
-        <member name="M:MvcTurbine.Web.Blades.MvcBlade.GetControllerFactory(MvcTurbine.ComponentModel.IServiceLocator)">
-            <summary>
-            Gets the registered <seealso cref="T:System.Web.Mvc.IControllerFactory"/>, if one is not found the default one is used.
-            </summary>
-            <param name="locator"></param>
+            <param name="blade"></param>
             <returns></returns>
         </member>
-        <member name="M:MvcTurbine.Web.Blades.MvcBlade.SetupViewEngines(MvcTurbine.IRotorContext)">
+        <member name="T:MvcTurbine.Web.Controllers.TurbineControllerFactory">
             <summary>
-            Initializes the <see cref="P:System.Web.Mvc.ViewEngines.Engines"/> by pulling all associated <seealso cref="T:System.Web.Mvc.IViewEngine"/> instances
-            in the current application.
+            Controller Factory class for instantiating controllers using the Windsor IoC container.
             </summary>
-            <param name="context"></param>
         </member>
-        <member name="M:MvcTurbine.Web.Blades.MvcBlade.GetViewEngines(MvcTurbine.ComponentModel.IServiceLocator)">
+        <member name="M:MvcTurbine.Web.Controllers.TurbineControllerFactory.#ctor(MvcTurbine.ComponentModel.IServiceLocator)">
             <summary>
-            Gets the <see cref="T:System.Web.Mvc.IViewEngine"/> registered with the system.
+            Creates a new instance of the <see cref="T:MvcTurbine.Web.Controllers.TurbineControllerFactory"/> class.
             </summary>
-            <param name="locator">Instance of <see cref="T:MvcTurbine.ComponentModel.IServiceLocator"/> to use.</param>
-            <returns>List of <see cref="T:System.Web.Mvc.IViewEngine"/>, null otherwise.</returns>
+            <param name="serviceLocator">The <see cref="T:MvcTurbine.ComponentModel.IServiceLocator"/> to use when 
+            creating controllers.</param>
+        </member>
+        <member name="M:MvcTurbine.Web.Controllers.TurbineControllerFactory.GetControllerInstance(System.Web.Routing.RequestContext,System.Type)">
+            <summary>
+            Provides the implementation of <see cref="T:System.Web.Mvc.IController"/> from the current
+            <see cref="T:MvcTurbine.ComponentModel.IServiceLocator"/>.
+            </summary>
+            <param name="requestContext">Request context.</param>
+            <param name="controllerType">Type of controller to search for.</param>
+            <returns>An instance of <see cref="T:System.Web.Mvc.IController"/> from the container.</returns>
+        </member>
+        <member name="M:MvcTurbine.Web.Controllers.TurbineControllerFactory.ReleaseController(System.Web.Mvc.IController)">
+            <summary>
+            Releases the controller by giving it back to <see cref="T:MvcTurbine.ComponentModel.IServiceLocator"/>.
+            </summary>
+            <param name="controller">Controller to dispose.</param>
+        </member>
+        <member name="P:MvcTurbine.Web.Controllers.TurbineControllerFactory.ServiceLocator">
+            <summary>
+            Gets the current instance of <see cref="T:MvcTurbine.ComponentModel.IServiceLocator"/> for the factory.
+            </summary>
         </member>
         <member name="T:MvcTurbine.Web.Blades.RoutingBlade">
             <summary>
@@ -118,10 +100,39 @@
             <param name="locator">Instance of <see cref="T:MvcTurbine.ComponentModel.IServiceLocator"/> to use.</param>
             <returns>List of <see cref="T:MvcTurbine.Routing.IRouteRegistrator"/>, null otherwise.</returns>
         </member>
-        <member name="T:MvcTurbine.Web.Controllers.DefaultFilterFinder">
+        <member name="T:MvcTurbine.Web.Properties.Resources">
             <summary>
-            Default implementation to find <see cref="T:MvcTurbine.Web.Controllers.InjectableFilterAttribute"/> for a controller action.
+              A strongly-typed resource class, for looking up localized strings, etc.
             </summary>
+        </member>
+        <member name="P:MvcTurbine.Web.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:MvcTurbine.Web.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:MvcTurbine.Web.Properties.Resources.ServiceLocatorExceptionMessage">
+             <summary>
+               Looks up a localized string similar to MVC Turbine cannot start!
+            You need to specify a valid IServiceLocator for the system to use!
+            
+            Check the result of your registered ServiceLocatorProvider to see if it&apos;s valid..
+             </summary>
+        </member>
+        <member name="P:MvcTurbine.Web.Properties.Resources.ServiceLocatorProviderExceptionMessage">
+             <summary>
+               Looks up a localized string similar to MVC Turbine cannot start!
+            You must specify a ServiceLocatorProvider to resolve a IServiceLocator for the system to use.  To specify a ServiceLocatorProvider, make sure you call
+            
+                ServiceLocatorManager.SetLocatorProvider(() =&gt; YOUR PROVIDER)
+                
+            Within the static constructor of your Global.asax.
+             </summary>
         </member>
         <member name="T:MvcTurbine.Web.Controllers.IFilterFinder">
             <summary>
@@ -135,123 +146,23 @@
             <param name="actionDescriptor">Current action being executed.</param>
             <returns></returns>
         </member>
-        <member name="M:MvcTurbine.Web.Controllers.DefaultFilterFinder.#ctor(MvcTurbine.ComponentModel.IServiceLocator)">
+        <member name="T:MvcTurbine.Web.TypeExtensions">
             <summary>
-            Default constructor.
+            Extension method classes
             </summary>
-            <param name="serviceLocator"></param>
         </member>
-        <member name="M:MvcTurbine.Web.Controllers.DefaultFilterFinder.FindFilters(System.Web.Mvc.ActionDescriptor)">
+        <member name="M:MvcTurbine.Web.TypeExtensions.IsMvcFilter(System.Type)">
             <summary>
-            Finds all the <see cref="T:MvcTurbine.Web.Controllers.InjectableFilterAttribute"/> on the specified <see cref="T:System.Web.Mvc.ActionDescriptor"/>.
+            Checks to see if the specified type is an MVC filter.
             </summary>
-            <param name="actionDescriptor">Current action being executed.</param>
+            <param name="type"></param>
             <returns></returns>
         </member>
-        <member name="M:MvcTurbine.Web.Controllers.DefaultFilterFinder.GetAttributes(System.Reflection.ICustomAttributeProvider)">
+        <member name="M:MvcTurbine.Web.TypeExtensions.IsController(System.Type)">
             <summary>
-            Gets the applied <see cref="T:MvcTurbine.Web.Controllers.InjectableFilterAttribute"/> on the specified <see cref="T:System.Web.Mvc.ActionDescriptor"/>.
+            Checks to see if the specified type is a <see cref="T:System.Web.Mvc.IController"/>.
             </summary>
-            <param name="actionDescriptor"></param>
-            <returns></returns>
-        </member>
-        <member name="M:MvcTurbine.Web.Controllers.DefaultFilterFinder.CreateFilterInfo(System.Collections.Generic.IEnumerable{System.Web.Mvc.IAuthorizationFilter},System.Collections.Generic.IEnumerable{System.Web.Mvc.IActionFilter},System.Collections.Generic.IEnumerable{System.Web.Mvc.IResultFilter},System.Collections.Generic.IEnumerable{System.Web.Mvc.IExceptionFilter})">
-            <summary>
-            Creates a new list of filters to process.
-            </summary>
-            <param name="authFilters"></param>
-            <param name="actionFilters"></param>
-            <param name="resultFilters"></param>
-            <param name="exceptionFilters"></param>
-            <returns></returns>
-        </member>
-        <member name="M:MvcTurbine.Web.Controllers.DefaultFilterFinder.GetRegisteredFilters``1(MvcTurbine.Web.Controllers.InjectableFilterAttribute[])">
-            <summary>
-            Searches the <see cref="P:MvcTurbine.Web.Controllers.DefaultFilterFinder.ServiceLocator"/> for the registered filters that match <paramref name="filterAttributes"/>.
-            </summary>
-            <typeparam name="TFilter"></typeparam>
-            <param name="filterAttributes"></param>
-            <returns></returns>
-        </member>
-        <member name="P:MvcTurbine.Web.Controllers.DefaultFilterFinder.ServiceLocator">
-            <summary>
-            Gets the current <see cref="T:MvcTurbine.ComponentModel.IServiceLocator"/>.
-            </summary>
-        </member>
-        <member name="T:MvcTurbine.Web.Controllers.InferredActionDescriptor">
-            <summary>
-            Custom implementation of <see cref="T:System.Web.Mvc.ActionDescriptor"/> to wire up inferred action execution.
-            </summary>
-        </member>
-        <member name="M:MvcTurbine.Web.Controllers.InferredActionDescriptor.#ctor(System.String,System.Web.Mvc.ControllerDescriptor)">
-            <summary>
-            See <see cref="T:System.Web.Mvc.ActionDescriptor"/>
-            </summary>
-            <param name="actionName"></param>
-            <param name="controllerDescriptor"></param>
-        </member>
-        <member name="M:MvcTurbine.Web.Controllers.InferredActionDescriptor.Execute(System.Web.Mvc.ControllerContext,System.Collections.Generic.IDictionary{System.String,System.Object})">
-            <summary>
-            Always returns a <see cref="T:System.Web.Mvc.ViewResult"/> with the specified <see cref="P:MvcTurbine.Web.Controllers.InferredActionDescriptor.ActionName"/> as the name of the view.
-            For more information, see <see cref="M:System.Web.Mvc.ActionDescriptor.Execute(System.Web.Mvc.ControllerContext,System.Collections.Generic.IDictionary{System.String,System.Object})"/>.
-            </summary>
-            <param name="controllerContext"></param>
-            <param name="parameters"></param>
-            <returns></returns>
-        </member>
-        <member name="M:MvcTurbine.Web.Controllers.InferredActionDescriptor.GetParameters">
-            <summary>
-            Gets an one item array of <see cref="T:MvcTurbine.Web.Controllers.InferredParameterDescriptor"/> containing the current instance.
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="P:MvcTurbine.Web.Controllers.InferredActionDescriptor.ActionName">
-            <summary>
-            See <see cref="P:System.Web.Mvc.ActionDescriptor.ActionName"/>.
-            </summary>
-        </member>
-        <member name="P:MvcTurbine.Web.Controllers.InferredActionDescriptor.ControllerDescriptor">
-            <summary>
-            See <see cref="P:System.Web.Mvc.ActionDescriptor.ControllerDescriptor"/>.
-            </summary>
-        </member>
-        <member name="T:MvcTurbine.Web.Controllers.InferredParameterDescriptor">
-            <summary>
-            Wrapper class defines the type of parameter to use with the <see cref="T:MvcTurbine.Web.Controllers.InferredActionDescriptor"/>.
-            </summary>
-        </member>
-        <member name="M:MvcTurbine.Web.Controllers.InferredParameterDescriptor.#ctor(System.Web.Mvc.ActionDescriptor,System.String)">
-            <summary>
-            Default constructor
-            </summary>
-            <param name="descriptor"></param>
-            <param name="parameterName"></param>
-        </member>
-        <member name="P:MvcTurbine.Web.Controllers.InferredParameterDescriptor.ActionDescriptor">
-            <summary>
-            See <see cref="P:System.Web.Mvc.ParameterDescriptor.ActionDescriptor"/>.
-            </summary>
-        </member>
-        <member name="P:MvcTurbine.Web.Controllers.InferredParameterDescriptor.ParameterName">
-            <summary>
-            Returns the name of the executing action.
-            </summary>
-        </member>
-        <member name="P:MvcTurbine.Web.Controllers.InferredParameterDescriptor.ParameterType">
-            <summary>
-            Returns <see cref="T:System.String"/> as the default type.
-            </summary>
-        </member>
-        <member name="T:MvcTurbine.Web.Controllers.InferredViewResult">
-            <summary>
-            Class to work around the pieces for invalid inferred actions.
-            </summary>
-        </member>
-        <member name="M:MvcTurbine.Web.Controllers.InferredViewResult.FindView(System.Web.Mvc.ControllerContext)">
-            <summary>
-            Checks whether the <see cref="T:System.Web.Mvc.ViewEngineResult"/> is valid, if not an HTTP 404 is thrown.
-            </summary>
-            <param name="context"></param>
+            <param name="type"></param>
             <returns></returns>
         </member>
         <member name="T:MvcTurbine.Web.Controllers.MergedFilters">
@@ -311,73 +222,63 @@
             Gets the MVC filters that have been registered with the service locator.
             </summary>
         </member>
-        <member name="T:MvcTurbine.Web.Controllers.MvcRegistration">
+        <member name="T:MvcTurbine.Web.Controllers.InferredActionDescriptor">
             <summary>
-            Helper class for registration of ASP.MVC components.
+            Custom implementation of <see cref="T:System.Web.Mvc.ActionDescriptor"/> to wire up inferred action execution.
             </summary>
         </member>
-        <member name="M:MvcTurbine.Web.Controllers.MvcRegistration.RegisterController">
+        <member name="M:MvcTurbine.Web.Controllers.InferredActionDescriptor.#ctor(System.String,System.Web.Mvc.ControllerDescriptor)">
             <summary>
-            Gets the default registration for <see cref="T:System.Web.Mvc.IController"/>.
+            See <see cref="T:System.Web.Mvc.ActionDescriptor"/>
+            </summary>
+            <param name="actionName"></param>
+            <param name="controllerDescriptor"></param>
+        </member>
+        <member name="M:MvcTurbine.Web.Controllers.InferredActionDescriptor.Execute(System.Web.Mvc.ControllerContext,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            Always returns a <see cref="T:System.Web.Mvc.ViewResult"/> with the specified <see cref="P:MvcTurbine.Web.Controllers.InferredActionDescriptor.ActionName"/> as the name of the view.
+            For more information, see <see cref="M:System.Web.Mvc.ActionDescriptor.Execute(System.Web.Mvc.ControllerContext,System.Collections.Generic.IDictionary{System.String,System.Object})"/>.
+            </summary>
+            <param name="controllerContext"></param>
+            <param name="parameters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MvcTurbine.Web.Controllers.InferredActionDescriptor.GetParameters">
+            <summary>
+            Gets an one item array of <see cref="T:MvcTurbine.Web.Controllers.InferredParameterDescriptor"/> containing the current instance.
             </summary>
             <returns></returns>
         </member>
-        <member name="M:MvcTurbine.Web.Controllers.MvcRegistration.RegisterController(System.Action{MvcTurbine.ComponentModel.IServiceLocator,System.Type})">
+        <member name="P:MvcTurbine.Web.Controllers.InferredActionDescriptor.ActionName">
             <summary>
-            Gets the registration for <see cref="T:System.Web.Mvc.IController"/> with the specified registration action.
+            See <see cref="P:System.Web.Mvc.ActionDescriptor.ActionName"/>.
             </summary>
-            <param name="regAction"></param>
+        </member>
+        <member name="P:MvcTurbine.Web.Controllers.InferredActionDescriptor.ControllerDescriptor">
+            <summary>
+            See <see cref="P:System.Web.Mvc.ActionDescriptor.ControllerDescriptor"/>.
+            </summary>
+        </member>
+        <member name="T:MvcTurbine.Web.Controllers.InferredViewResult">
+            <summary>
+            Class to work around the pieces for invalid inferred actions.
+            </summary>
+        </member>
+        <member name="M:MvcTurbine.Web.Controllers.InferredViewResult.FindView(System.Web.Mvc.ControllerContext)">
+            <summary>
+            Checks whether the <see cref="T:System.Web.Mvc.ViewEngineResult"/> is valid, if not an HTTP 404 is thrown.
+            </summary>
+            <param name="context"></param>
             <returns></returns>
         </member>
-        <member name="M:MvcTurbine.Web.Controllers.MvcRegistration.RegisterViewEngine">
+        <member name="T:MvcTurbine.Web.Controllers.InjectableFilterAttribute">
             <summary>
-            Gets the default registration for <see cref="T:System.Web.Mvc.IViewEngine"/>.
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:MvcTurbine.Web.Controllers.MvcRegistration.RegisterViewEngine(System.Action{MvcTurbine.ComponentModel.IServiceLocator,System.Type})">
-            <summary>
-            Gets the registration for <see cref="T:System.Web.Mvc.IViewEngine"/> withthe specified registration action.
-            </summary>
-            <param name="regAction"></param>
-            <returns></returns>
-        </member>
-        <member name="M:MvcTurbine.Web.Controllers.MvcRegistration.RegisterFilter``1">
-            <summary>
-            
-            </summary>
-            <typeparam name="TFilter"></typeparam>
-            <returns></returns>
-        </member>
-        <member name="M:MvcTurbine.Web.Controllers.MvcRegistration.RegisterFilter``1(System.Action{MvcTurbine.ComponentModel.IServiceLocator,System.Type})">
-            <summary>
-            
-            </summary>
-            <typeparam name="TFilter"></typeparam>
-            <param name="regAction"></param>
-            <returns></returns>
-        </member>
-        <member name="M:MvcTurbine.Web.Controllers.MvcRegistration.RegisterBinder">
-            <summary>
-            
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:MvcTurbine.Web.Controllers.MvcRegistration.RegisterBinder(System.Action{MvcTurbine.ComponentModel.IServiceLocator,System.Type})">
-            <summary>
-            
-            </summary>
-            <param name="regAction"></param>
-            <returns></returns>
-        </member>
-        <member name="T:MvcTurbine.Web.Controllers.MvcRegistrationFilters">
-            <summary>
-            Helper class for registration of ASP.NET MVC pieces.
+             Defines the common attribute to use for injectable filters.
             </summary>
         </member>
-        <member name="P:MvcTurbine.Web.Controllers.MvcRegistrationFilters.ModelBinderFilter">
+        <member name="P:MvcTurbine.Web.Controllers.InjectableFilterAttribute.FilterType">
             <summary>
-            Gets the registration for a <see cref="T:System.Web.Mvc.IModelBinder"/>.
+            Gets the type of the filter associated with the attribute.
             </summary>
         </member>
         <member name="T:MvcTurbine.Web.Controllers.TurbineActionInvoker">
@@ -424,240 +325,6 @@
         <member name="P:MvcTurbine.Web.Controllers.TurbineActionInvoker.ServiceLocator">
             <summary>
             Gets the current instance of <see cref="T:MvcTurbine.ComponentModel.IServiceLocator"/>.
-            </summary>
-        </member>
-        <member name="T:MvcTurbine.Web.Controllers.TurbineControllerFactory">
-            <summary>
-            Controller Factory class for instantiating controllers using the Windsor IoC container.
-            </summary>
-        </member>
-        <member name="M:MvcTurbine.Web.Controllers.TurbineControllerFactory.#ctor(MvcTurbine.ComponentModel.IServiceLocator)">
-            <summary>
-            Creates a new instance of the <see cref="T:MvcTurbine.Web.Controllers.TurbineControllerFactory"/> class.
-            </summary>
-            <param name="serviceLocator">The <see cref="T:MvcTurbine.ComponentModel.IServiceLocator"/> to use when 
-            creating controllers.</param>
-        </member>
-        <member name="M:MvcTurbine.Web.Controllers.TurbineControllerFactory.GetControllerInstance(System.Type)">
-            <summary>
-            Provides the implementation of <see cref="T:System.Web.Mvc.IController"/> from the current
-            <see cref="T:MvcTurbine.ComponentModel.IServiceLocator"/>.
-            </summary>
-            <param name="controllerType">Type of controller to search for.</param>
-            <returns>An instance of <see cref="T:System.Web.Mvc.IController"/> from the container.</returns>
-        </member>
-        <member name="M:MvcTurbine.Web.Controllers.TurbineControllerFactory.ReleaseController(System.Web.Mvc.IController)">
-            <summary>
-            Releases the controller by giving it back to <see cref="T:MvcTurbine.ComponentModel.IServiceLocator"/>.
-            </summary>
-            <param name="controller">Controller to dispose.</param>
-        </member>
-        <member name="P:MvcTurbine.Web.Controllers.TurbineControllerFactory.ServiceLocator">
-            <summary>
-            Gets the current instance of <see cref="T:MvcTurbine.ComponentModel.IServiceLocator"/> for the factory.
-            </summary>
-        </member>
-        <member name="T:MvcTurbine.Web.Controllers.InjectableFilterAttribute">
-            <summary>
-             Defines the common attribute to use for injectable filters.
-            </summary>
-        </member>
-        <member name="P:MvcTurbine.Web.Controllers.InjectableFilterAttribute.FilterType">
-            <summary>
-            Gets the type of the filter associated with the attribute.
-            </summary>
-        </member>
-        <member name="T:MvcTurbine.Web.Models.IFilterableModelBinder">
-            <summary>
-            Defines a common interface for checking whether a <see cref="T:System.Web.Mvc.IModelBinder"/> should
-            be applied to a specified model.
-            </summary>
-        </member>
-        <member name="M:MvcTurbine.Web.Models.IFilterableModelBinder.SupportsModelType(System.Type)">
-            <summary>
-            Checks whether the current instance supports the specified type.
-            </summary>
-            <param name="modelType">Type to check against.</param>
-            <returns>True of they're the same, false otherwise.</returns>
-        </member>
-        <member name="T:MvcTurbine.Web.Models.TurbineModelBinder">
-            <summary>
-            Default <see cref="T:System.Web.Mvc.IModelBinder"/> to use within an application.
-            </summary>
-        </member>
-        <member name="F:MvcTurbine.Web.Models.TurbineModelBinder.modelBinders">
-            <summary>
-            Cache list for the model binders to use
-            </summary>
-        </member>
-        <member name="M:MvcTurbine.Web.Models.TurbineModelBinder.#ctor(MvcTurbine.ComponentModel.IServiceLocator)">
-            <summary>
-            Default constructor
-            </summary>
-            <param name="locator"></param>
-        </member>
-        <member name="M:MvcTurbine.Web.Models.TurbineModelBinder.BindModel(System.Web.Mvc.ControllerContext,System.Web.Mvc.ModelBindingContext)">
-            <summary>
-            Processes the registered <see cref="T:System.Web.Mvc.IModelBinder"/> within the <see cref="P:MvcTurbine.Web.Models.TurbineModelBinder.ServiceLocator"/>.
-            </summary>
-            <param name="controllerContext"></param>
-            <param name="bindingContext"></param>
-            <returns></returns>
-        </member>
-        <member name="M:MvcTurbine.Web.Models.TurbineModelBinder.GetRegisteredModelBinders">
-            <summary>
-            Gets the current registered <see cref="T:MvcTurbine.Web.Models.IFilterableModelBinder"/> instances from the container
-            and caches them.
-            </summary>
-            <returns>Cached list of <see cref="T:MvcTurbine.Web.Models.IFilterableModelBinder"/>, if cache null, <see cref="T:MvcTurbine.ComponentModel.IServiceLocator"/> 
-            is queried and results are cached.</returns>
-        </member>
-        <member name="P:MvcTurbine.Web.Models.TurbineModelBinder.ServiceLocator">
-            <summary>
-            Gets the current ServiceLocator associated with this binder
-            </summary>
-        </member>
-        <member name="T:MvcTurbine.Web.Properties.Resources">
-            <summary>
-              A strongly-typed resource class, for looking up localized strings, etc.
-            </summary>
-        </member>
-        <member name="P:MvcTurbine.Web.Properties.Resources.ResourceManager">
-            <summary>
-              Returns the cached ResourceManager instance used by this class.
-            </summary>
-        </member>
-        <member name="P:MvcTurbine.Web.Properties.Resources.Culture">
-            <summary>
-              Overrides the current thread's CurrentUICulture property for all
-              resource lookups using this strongly typed resource class.
-            </summary>
-        </member>
-        <member name="P:MvcTurbine.Web.Properties.Resources.ServiceLocatorExceptionMessage">
-             <summary>
-               Looks up a localized string similar to MVC Turbine cannot start!
-            You need to specify a valid IServiceLocator for the system to use!
-            
-            Check the result of your registered ServiceLocatorProvider to see if it&apos;s valid..
-             </summary>
-        </member>
-        <member name="P:MvcTurbine.Web.Properties.Resources.ServiceLocatorProviderExceptionMessage">
-             <summary>
-               Looks up a localized string similar to MVC Turbine cannot start!
-            You must specify a ServiceLocatorProvider to resolve a IServiceLocator for the system to use.  To specify a ServiceLocatorProvider, make sure you call
-            
-                ServiceLocatorManager.SetLocatorProvider(() =&gt; YOUR PROVIDER)
-                
-            Within the static constructor of your Global.asax.
-             </summary>
-        </member>
-        <member name="T:MvcTurbine.Web.RotorContext">
-            <summary>
-            Defines the default flow of a <see cref="T:MvcTurbine.Web.TurbineApplication"/> instance.
-            </summary>
-        </member>
-        <member name="M:MvcTurbine.Web.RotorContext.#ctor(MvcTurbine.ITurbineApplication)">
-            <summary>
-            Default constructor
-            </summary>
-        </member>
-        <member name="M:MvcTurbine.Web.RotorContext.Dispose">
-            <summary>
-            Cleans up the current <see cref="T:MvcTurbine.ComponentModel.IServiceLocator"/> associated with the context.
-            </summary>
-        </member>
-        <member name="M:MvcTurbine.Web.RotorContext.Initialize(MvcTurbine.ITurbineApplication)">
-            <summary>
-            Initializes the current context by auto-registering the default components.
-            </summary>
-        </member>
-        <member name="M:MvcTurbine.Web.RotorContext.Turn">
-            <summary>
-            Executes the current context.
-            </summary>
-        </member>
-        <member name="M:MvcTurbine.Web.RotorContext.GetAllBlades">
-            <summary>
-            Gets the list of components that are to be used for the application.
-            </summary>
-            <returns>A list of the components registered with the application.</returns>
-        </member>
-        <member name="M:MvcTurbine.Web.RotorContext.LoadAssembliesIntoAppDomain">
-            <summary>
-            Loads the assemblies from the <see cref="P:System.Web.HttpRuntime.BinDirectory"/> into the 
-            <see cref="P:System.AppDomain.CurrentDomain"/> to make the auto-registration process work after an AppPool reset.
-            </summary>
-        </member>
-        <member name="M:MvcTurbine.Web.RotorContext.InitializeBlades">
-            <summary>
-            Initializes the registered <see cref="T:MvcTurbine.Blades.Blade"/> instances.
-            </summary>
-        </member>
-        <member name="M:MvcTurbine.Web.RotorContext.RunBlades">
-            <summary>
-            Executes the registered <see cref="T:MvcTurbine.Blades.Blade"/> instances.
-            </summary>
-        </member>
-        <member name="M:MvcTurbine.Web.RotorContext.PerformBladeAction(System.Action{MvcTurbine.Blades.IBlade})">
-            <summary>
-            Performs the given <see cref="T:System.Action`1"/> for all registered
-            <see cref="T:MvcTurbine.Blades.IBlade"/> in the system.
-            </summary>
-            <param name="bladeAction">Action to perform for each <see cref="T:MvcTurbine.Blades.IBlade"/>.</param>
-        </member>
-        <member name="M:MvcTurbine.Web.RotorContext.AutoRegistrationForBlades">
-            <summary>
-            Queries all the registered <see cref="T:MvcTurbine.Blades.IBlade"/> to see if they implement, <see cref="T:MvcTurbine.ComponentModel.ISupportAutoRegistration"/>
-            then sets them up
-            </summary>
-        </member>
-        <member name="M:MvcTurbine.Web.RotorContext.AutoRegistrationForContext">
-            <summary>
-            Setup registration for "top" level pieces of the application
-            </summary>
-        </member>
-        <member name="M:MvcTurbine.Web.RotorContext.GetCommonBlades">
-            <summary>
-            Gets all the registered <see cref="T:MvcTurbine.Blades.IBlade"/> instances that are not part of the <see cref="T:MvcTurbine.Web.Blades.CoreBlades"/> list.
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:MvcTurbine.Web.RotorContext.ProcessManualRegistrations">
-            <summary>
-            Iterates through all the registered <see cref="T:MvcTurbine.ComponentModel.IServiceRegistration"/> instances
-            </summary>
-        </member>
-        <member name="M:MvcTurbine.Web.RotorContext.ProcessAutomaticRegistration(MvcTurbine.ComponentModel.AutoRegistrationList)">
-            <summary>
-            Iterates through all the <see cref="T:MvcTurbine.ComponentModel.ServiceRegistration"/> instances within 
-            <paramref name="registrationList"/> and process them with the registered 
-            <see cref="T:MvcTurbine.ComponentModel.IAutoRegistrator"/> instance or uses <see cref="T:MvcTurbine.ComponentModel.DefaultAutoRegistrator"/> 
-            if one is not registered. 
-            </summary>
-            <param name="registrationList">Registrations to process</param>
-        </member>
-        <member name="M:MvcTurbine.Web.RotorContext.GetAutoRegistrator">
-            <summary>
-            Gets the <seealso cref="T:MvcTurbine.ComponentModel.IAutoRegistrator"/> to use. Checks the container first, it one not found, it returns
-            the default one.
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:MvcTurbine.Web.RotorContext.GetBinLoader">
-            <summary>
-            Gets the <see cref="T:MvcTurbine.ComponentModel.IBinAssemblyLoader"/> to use. Checks the container first, if one is not fou,d it returns
-            <see cref="T:MvcTurbine.ComponentModel.DefaultBinAssemblyLoader"/>.
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="P:MvcTurbine.Web.RotorContext.ServiceLocator">
-            <summary>
-            Gets or sets the current implementation of <see cref="T:MvcTurbine.ComponentModel.IServiceLocator"/>.
-            </summary>
-        </member>
-        <member name="P:MvcTurbine.Web.RotorContext.Application">
-            <summary>
-            Gets or sets the current instance of <see cref="T:MvcTurbine.Web.TurbineApplication"/>.
             </summary>
         </member>
         <member name="T:MvcTurbine.Web.TurbineApplication">
@@ -743,24 +410,358 @@
             Gets or sets the current <see cref="T:MvcTurbine.Web.RotorContext"/> for the application instance to use.
             </summary>
         </member>
-        <member name="T:MvcTurbine.Web.TypeExtensions">
+        <member name="T:MvcTurbine.Web.Controllers.MvcRegistration">
             <summary>
-            Extension method classes
+            Helper class for registration of ASP.MVC components.
             </summary>
         </member>
-        <member name="M:MvcTurbine.Web.TypeExtensions.IsMvcFilter(System.Type)">
+        <member name="M:MvcTurbine.Web.Controllers.MvcRegistration.RegisterController">
             <summary>
-            Checks to see if the specified type is an MVC filter.
+            Gets the default registration for <see cref="T:System.Web.Mvc.IController"/>.
             </summary>
-            <param name="type"></param>
             <returns></returns>
         </member>
-        <member name="M:MvcTurbine.Web.TypeExtensions.IsController(System.Type)">
+        <member name="M:MvcTurbine.Web.Controllers.MvcRegistration.RegisterController(System.Action{MvcTurbine.ComponentModel.IServiceLocator,System.Type})">
             <summary>
-            Checks to see if the specified type is a <see cref="T:System.Web.Mvc.IController"/>.
+            Gets the registration for <see cref="T:System.Web.Mvc.IController"/> with the specified registration action.
             </summary>
-            <param name="type"></param>
+            <param name="regAction"></param>
             <returns></returns>
+        </member>
+        <member name="M:MvcTurbine.Web.Controllers.MvcRegistration.RegisterViewEngine">
+            <summary>
+            Gets the default registration for <see cref="T:System.Web.Mvc.IViewEngine"/>.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MvcTurbine.Web.Controllers.MvcRegistration.RegisterViewEngine(System.Action{MvcTurbine.ComponentModel.IServiceLocator,System.Type})">
+            <summary>
+            Gets the registration for <see cref="T:System.Web.Mvc.IViewEngine"/> withthe specified registration action.
+            </summary>
+            <param name="regAction"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MvcTurbine.Web.Controllers.MvcRegistration.RegisterFilter``1">
+            <summary>
+            
+            </summary>
+            <typeparam name="TFilter"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:MvcTurbine.Web.Controllers.MvcRegistration.RegisterFilter``1(System.Action{MvcTurbine.ComponentModel.IServiceLocator,System.Type})">
+            <summary>
+            
+            </summary>
+            <typeparam name="TFilter"></typeparam>
+            <param name="regAction"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MvcTurbine.Web.Controllers.MvcRegistration.RegisterBinder">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MvcTurbine.Web.Controllers.MvcRegistration.RegisterBinder(System.Action{MvcTurbine.ComponentModel.IServiceLocator,System.Type})">
+            <summary>
+            
+            </summary>
+            <param name="regAction"></param>
+            <returns></returns>
+        </member>
+        <member name="T:MvcTurbine.Web.Controllers.InferredParameterDescriptor">
+            <summary>
+            Wrapper class defines the type of parameter to use with the <see cref="T:MvcTurbine.Web.Controllers.InferredActionDescriptor"/>.
+            </summary>
+        </member>
+        <member name="M:MvcTurbine.Web.Controllers.InferredParameterDescriptor.#ctor(System.Web.Mvc.ActionDescriptor,System.String)">
+            <summary>
+            Default constructor
+            </summary>
+            <param name="descriptor"></param>
+            <param name="parameterName"></param>
+        </member>
+        <member name="P:MvcTurbine.Web.Controllers.InferredParameterDescriptor.ActionDescriptor">
+            <summary>
+            See <see cref="P:System.Web.Mvc.ParameterDescriptor.ActionDescriptor"/>.
+            </summary>
+        </member>
+        <member name="P:MvcTurbine.Web.Controllers.InferredParameterDescriptor.ParameterName">
+            <summary>
+            Returns the name of the executing action.
+            </summary>
+        </member>
+        <member name="P:MvcTurbine.Web.Controllers.InferredParameterDescriptor.ParameterType">
+            <summary>
+            Returns <see cref="T:System.String"/> as the default type.
+            </summary>
+        </member>
+        <member name="T:MvcTurbine.Web.RotorContext">
+            <summary>
+            Defines the default flow of a <see cref="T:MvcTurbine.Web.TurbineApplication"/> instance.
+            </summary>
+        </member>
+        <member name="M:MvcTurbine.Web.RotorContext.#ctor(MvcTurbine.ITurbineApplication)">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:MvcTurbine.Web.RotorContext.Dispose">
+            <summary>
+            Cleans up the current <see cref="T:MvcTurbine.ComponentModel.IServiceLocator"/> associated with the context.
+            </summary>
+        </member>
+        <member name="M:MvcTurbine.Web.RotorContext.Initialize(MvcTurbine.ITurbineApplication)">
+            <summary>
+            Initializes the current context by auto-registering the default components.
+            </summary>
+        </member>
+        <member name="M:MvcTurbine.Web.RotorContext.Turn">
+            <summary>
+            Executes the current context.
+            </summary>
+        </member>
+        <member name="M:MvcTurbine.Web.RotorContext.LoadAssembliesIntoAppDomain">
+            <summary>
+            Loads the assemblies from the <see cref="P:System.Web.HttpRuntime.BinDirectory"/> into the 
+            <see cref="P:System.AppDomain.CurrentDomain"/> to make the auto-registration process work after an AppPool reset.
+            </summary>
+        </member>
+        <member name="M:MvcTurbine.Web.RotorContext.InitializeBlades">
+            <summary>
+            Initializes the registered <see cref="T:MvcTurbine.Blades.Blade"/> instances.
+            </summary>
+        </member>
+        <member name="M:MvcTurbine.Web.RotorContext.RunBlades">
+            <summary>
+            Executes the registered <see cref="T:MvcTurbine.Blades.Blade"/> instances.
+            </summary>
+        </member>
+        <member name="M:MvcTurbine.Web.RotorContext.PerformBladeAction(System.Action{MvcTurbine.Blades.IBlade})">
+            <summary>
+            Performs the given <see cref="T:System.Action`1"/> for all registered
+            <see cref="T:MvcTurbine.Blades.IBlade"/> in the system.
+            </summary>
+            <param name="bladeAction">Action to perform for each <see cref="T:MvcTurbine.Blades.IBlade"/>.</param>
+        </member>
+        <member name="M:MvcTurbine.Web.RotorContext.AutoRegistrationForBlades">
+            <summary>
+            Queries all the registered <see cref="T:MvcTurbine.Blades.IBlade"/> to see if they implement, <see cref="T:MvcTurbine.ComponentModel.ISupportAutoRegistration"/>
+            then sets them up
+            </summary>
+        </member>
+        <member name="M:MvcTurbine.Web.RotorContext.AutoRegistrationForContext">
+            <summary>
+            Setup registration for "top" level pieces of the application
+            </summary>
+        </member>
+        <member name="M:MvcTurbine.Web.RotorContext.GetAllBlades">
+            <summary>
+            Gets the list of components that are to be used for the application.
+            </summary>
+            <returns>A list of the components registered with the application.</returns>
+        </member>
+        <member name="M:MvcTurbine.Web.RotorContext.GetCommonBlades">
+            <summary>
+            Gets all the registered <see cref="T:MvcTurbine.Blades.IBlade"/> instances that are not part of the <see cref="T:MvcTurbine.Web.Blades.CoreBlades"/> list.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MvcTurbine.Web.RotorContext.ProcessManualRegistrations">
+            <summary>
+            Iterates through all the registered <see cref="T:MvcTurbine.ComponentModel.IServiceRegistration"/> instances
+            </summary>
+        </member>
+        <member name="M:MvcTurbine.Web.RotorContext.ProcessAutomaticRegistration(MvcTurbine.ComponentModel.AutoRegistrationList)">
+            <summary>
+            Iterates through all the <see cref="T:MvcTurbine.ComponentModel.ServiceRegistration"/> instances within 
+            <paramref name="registrationList"/> and process them with the registered 
+            <see cref="T:MvcTurbine.ComponentModel.IAutoRegistrator"/> instance or uses <see cref="T:MvcTurbine.ComponentModel.DefaultAutoRegistrator"/> 
+            if one is not registered. 
+            </summary>
+            <param name="registrationList">Registrations to process</param>
+        </member>
+        <member name="M:MvcTurbine.Web.RotorContext.GetAutoRegistrator">
+            <summary>
+            Gets the <seealso cref="T:MvcTurbine.ComponentModel.IAutoRegistrator"/> to use. Checks the container first, it one not found, it returns
+            the default one.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MvcTurbine.Web.RotorContext.GetBinLoader">
+            <summary>
+            Gets the <see cref="T:MvcTurbine.ComponentModel.IBinAssemblyLoader"/> to use. Checks the container first, if one is not fou,d it returns
+            <see cref="T:MvcTurbine.ComponentModel.DefaultBinAssemblyLoader"/>.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:MvcTurbine.Web.RotorContext.ServiceLocator">
+            <summary>
+            Gets or sets the current implementation of <see cref="T:MvcTurbine.ComponentModel.IServiceLocator"/>.
+            </summary>
+        </member>
+        <member name="P:MvcTurbine.Web.RotorContext.Application">
+            <summary>
+            Gets or sets the current instance of <see cref="T:MvcTurbine.Web.TurbineApplication"/>.
+            </summary>
+        </member>
+        <member name="T:MvcTurbine.Web.Models.TurbineModelBinder">
+            <summary>
+            Default <see cref="T:System.Web.Mvc.IModelBinder"/> to use within an application.
+            </summary>
+        </member>
+        <member name="F:MvcTurbine.Web.Models.TurbineModelBinder.modelBinders">
+            <summary>
+            Cache list for the model binders to use
+            </summary>
+        </member>
+        <member name="M:MvcTurbine.Web.Models.TurbineModelBinder.#ctor(MvcTurbine.ComponentModel.IServiceLocator)">
+            <summary>
+            Default constructor
+            </summary>
+            <param name="locator"></param>
+        </member>
+        <member name="M:MvcTurbine.Web.Models.TurbineModelBinder.BindModel(System.Web.Mvc.ControllerContext,System.Web.Mvc.ModelBindingContext)">
+            <summary>
+            Processes the registered <see cref="T:System.Web.Mvc.IModelBinder"/> within the <see cref="P:MvcTurbine.Web.Models.TurbineModelBinder.ServiceLocator"/>.
+            </summary>
+            <param name="controllerContext"></param>
+            <param name="bindingContext"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MvcTurbine.Web.Models.TurbineModelBinder.GetRegisteredModelBinders">
+            <summary>
+            Gets the current registered <see cref="T:MvcTurbine.Web.Models.IFilterableModelBinder"/> instances from the container
+            and caches them.
+            </summary>
+            <returns>Cached list of <see cref="T:MvcTurbine.Web.Models.IFilterableModelBinder"/>, if cache null, <see cref="T:MvcTurbine.ComponentModel.IServiceLocator"/> 
+            is queried and results are cached.</returns>
+        </member>
+        <member name="P:MvcTurbine.Web.Models.TurbineModelBinder.ServiceLocator">
+            <summary>
+            Gets the current ServiceLocator associated with this binder
+            </summary>
+        </member>
+        <member name="T:MvcTurbine.Web.Models.IFilterableModelBinder">
+            <summary>
+            Defines a common interface for checking whether a <see cref="T:System.Web.Mvc.IModelBinder"/> should
+            be applied to a specified model.
+            </summary>
+        </member>
+        <member name="M:MvcTurbine.Web.Models.IFilterableModelBinder.SupportsModelType(System.Type)">
+            <summary>
+            Checks whether the current instance supports the specified type.
+            </summary>
+            <param name="modelType">Type to check against.</param>
+            <returns>True of they're the same, false otherwise.</returns>
+        </member>
+        <member name="T:MvcTurbine.Web.Controllers.DefaultFilterFinder">
+            <summary>
+            Default implementation to find <see cref="T:MvcTurbine.Web.Controllers.InjectableFilterAttribute"/> for a controller action.
+            </summary>
+        </member>
+        <member name="M:MvcTurbine.Web.Controllers.DefaultFilterFinder.#ctor(MvcTurbine.ComponentModel.IServiceLocator)">
+            <summary>
+            Default constructor.
+            </summary>
+            <param name="serviceLocator"></param>
+        </member>
+        <member name="M:MvcTurbine.Web.Controllers.DefaultFilterFinder.FindFilters(System.Web.Mvc.ActionDescriptor)">
+            <summary>
+            Finds all the <see cref="T:MvcTurbine.Web.Controllers.InjectableFilterAttribute"/> on the specified <see cref="T:System.Web.Mvc.ActionDescriptor"/>.
+            </summary>
+            <param name="actionDescriptor">Current action being executed.</param>
+            <returns></returns>
+        </member>
+        <member name="M:MvcTurbine.Web.Controllers.DefaultFilterFinder.GetAttributes(System.Reflection.ICustomAttributeProvider)">
+            <summary>
+            Gets the applied <see cref="T:MvcTurbine.Web.Controllers.InjectableFilterAttribute"/> on the specified <see cref="T:System.Web.Mvc.ActionDescriptor"/>.
+            </summary>
+            <param name="actionDescriptor"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MvcTurbine.Web.Controllers.DefaultFilterFinder.CreateFilterInfo(System.Collections.Generic.IEnumerable{System.Web.Mvc.IAuthorizationFilter},System.Collections.Generic.IEnumerable{System.Web.Mvc.IActionFilter},System.Collections.Generic.IEnumerable{System.Web.Mvc.IResultFilter},System.Collections.Generic.IEnumerable{System.Web.Mvc.IExceptionFilter})">
+            <summary>
+            Creates a new list of filters to process.
+            </summary>
+            <param name="authFilters"></param>
+            <param name="actionFilters"></param>
+            <param name="resultFilters"></param>
+            <param name="exceptionFilters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MvcTurbine.Web.Controllers.DefaultFilterFinder.GetRegisteredFilters``1(MvcTurbine.Web.Controllers.InjectableFilterAttribute[])">
+            <summary>
+            Searches the <see cref="P:MvcTurbine.Web.Controllers.DefaultFilterFinder.ServiceLocator"/> for the registered filters that match <paramref name="filterAttributes"/>.
+            </summary>
+            <typeparam name="TFilter"></typeparam>
+            <param name="filterAttributes"></param>
+            <returns></returns>
+        </member>
+        <member name="P:MvcTurbine.Web.Controllers.DefaultFilterFinder.ServiceLocator">
+            <summary>
+            Gets the current <see cref="T:MvcTurbine.ComponentModel.IServiceLocator"/>.
+            </summary>
+        </member>
+        <member name="T:MvcTurbine.Web.Controllers.MvcRegistrationFilters">
+            <summary>
+            Helper class for registration of ASP.NET MVC pieces.
+            </summary>
+        </member>
+        <member name="P:MvcTurbine.Web.Controllers.MvcRegistrationFilters.ModelBinderFilter">
+            <summary>
+            Gets the registration for a <see cref="T:System.Web.Mvc.IModelBinder"/>.
+            </summary>
+        </member>
+        <member name="T:MvcTurbine.Web.Blades.MvcBlade">
+            <summary>
+            Default <see cref="T:MvcTurbine.Blades.IBlade"/> that supports all ASP.NET MVC components.
+            </summary>
+        </member>
+        <member name="M:MvcTurbine.Web.Blades.MvcBlade.AddRegistrations(MvcTurbine.ComponentModel.AutoRegistrationList)">
+            <summary>
+            Provides the auto-registration of MVC related components (controllers, view engines, filters, etc).
+            </summary>
+            <param name="registrationList"></param>
+        </member>
+        <member name="M:MvcTurbine.Web.Blades.MvcBlade.Spin(MvcTurbine.IRotorContext)">
+            <summary>
+            Executes the setup of controller factories, view engines and model binders.
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="M:MvcTurbine.Web.Blades.MvcBlade.SetupModelBinders(MvcTurbine.IRotorContext)">
+            <summary>
+             Changes the <see cref="P:System.Web.Mvc.ModelBinderDictionary.DefaultBinder"/> instance to be <see cref="T:MvcTurbine.Web.Models.TurbineModelBinder"/>.
+            </summary>
+            <param name="context">Current <see cref="T:MvcTurbine.IRotorContext"/> performing the execution.</param>
+        </member>
+        <member name="M:MvcTurbine.Web.Blades.MvcBlade.SetupControllerFactory(MvcTurbine.IRotorContext)">
+            <summary>
+            Sets the instance of <see cref="T:System.Web.Mvc.IControllerFactory"/> to use.  If one is not registered,
+            <see cref="T:MvcTurbine.Web.Controllers.TurbineControllerFactory"/> is used.
+            </summary>
+        </member>
+        <member name="M:MvcTurbine.Web.Blades.MvcBlade.GetControllerFactory(MvcTurbine.ComponentModel.IServiceLocator)">
+            <summary>
+            Gets the registered <seealso cref="T:System.Web.Mvc.IControllerFactory"/>, if one is not found the default one is used.
+            </summary>
+            <param name="locator"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MvcTurbine.Web.Blades.MvcBlade.SetupViewEngines(MvcTurbine.IRotorContext)">
+            <summary>
+            Initializes the <see cref="P:System.Web.Mvc.ViewEngines.Engines"/> by pulling all associated <seealso cref="T:System.Web.Mvc.IViewEngine"/> instances
+            in the current application.
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="M:MvcTurbine.Web.Blades.MvcBlade.GetViewEngines(MvcTurbine.ComponentModel.IServiceLocator)">
+            <summary>
+            Gets the <see cref="T:System.Web.Mvc.IViewEngine"/> registered with the system.
+            </summary>
+            <param name="locator">Instance of <see cref="T:MvcTurbine.ComponentModel.IServiceLocator"/> to use.</param>
+            <returns>List of <see cref="T:System.Web.Mvc.IViewEngine"/>, null otherwise.</returns>
         </member>
     </members>
 </doc>
