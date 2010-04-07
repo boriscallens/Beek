@@ -100,10 +100,6 @@
       <Project>{FC249D92-0447-4F58-8C3D-88300058957C}</Project>
       <Name>Boris.BeekProject.Guis.Shared</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Boris.Utils.Html\Boris.Utils.Html.csproj">
-      <Project>{AF365B66-9ED4-4B01-BD6A-030834819334}</Project>
-      <Name>Boris.Utils.Html</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v9.0\WebApplications\Microsoft.WebApplication.targets" />

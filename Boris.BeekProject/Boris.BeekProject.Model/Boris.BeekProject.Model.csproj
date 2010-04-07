@@ -80,7 +80,7 @@
       <Project>{ED162812-90E3-4D4F-A47E-C5D0297D51D5}</Project>
       <Name>Boris.Utils.IO</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Boris.Utils.Security\Boris.Utils.Security.csproj">
+    <ProjectReference Include="..\..\Boris.Utils\Boris.Utils.Security\Boris.Utils.Security.csproj">
       <Project>{541CEE5E-8BA8-486E-8FB4-6845543E2298}</Project>
       <Name>Boris.Utils.Security</Name>
     </ProjectReference>
