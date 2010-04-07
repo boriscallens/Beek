@@ -33,7 +33,7 @@
   <ItemGroup>
     <Reference Include="Db4objects.Db4o, Version=7.4.86.12797, Culture=neutral, PublicKeyToken=6199cd4f203aa8eb, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Boris.BeekProject.Guis.Web\Bin\Db4objects.Db4o.dll</HintPath>
+      <HintPath>..\dependencies\Db4objects.Db4o.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />

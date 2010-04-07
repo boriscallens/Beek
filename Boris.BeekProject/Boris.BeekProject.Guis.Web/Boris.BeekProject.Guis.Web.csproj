@@ -35,6 +35,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\dependencies\Microsoft.Web.Mvc.dll</HintPath>
     </Reference>
+    <Reference Include="RouteDebug, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\External\RouteDebug\RouteDebug.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.ComponentModel.DataAnnotations">
@@ -79,9 +83,14 @@
   <ItemGroup>
     <Content Include="content\css\site.css" />
     <Content Include="content\pics\bgndStripes.png" />
+    <Content Include="content\pics\icons\key.png" />
     <Content Include="content\pics\logo.jpg" />
+    <Content Include="views\account\MyBeek.aspx" />
     <Content Include="views\account\Register.aspx" />
+    <Content Include="views\beek\Create.aspx" />
     <Content Include="views\home\Index.aspx" />
+    <Content Include="views\search\Search.aspx" />
+    <Content Include="views\shared\MyStuff.ascx" />
     <Content Include="views\shared\Header.ascx" />
     <Content Include="views\shared\MyStuffAnonymous.ascx" />
     <Content Include="views\shared\Site.Master" />
@@ -110,8 +119,8 @@
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
-          <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>54450</DevelopmentServerPort>
+          <AutoAssignPort>False</AutoAssignPort>
+          <DevelopmentServerPort>1234</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

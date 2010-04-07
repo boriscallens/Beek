@@ -7,7 +7,10 @@
   <%=Html.PrintStyleSheet("register")%>
 </asp:Content>
 <asp:Content ContentPlaceHolderID="Main" runat="server">
-  <%using (Html.BeginForm<AccountController>(a=>a.Register(Model.User as User, string.Empty), FormMethod.Post, new{id="registerForm"})){%>
+  <%if (Model.Messages.ContainsKey(MessageKeys.UserNameNotFound)){%>
+    <span><%=Model.Messages[MessageKeys.UserNameNotFound]%></span>
+  <%}%>
+  <%using (Html.BeginForm<AccountController>(a=>a.Register(null), FormMethod.Post, new{id="registerForm"})){%>
     <div>
       <%=Html.HiddenFor(i=>Model.User.Id)%>
     </div>
@@ -21,7 +24,7 @@
     </div>
     <div>
       <%=Html.LabelFor(n => Model.User.Email)%>
-      <%=Html.TextBoxFor(n => Model.User.Name, new {tabindex = "3"})%>      
+      <%=Html.TextBoxFor(n => Model.User.Email, new {tabindex = "3"})%>      
     </div>
     <div>      
 	    <input type="submit" value="Register"/>

@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Web;
 using System.Web.Mvc;
+using System.Collections.Generic;
+using Boris.Utils.Mvc.Attributes;
 using Boris.BeekProject.Model.Accounts;
 using Boris.BeekProject.Model.DataAccess;
-using Boris.Utils.Mvc.Attributes;
 using Boris.BeekProject.Guis.Shared.ViewModels;
 
 namespace Boris.BeekProject.Guis.Shared.Controllers
@@ -19,7 +19,7 @@ namespace Boris.BeekProject.Guis.Shared.Controllers
         {
             userRepository = repository;
             this.viewModel = viewModel;
-            this.viewModel.Messages = new List<string>();
+            this.viewModel.Messages = new Dictionary<MessageKeys, string>();
         }
         
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
@@ -33,15 +33,19 @@ namespace Boris.BeekProject.Guis.Shared.Controllers
                 if (viewModel.User == null)
                 {
                     viewModel.User = userRepository.CreateAnonymousUser();
-                    Response.Cookies.Add(CreateUserCookie(viewModel.User, Request.UserHostAddress));
-                    viewModel.Messages.Add("isFirstTimeVisitor");
+                    SetUserCookie(viewModel.User);
+                    viewModel.Messages.Add(MessageKeys.FirstTimeVisitor, "First time user? Check all the stuffs etc");
                 }
             }
             if (viewModel.User.IsAnonymous)
             {
-                viewModel.Messages.Add("isAnonymous");
+                viewModel.Messages.Add(MessageKeys.IsAnonymous, "You are currently not logged in.");
             }
             base.OnActionExecuting(filterContext);
+        }
+        protected void SetUserCookie(IUser user)
+        {
+            Response.Cookies.Set(CreateUserCookie(user, Request.UserHostAddress));
         }
 
         private IUser RestoreUser(HttpCookie cookie)
@@ -52,7 +56,7 @@ namespace Boris.BeekProject.Guis.Shared.Controllers
                 {
                     return userRepository.GetUser(new Guid(cookie.Values["id"]));
                 }
-                catch (Exception)
+                catch (Exception err)
                 {
                     return null;
                 }

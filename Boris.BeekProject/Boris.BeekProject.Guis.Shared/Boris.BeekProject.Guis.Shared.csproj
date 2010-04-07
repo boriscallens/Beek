@@ -31,6 +31,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=1.0.0.155, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\dependencies\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="Cecil.FlowAnalysis, Version=0.1.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\dependencies\Cecil.FlowAnalysis.dll</HintPath>
@@ -45,11 +49,11 @@
     </Reference>
     <Reference Include="Microsoft.Practices.ObjectBuilder2, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Boris.BeekProject.Guis.Web\Bin\Microsoft.Practices.ObjectBuilder2.dll</HintPath>
+      <HintPath>..\dependencies\Microsoft.Practices.ObjectBuilder2.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Practices.Unity, Version=1.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Boris.BeekProject.Guis.Web\Bin\Microsoft.Practices.Unity.dll</HintPath>
+      <HintPath>..\dependencies\Microsoft.Practices.Unity.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Cecil, Version=0.6.8.8607, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -67,14 +71,15 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\dependencies\MvcTurbine.Web.dll</HintPath>
     </Reference>
-    <Reference Include="NHaml.Web.Mvc, Version=1.5.0.2, Culture=neutral, PublicKeyToken=d603208bac452365, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\dependencies\NHaml.Web.Mvc.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Data" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Abstractions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -88,6 +93,7 @@
     <Reference Include="System.Web.Routing">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\AccountController.cs" />
@@ -98,18 +104,24 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Ioc\BeekRepositoryRegistration.cs" />
     <Compile Include="Ioc\DefaultRoutRegistration.cs" />
     <Compile Include="Ioc\SearchServiceRegistration.cs" />
     <Compile Include="Ioc\UserRepositoryRegistration.cs" />
+    <Compile Include="ModelBinding\BaseBeekModelBinder.cs" />
+    <Compile Include="ModelBinding\UserModelBinder.cs" />
     <Compile Include="ViewModels\BaseBeekViewModel.cs" />
     <Compile Include="ViewModels\BeekViewModel.cs" />
     <Compile Include="ViewModels\AccountViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\DTO\BaseBeek.cs" />
     <Compile Include="ViewModels\SearchViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Boris.Utils\Boris.Utils.IO\Boris.Utils.IO.csproj">
+      <Project>{ED162812-90E3-4D4F-A47E-C5D0297D51D5}</Project>
+      <Name>Boris.Utils.IO</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Boris.Utils\Boris.Utils.Mvc\Boris.Utils.Mvc.csproj">
       <Project>{53B4AE97-8674-4A6D-96B5-42850DABF73D}</Project>
       <Name>Boris.Utils.Mvc</Name>

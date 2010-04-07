@@ -38,7 +38,7 @@ namespace Boris.BeekProject.Model.DataAccess.Db4o
         public void UpdateUser(IUser user)
         {
             lock(userLock)
-            {
+            {                
                 client.Store(user);
                 client.Commit();
             }
@@ -51,6 +51,10 @@ namespace Boris.BeekProject.Model.DataAccess.Db4o
         {
             lock (userLock)
             {
+                if(GetUser(user.Id) != null)
+                {
+                    throw new ArgumentException("User with this Id already exists", "user");
+                }
                 user.Id = Guid.NewGuid();
                 client.Store(user);
                 client.Commit();
@@ -75,6 +79,10 @@ namespace Boris.BeekProject.Model.DataAccess.Db4o
         }
         public IUser GetUser(Guid id)
         {
+            if(id == Guid.Empty)
+            {
+                return null;
+            }
             return GetUsers().Where(u => u.Id.Equals(id)).SingleOrDefault();
         }
         public IUser GetUser(string name)
@@ -85,7 +93,7 @@ namespace Boris.BeekProject.Model.DataAccess.Db4o
         }
         public IUser CreateAnonymousUser()
         {
-            IUser user = new User("Anonymous", "Anonymous", string.Empty);
+            IUser user = new User("Username", "Password", string.Empty);
             user.AddRole(Roles.Anonymous);
             user.Id = AddUser(user);
             return user;

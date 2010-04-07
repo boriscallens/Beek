@@ -21,7 +21,6 @@ namespace Boris.BeekProject.Services
         {
             return SearchBeek(bag).Skip(skip).Take(take);
         }
-
         public IEnumerable<BaseBeek> SearchBeek(BeekSearchbag bag)
         {
             var q = beekRepository.GetBeek();

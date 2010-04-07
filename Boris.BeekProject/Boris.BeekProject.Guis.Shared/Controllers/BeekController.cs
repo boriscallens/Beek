@@ -1,5 +1,7 @@
 using System.Web.Mvc;
+using AutoMapper;
 using Boris.BeekProject.Guis.Shared.ViewModels;
+using Boris.BeekProject.Guis.Shared.ViewModels.DTO;
 using Boris.BeekProject.Model.Beek;
 using Boris.BeekProject.Model.DataAccess;
 using System.Linq;
@@ -17,22 +19,19 @@ namespace Boris.BeekProject.Guis.Shared.Controllers
             beeks = beekRepository;
         }
 
-        //
         // GET: /Beek/Details/5
         public ActionResult Details(int id)
         {
-            ViewModel.Beek = beeks.GetBeek().Where(b => b.Id == id).SingleOrDefault();
+            ViewModel.Beek = Mapper.Map<BaseBeek, BaseBeekDTO>(beeks.GetBeek().Where(b => b.Id == id).SingleOrDefault());
             return View(viewModel);
         }
 
-        //
         // GET: /Beek/Create
         public ActionResult Create()
         {
-            return View();
+            return View(viewModel);
         } 
-
-        //
+        
         // POST: /Beek/Create
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Create(BaseBeek beek)
@@ -44,19 +43,17 @@ namespace Boris.BeekProject.Guis.Shared.Controllers
             }
             catch
             {
-                return View();
+                return View(viewModel);
             }
         }
-
-        //
+        
         // GET: /Beek/Edit/5
         public ActionResult Edit(int id)
         {
-            ViewModel.Beek = beeks.GetBeek().Where(b => b.Id == id).SingleOrDefault();
+            ViewModel.Beek = Mapper.Map<BaseBeek, BaseBeekDTO>(beeks.GetBeek().Where(b => b.Id == id).SingleOrDefault());
             return View();
         }
-
-        //
+        
         // POST: /Beek/Edit/5
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Edit(BaseBeek updatedBeek)

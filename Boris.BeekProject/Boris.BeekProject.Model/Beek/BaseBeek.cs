@@ -13,6 +13,7 @@ namespace Boris.BeekProject.Model.Beek
         private IList<KeyValuePair<BaseBeek, BeekRelationTypes>> relations;
         private BeekCollection collection;
 
+        [System.ComponentModel.DataAnnotations.ScaffoldColumn(false)]
         public int Id { get; set; }
         public string Isbn { get; set; }
         public string Title { get; set; }

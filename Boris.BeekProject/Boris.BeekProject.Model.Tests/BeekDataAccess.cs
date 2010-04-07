@@ -178,7 +178,19 @@ namespace Boris.BeekProject.Model.Tests
 
             // Get the user again and check if the roles are updated correctly
             IUser actual = userRepository.GetUser(expected.Id);
-            Assert.IsTrue(actual.IsInRole(Roles.Illustrator));
+            userRepository.GetUser(expected.Id);
+        }
+        [TestMethod]
+        public void UpdatingUserAfterRemovingRoleDoesntCreateDuplicate()
+        {
+            IUser user = GenerateTestUser();
+            user.AddRole(Roles.Anonymous);
+            userRepository.AddUser(user);
+            int expected = userRepository.GetUsers().Count();
+
+            user.RemoveRole(Roles.Anonymous);
+            userRepository.UpdateUser(user);
+            Assert.IsTrue(expected == userRepository.GetUsers().Count());
         }
 
         private static IUser GenerateTestUser()

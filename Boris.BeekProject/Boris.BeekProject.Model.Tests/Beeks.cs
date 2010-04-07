@@ -1,9 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using Boris.BeekProject.Model.Accounts;
-using Boris.BeekProject.Model.Beek;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
+using System.Collections.Generic;
+using Boris.BeekProject.Model.Beek;
+using Boris.BeekProject.Model.Accounts;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
 
 namespace Boris.BeekProject.Model.Tests
 {

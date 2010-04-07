@@ -4,7 +4,7 @@ using MvcTurbine.Routing;
 
 namespace Boris.BeekProject.Guis.Shared.Ioc
 {
-    public class DefaultRoutRegistration: IRouteRegistrator
+    public class DefaultRoutRegistration : IRouteRegistrator
     {
         public void Register(RouteCollection routes)
         {
@@ -13,7 +13,7 @@ namespace Boris.BeekProject.Guis.Shared.Ioc
             routes.MapRoute(
                 "Accounts",
                 "Accounts/{userName}/{action}",
-                new {controller = "Account", action="Index"}
+                new { controller = "Account", action = "Index" }
                 );
 
             routes.MapRoute(
@@ -21,6 +21,7 @@ namespace Boris.BeekProject.Guis.Shared.Ioc
                 "{controller}/{action}/{id}",                           // URL with parameters
                 new { controller = "Home", action = "Index", id = "" }  // Parameter defaults
                 );
+//            RouteDebug.RouteDebugger.RewriteRoutesForTesting(RouteTable.Routes);
         }
     }
 }

@@ -1,8 +1,8 @@
 ﻿using System;
+using System.Linq;
+using System.Security.Principal;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Security.Principal;
-using System.Linq;
 
 namespace Boris.BeekProject.Model.Accounts
 {
@@ -15,8 +15,8 @@ namespace Boris.BeekProject.Model.Accounts
         public Guid Id { get; set; }
         public string Name { get; set; }
         public string Salt { get; set; }
-        
         public string Email { get; set; }
+
         public DateTime CreationTime { get; set; }
         public DateTime? LastLoginAttempt { get; set; }
         public bool IsApproved { get; set; }
@@ -38,7 +38,7 @@ namespace Boris.BeekProject.Model.Accounts
         public User(string userName, string password, string email):this()
         {
             Name = userName;
-            HashedPassword = GetHashedPassword(Salt, password);
+            SetPassword(password);
             Email = email;
             roles.Remove(Accounts.Roles.Anonymous);
         }
@@ -75,6 +75,10 @@ namespace Boris.BeekProject.Model.Accounts
                 roles = roles.Where(r => !r.Equals(role)).ToList();
             }
         }
+        public void SetPassword(string password)
+        {
+            HashedPassword = GetHashedPassword(Salt, password);
+        }
 
         public bool Challenge(string password)
         {
@@ -87,13 +91,16 @@ namespace Boris.BeekProject.Model.Accounts
         }
         private static string GetHashedPassword (string salt, string password)
         {
-            //ToDo, md5 hash this bitch
-            return string.Empty;
+            return Utils.Security.Md5.GetMd5Hash(salt + password);
         }
 
         public bool Equals(IUser other)
         {
             return Id.Equals(other.Id);
+        }
+        public override int GetHashCode()
+        {
+            return Id.GetHashCode();
         }
     }
 }
