@@ -15,5 +15,10 @@
         public int? PublishDate { get; set; }
         public int? PublishDateBefore { get; set; }
         public int? PublishDateAfter { get; set; }
+
+        public string IsbnStartsWith { get; set; }
+        public string IsbnEndsWith { get; set; }
+        public string IsbnContains { get; set; }
     }
+
 }

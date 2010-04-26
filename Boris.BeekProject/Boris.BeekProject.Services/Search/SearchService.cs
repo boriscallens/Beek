@@ -1,20 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Boris.Utils.Strings;
+using Boris.BeekProject.Model.Accounts;
 using Boris.BeekProject.Model.Beek;
 using Boris.BeekProject.Model.DataAccess;
 using Boris.BeekProject.Services.Search;
-using Boris.Utils.Strings;
+using Boris.BeekProject.Services.Search.SearchBags;
+
 
 namespace Boris.BeekProject.Services
 {
     public class SearchService: ISearchService
     {
         private readonly IBeekRepository beekRepository;
+        private readonly IUserRepository userRepository;
 
-        public SearchService(IBeekRepository beekRepository)
+        public SearchService(IBeekRepository beekRepository, IUserRepository userRepository)
         {
             this.beekRepository = beekRepository;
+            this.userRepository = userRepository;
         }
 
         public IEnumerable<BaseBeek> SearchBeek(BeekSearchbag bag, int skip, int take)
@@ -39,6 +44,32 @@ namespace Boris.BeekProject.Services
             if(!string.IsNullOrEmpty(bag.BeekTitleContains))
             {
                 q = q.Where(b => b.Title.Contains(bag.BeekTitleContains, StringComparison.OrdinalIgnoreCase));
+            }
+            return q.AsEnumerable();
+        }
+
+        public IEnumerable<IUser> SearchUsers(UserSearchbag bag, int skip, int take)
+        {
+            return SearchUsers(bag).Skip(skip).Take(take);
+        }
+        public IEnumerable<IUser> SearchUsers(UserSearchbag bag)
+        {
+            var q = userRepository.GetUsers();
+            if(bag.UserId.HasValue)
+            {
+                q = q.Where(u => u.Id.Equals(bag.UserId));
+            }
+            if (!string.IsNullOrEmpty(bag.UserNameStartsWith))
+            {
+                q = q.Where(b => b.Name.StartsWith(bag.UserNameStartsWith, StringComparison.OrdinalIgnoreCase));
+            }
+            if (!string.IsNullOrEmpty(bag.UserNameEndsWith))
+            {
+                q = q.Where(b => b.Name.EndsWith(bag.UserNameEndsWith, StringComparison.OrdinalIgnoreCase));
+            }
+            if (!string.IsNullOrEmpty(bag.UserNameContains))
+            {
+                q = q.Where(b => b.Name.Contains(bag.UserNameContains, StringComparison.OrdinalIgnoreCase));
             }
             return q.AsEnumerable();
         }

@@ -13,7 +13,6 @@ namespace Boris.BeekProject.Model.Beek
         private IList<KeyValuePair<BaseBeek, BeekRelationTypes>> relations;
         private BeekCollection collection;
 
-        [System.ComponentModel.DataAnnotations.ScaffoldColumn(false)]
         public int Id { get; set; }
         public string Isbn { get; set; }
         public string Title { get; set; }
@@ -32,6 +31,7 @@ namespace Boris.BeekProject.Model.Beek
         public IEnumerable<BaseGenre> Genres { get { return genres; } }
         public IEnumerable<WritingStyle> WritingStyles { get { return writingStyles; } }
         public IEnumerable<KeyValuePair<BaseBeek, BeekRelationTypes>> Relations { get { return relations; } }
+        public DateTime DateCreated { get; private set; }
         
         public BaseBeek(BeekTypes type)
         {
@@ -42,6 +42,7 @@ namespace Boris.BeekProject.Model.Beek
             Type = type;
             collection = new BeekCollection();
             AddToCollection(new BeekCollection(), 1, null);
+            DateCreated = DateTime.UtcNow;
         }
 
         public void AddGenre(BaseGenre genre)

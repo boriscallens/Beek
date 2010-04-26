@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Web.Mvc;
 using AutoMapper;
 using Boris.BeekProject.Guis.Shared.ViewModels;
@@ -31,15 +32,14 @@ namespace Boris.BeekProject.Guis.Shared.Controllers
         {
             return View(viewModel);
         } 
-        
         // POST: /Beek/Create
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Create(BaseBeek beek)
         {
             try
             {
-                beeks.AddBeek(beek);
-                return RedirectToAction("Index");
+                int id = beeks.AddBeek(beek);
+                return RedirectToAction("Details", new {id});
             }
             catch
             {
@@ -53,7 +53,6 @@ namespace Boris.BeekProject.Guis.Shared.Controllers
             ViewModel.Beek = Mapper.Map<BaseBeek, BaseBeekDTO>(beeks.GetBeek().Where(b => b.Id == id).SingleOrDefault());
             return View();
         }
-        
         // POST: /Beek/Edit/5
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Edit(BaseBeek updatedBeek)
@@ -68,5 +67,22 @@ namespace Boris.BeekProject.Guis.Shared.Controllers
                 return View();
             }
         }
+    
+        // GET: /Beek/Latest/20
+        public ActionResult Latest(int take)
+        {
+            if (take > 50)
+            {
+                take = 50;
+            }
+
+            var model = new BeekListViewModel
+              {
+                  Beeks = beeks.GetBeek().OrderBy(b => b.DateCreated).Take(take)
+                          .Select(oriBeek => Mapper.Map<BaseBeek, BaseBeekDTO>(oriBeek))
+              };
+            return View("List", model);
+        }
+
     }
 }
