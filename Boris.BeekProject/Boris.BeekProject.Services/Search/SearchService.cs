@@ -8,7 +8,6 @@ using Boris.BeekProject.Model.DataAccess;
 using Boris.BeekProject.Services.Search;
 using Boris.BeekProject.Services.Search.SearchBags;
 
-
 namespace Boris.BeekProject.Services
 {
     public class SearchService: ISearchService
@@ -70,6 +69,37 @@ namespace Boris.BeekProject.Services
             if (!string.IsNullOrEmpty(bag.UserNameContains))
             {
                 q = q.Where(b => b.Name.Contains(bag.UserNameContains, StringComparison.OrdinalIgnoreCase));
+            }
+            return q.AsEnumerable();
+        }
+        public IEnumerable<IUser> SearchUsers(IEnumerable<UserSearchbag> bags, int skip, int take)
+        {
+            return SearchUsers(bags).Skip(skip).Take(take);
+        }
+        public IEnumerable<IUser> SearchUsers(IEnumerable<UserSearchbag> bags)
+        {
+            var q = userRepository.GetUsers();
+            foreach (UserSearchbag bag in bags)
+            {
+                var subQuery = userRepository.GetUsers();
+                UserSearchbag bag1 = bag;
+                if (bag.UserId.HasValue)
+                {
+                    subQuery = subQuery.Where(u => u.Id.Equals(bag1.UserId));
+                }
+                if (!string.IsNullOrEmpty(bag.UserNameStartsWith))
+                {
+                    subQuery = subQuery.Where(b => b.Name.StartsWith(bag1.UserNameStartsWith, StringComparison.OrdinalIgnoreCase));
+                }
+                if (!string.IsNullOrEmpty(bag.UserNameEndsWith))
+                {
+                    subQuery = subQuery.Where(b => b.Name.EndsWith(bag1.UserNameEndsWith, StringComparison.OrdinalIgnoreCase));
+                }
+                if (!string.IsNullOrEmpty(bag.UserNameContains))
+                {
+                    subQuery = subQuery.Where(b => b.Name.Contains(bag1.UserNameContains, StringComparison.OrdinalIgnoreCase));
+                }
+                q = q.Intersect(subQuery);
             }
             return q.AsEnumerable();
         }

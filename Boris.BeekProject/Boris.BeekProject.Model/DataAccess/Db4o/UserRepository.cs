@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using Boris.BeekProject.Model.Accounts;
 using Db4objects.Db4o;
 using Db4objects.Db4o.Linq;
@@ -61,6 +63,23 @@ namespace Boris.BeekProject.Model.DataAccess.Db4o
             }
             return user.Id;
         }
+        public void AddUsers(IEnumerable<User> newUsers)
+        {
+            if(newUsers.Any(user=>!user.Id.Equals(default(Guid))))
+            {
+                throw new ArgumentException("Users cannot have ids issigned to them yet", "newUsers");
+            }
+
+            lock (userLock)
+            {
+                Parallel.ForEach(newUsers, user => {
+                     user.Id = Guid.NewGuid();
+                     client.Store(user);
+                     client.Commit();
+                });
+            }
+        }
+
         public void RemoveUser(Guid id)
         {
             RemoveUser(GetUser(id));
@@ -97,6 +116,11 @@ namespace Boris.BeekProject.Model.DataAccess.Db4o
             user.AddRole(Roles.Anonymous);
             user.Id = AddUser(user);
             return user;
+        }
+
+        public string NonUserGeneratedPassword
+        {
+            get { return "6DC1A8E6-55D9-405C-8B8F-C2D1D20FC508"; }
         }
     }
 }

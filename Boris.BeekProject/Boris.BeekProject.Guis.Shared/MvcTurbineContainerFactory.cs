@@ -2,6 +2,8 @@
 using Boris.BeekProject.Model.Accounts;
 using Boris.BeekProject.Model.DataAccess;
 using Boris.BeekProject.Model.DataAccess.Db4o;
+using Boris.BeekProject.Services;
+using Boris.BeekProject.Services.Accounts;
 using Boris.Utils.IO;
 using Db4objects.Db4o;
 using Microsoft.Practices.Unity;
@@ -24,8 +26,8 @@ namespace Boris.BeekProject.Guis.Shared
             container.RegisterInstance(
                 Db4oFactory.OpenServer(
                     IOHelper.MakeAbsolute(ConfigurationManager.AppSettings["beekRepository.path.db4o"]), 0));
-
             container.RegisterType<IUserRepository, UserRepository>(new ContainerControlledLifetimeManager());
+            container.RegisterType<IAccountService, AccountService>(new ContainerControlledLifetimeManager());
             container.Configure<InjectedMembers>()
                 .ConfigureInjectionFor<UserRepository>(
                     new InjectionConstructor()
@@ -33,7 +35,7 @@ namespace Boris.BeekProject.Guis.Shared
             container.RegisterType<IUser, User>();
 
             container.RegisterType<IBeekRepository, BeekRepository>(new ContainerControlledLifetimeManager());
-
+            container.RegisterType<ISearchService, SearchService>(new ContainerControlledLifetimeManager());
             return container;
         }
     }

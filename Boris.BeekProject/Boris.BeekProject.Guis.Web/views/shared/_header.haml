@@ -1,0 +1,24 @@
+﻿#logo
+  %a{href="#"}
+    %img{alt="Beekweb logo depicting a letter B" src="../../content/pics/logo.png"}
+%ul.navBlock.activeNavBlock
+  %li
+    %a{href="#"}
+      Beek
+    %ul
+      %li
+        %a{href="#"}
+        Add
+      
+%ul.navBlock
+  %li
+    %a{href="#"}
+      Search
+      
+%ul.navBlock          
+  %li
+    -if (Model.User.IsAnonymous)
+      _myStuffAnonymous
+    -else
+      _myStuff
+      

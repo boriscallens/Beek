@@ -7,7 +7,7 @@ namespace Boris.Utils.IO
     {
         public static string MakeAbsolute(string path)
         {
-            return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, path.Trim(new[] { '\\', '/' }));
+            return Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, path.Trim(new[] { '\\', '/' })));
         }
 
     }

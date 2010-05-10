@@ -8,3 +8,8 @@ D:\Code\Boris.Utils\Boris.Utils.Strings\bin\Debug\Boris.Utils.Strings.pdb
 D:\Code\Boris.Utils\Boris.Utils.Strings\obj\Debug\ResolveAssemblyReference.cache
 D:\Code\Boris.Utils\Boris.Utils.Strings\obj\Debug\Boris.Utils.Strings.dll
 D:\Code\Boris.Utils\Boris.Utils.Strings\obj\Debug\Boris.Utils.Strings.pdb
+D:\Code\Beek\Boris.Utils\Boris.Utils.Strings\bin\Debug\Boris.Utils.Strings.dll
+D:\Code\Beek\Boris.Utils\Boris.Utils.Strings\bin\Debug\Boris.Utils.Strings.pdb
+D:\Code\Beek\Boris.Utils\Boris.Utils.Strings\obj\Debug\ResolveAssemblyReference.cache
+D:\Code\Beek\Boris.Utils\Boris.Utils.Strings\obj\Debug\Boris.Utils.Strings.dll
+D:\Code\Beek\Boris.Utils\Boris.Utils.Strings\obj\Debug\Boris.Utils.Strings.pdb

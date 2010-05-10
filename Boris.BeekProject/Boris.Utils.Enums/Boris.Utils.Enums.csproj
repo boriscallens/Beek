@@ -5,12 +5,12 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{1F4C8DAC-4248-4FC3-8422-310D51851F31}</ProjectGuid>
+    <ProjectGuid>{6169EBC9-49DC-48B7-B6F5-96CEEED47AB7}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Boris.BeekProject.Services</RootNamespace>
-    <AssemblyName>Boris.BeekProject.Services</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <RootNamespace>Boris.Utils.Enums</RootNamespace>
+    <AssemblyName>Boris.Utils.Enums</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
@@ -57,27 +57,19 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Accounts\AccountService.cs" />
-    <Compile Include="Accounts\IAccountService.cs" />
+    <Compile Include="EnumHelpers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Search\SearchBags\BeekSearchbag.cs" />
-    <Compile Include="Search\ISearchService.cs" />
-    <Compile Include="Search\SearchBags\UserSearchbag.cs" />
-    <Compile Include="Search\SearchService.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Boris.Utils\Boris.Utils.Strings\Boris.Utils.Strings.csproj">
-      <Project>{460BCD98-0AD7-4536-9DFB-B38D33E1BF13}</Project>
-      <Name>Boris.Utils.Strings</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Boris.BeekProject.Model\Boris.BeekProject.Model.csproj">
-      <Project>{7A10D58A-1F92-462E-B722-034EF25AE2F3}</Project>
-      <Name>Boris.BeekProject.Model</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
       <Visible>False</Visible>

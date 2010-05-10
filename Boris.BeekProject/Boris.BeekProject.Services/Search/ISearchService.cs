@@ -12,5 +12,7 @@ namespace Boris.BeekProject.Services
         IEnumerable<BaseBeek> SearchBeek(BeekSearchbag bag);
         IEnumerable<IUser> SearchUsers(UserSearchbag bag, int skip, int take);
         IEnumerable<IUser> SearchUsers(UserSearchbag bag);
+        IEnumerable<IUser> SearchUsers(IEnumerable<UserSearchbag> bags);
+        IEnumerable<IUser> SearchUsers(IEnumerable<UserSearchbag> bags, int skip, int take);
     }
 }
