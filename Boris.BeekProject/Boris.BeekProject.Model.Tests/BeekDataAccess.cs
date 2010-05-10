@@ -39,7 +39,7 @@ namespace Boris.BeekProject.Model.Tests
             }
             beekServer = Db4oFactory.OpenServer(beekPath, 0);
             userServer = Db4oFactory.OpenServer(userPath, 0);
-            beekRepos = new BeekRepository(beekServer);
+            beekRepos = new Db4oBeekRepository(beekServer);
             userRepository = new UserRepository(userServer);
         }
 

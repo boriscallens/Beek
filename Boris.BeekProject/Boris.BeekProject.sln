@@ -45,8 +45,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "04 Misc", "04 Misc", "{0707
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boris.BeekProject.Misc.BeekFiller.Console", "Boris.BeekProject.Misc.BeekFiller\Boris.BeekProject.Misc.BeekFiller.Console.csproj", "{07191E87-8111-486B-B44A-25D9987AB0DF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boris.BeekProject.Misc.BeekFiller.Controller", "Boris.BeekProject.Misc.BeekFiller.Controller\Boris.BeekProject.Misc.BeekFiller.Controller.csproj", "{A4319A09-C450-43A3-B5FD-89DBF3E27EBC}"
-EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Boris.BeekProject.vsmdi
@@ -198,16 +196,6 @@ Global
 		{07191E87-8111-486B-B44A-25D9987AB0DF}.Release|Mixed Platforms.Build.0 = Release|x86
 		{07191E87-8111-486B-B44A-25D9987AB0DF}.Release|x86.ActiveCfg = Release|x86
 		{07191E87-8111-486B-B44A-25D9987AB0DF}.Release|x86.Build.0 = Release|x86
-		{A4319A09-C450-43A3-B5FD-89DBF3E27EBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A4319A09-C450-43A3-B5FD-89DBF3E27EBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A4319A09-C450-43A3-B5FD-89DBF3E27EBC}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{A4319A09-C450-43A3-B5FD-89DBF3E27EBC}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{A4319A09-C450-43A3-B5FD-89DBF3E27EBC}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{A4319A09-C450-43A3-B5FD-89DBF3E27EBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A4319A09-C450-43A3-B5FD-89DBF3E27EBC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A4319A09-C450-43A3-B5FD-89DBF3E27EBC}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{A4319A09-C450-43A3-B5FD-89DBF3E27EBC}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{A4319A09-C450-43A3-B5FD-89DBF3E27EBC}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -229,6 +217,5 @@ Global
 		{F24F314D-7423-4050-BE48-426D5D965913} = {263EF6E2-5429-4D41-86D2-D7650A4BC62C}
 		{31EACC69-F5D9-4315-BB3E-44F3FBE7B714} = {263EF6E2-5429-4D41-86D2-D7650A4BC62C}
 		{07191E87-8111-486B-B44A-25D9987AB0DF} = {07070033-DB02-4A82-85B6-3CFA26641487}
-		{A4319A09-C450-43A3-B5FD-89DBF3E27EBC} = {07070033-DB02-4A82-85B6-3CFA26641487}
 	EndGlobalSection
 EndGlobal

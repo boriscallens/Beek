@@ -8,15 +8,15 @@ using Db4objects.Db4o.Linq;
 
 namespace Boris.BeekProject.Model.DataAccess.Db4o
 {
-    public class BeekRepository: IBeekRepository
+    public class Db4oBeekRepository: IBeekRepository
     {
         private readonly IObjectServer server;
         private readonly IObjectContainer client;
         private readonly object genreLock;
         private readonly object beekLock;
 
-        public BeekRepository (): this(ConfigurationManager.AppSettings["beekRepository.path.db4o"]){}
-        private BeekRepository (string db4oFilePath) 
+        public Db4oBeekRepository (): this(ConfigurationManager.AppSettings["beekRepository.path.db4o"]){}
+        private Db4oBeekRepository (string db4oFilePath) 
         {
             FileInfo file = new FileInfo(db4oFilePath);
             if (file.Directory != null && !file.Directory.Exists)
@@ -28,7 +28,7 @@ namespace Boris.BeekProject.Model.DataAccess.Db4o
             genreLock = new object();
             beekLock = new object();
         }
-        public BeekRepository (IObjectServer beekServer)
+        public Db4oBeekRepository (IObjectServer beekServer)
         {
             server = beekServer;
             client = server.OpenClient();

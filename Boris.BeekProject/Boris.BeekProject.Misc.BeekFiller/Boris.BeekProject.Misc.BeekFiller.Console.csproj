@@ -43,10 +43,6 @@
       <Project>{FC249D92-0447-4F58-8C3D-88300058957C}</Project>
       <Name>Boris.BeekProject.Guis.Shared</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Boris.BeekProject.Misc.BeekFiller.Controller\Boris.BeekProject.Misc.BeekFiller.Controller.csproj">
-      <Project>{A4319A09-C450-43A3-B5FD-89DBF3E27EBC}</Project>
-      <Name>Boris.BeekProject.Misc.BeekFiller.Controller</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Boris.BeekProject.Model\Boris.BeekProject.Model.csproj">
       <Project>{7A10D58A-1F92-462E-B722-034EF25AE2F3}</Project>
       <Name>Boris.BeekProject.Model</Name>
@@ -58,15 +54,19 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="App_Data\db4o\beekRepository.db4o" />
+    <None Include="App_Data\db4o\userRepository.db4o" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Practices.Unity">
       <HintPath>..\dependencies\Microsoft.Practices.Unity.dll</HintPath>
     </Reference>
+    <Reference Include="Ninject, Version=2.0.1.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\dependencies\Ninject.dll</HintPath>
+    </Reference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\db4o\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
