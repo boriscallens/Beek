@@ -77,6 +77,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
+    <Content Include="views\account\LogIn.aspx" />
     <Content Include="views\beek\Details.aspx" />
     <Content Include="views\beek\DisplayTemplates\ViewUserControl1.ascx" />
     <Content Include="views\beek\List.aspx" />

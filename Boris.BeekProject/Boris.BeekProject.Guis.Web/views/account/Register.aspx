@@ -1,5 +1,5 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/views/shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<AccountViewModel>" %>
-<%@ Import Namespace="Boris.BeekProject.Model.Accounts"%>
+﻿<%@ Page Language="C#" MasterPageFile="~/views/shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<AccountViewData>" %>
+
 <asp:Content ContentPlaceHolderID="Title" runat="server">
   - Account - Register
 </asp:Content>

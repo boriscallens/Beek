@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<BaseBeekViewModel>" %>
+﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<BaseBeekViewData>" %>
     <div id="header">
       <a href="#" id="logo"></a>
       <div id="navBlocks" <%=Model.CurrentNavBlock == NavBlocks.MyStuff?"class='lastNavBlockSelected'":""%>>          

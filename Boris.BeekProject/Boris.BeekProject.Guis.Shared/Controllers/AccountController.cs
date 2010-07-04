@@ -1,33 +1,32 @@
 using System;
 using System.Linq;
 using System.Web.Mvc;
+using Boris.BeekProject.Guis.Shared.ViewData;
 using Boris.BeekProject.Model.Accounts;
 using Boris.BeekProject.Model.DataAccess;
-using Boris.BeekProject.Guis.Shared.ViewModels;
 
 namespace Boris.BeekProject.Guis.Shared.Controllers
 {
     public class AccountController : BaseBeekController
     {
         private readonly IBeekRepository beekRepos;
-        private AccountViewModel ViewModel { get { return (AccountViewModel) viewModel; } }
+        private new readonly AccountViewData ViewData = new AccountViewData {CurrentNavBlock = NavBlocks.MyStuff};
 
-        public AccountController(IUserRepository userRepository, IBeekRepository beekRepository) : base(userRepository, new AccountViewModel())
+        public AccountController(IUserRepository userRepository, IBeekRepository beekRepository) : base(userRepository)
         {
-            viewModel.CurrentNavBlock = NavBlocks.MyStuff;
             beekRepos = beekRepository;
         }
 
         // GET: /accounts/register
         public ViewResult Register(Guid userId)
         {
-            viewModel.User = userRepository.GetUser(userId)
-                ?? userRepository.CreateAnonymousUser();
-            if(viewModel.User.IsAnonymous)
+            base.ViewData.User = UserRepository.GetUser(userId)
+                ?? UserRepository.CreateAnonymousUser();
+            if(base.ViewData.User.IsAnonymous)
             {
-                viewModel.User.Name = string.Empty;
+                base.ViewData.User.Name = string.Empty;
             }
-            return View(viewModel);
+            return View(ViewData);
         }
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Register(IUser user)
@@ -35,9 +34,9 @@ namespace Boris.BeekProject.Guis.Shared.Controllers
             if (ModelState.IsValid)
             {
                 user.RemoveRole(Roles.Anonymous);
-                userRepository.UpdateUser(user);
+                UserRepository.UpdateUser(user);
             }
-            viewModel.User = user;
+            base.ViewData.User = user;
             SetUserCookie(user);
             return RedirectToAction("index", "home");
         }
@@ -45,23 +44,24 @@ namespace Boris.BeekProject.Guis.Shared.Controllers
         // GET: /accounts/login        
         public ActionResult LogIn()
         {
-            return View();
+            throw new NotImplementedException();
+            //return View();
         }
         // POST: /accounts/login
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult LogIn(string username, string password, string referer)
         {
-            IUser user = userRepository.GetUser(username);
+            IUser user = UserRepository.GetUser(username);
             if (user == null || user.IsAnonymous)
             {
-                viewModel.Messages.Add(MessageKeys.UserNameNotFound, String.Format("Couldn't find the username {0}, but feel free to register it!", username));
-                viewModel.User.Name = username;
-                return View("register", viewModel);
+                base.ViewData.Messages.Add(MessageKeys.UserNameNotFound, String.Format("Couldn't find the username {0}, but feel free to register it!", username));
+                base.ViewData.User.Name = username;
+                return View("register", ViewData);
             }
 
             if(user.Challenge(password))
             {
-                viewModel.User = user;
+                base.ViewData.User = user;
                 SetUserCookie(user);
                 if(!string.IsNullOrEmpty(referer))
                 {
@@ -90,20 +90,20 @@ namespace Boris.BeekProject.Guis.Shared.Controllers
         // GET: /accounts/logout
         public ActionResult LogOut()
         {
-            viewModel.User = userRepository.CreateAnonymousUser();
-            SetUserCookie(viewModel.User);
+            base.ViewData.User = UserRepository.CreateAnonymousUser();
+            SetUserCookie(base.ViewData.User);
             return RedirectToAction("index", "home");
         }
         // GET: /accounts/myBeek
         public ActionResult MyBeek()
         {
             // Any beek where the user is involved should be listed
-            ViewModel.Beek = beekRepos.GetBeek()
+            ViewData.Beek = beekRepos.GetBeek()
                 .Where(b => b.Involvements.Any(
-                    i => i.Key.Equals(viewModel.User)
+                    i => i.Key.Equals(ViewData.User)
                 )
             );
-            return View(ViewModel);
+            return View(ViewData);
         }
     }
 }

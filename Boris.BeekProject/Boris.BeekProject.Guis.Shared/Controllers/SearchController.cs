@@ -1,28 +1,28 @@
 using System.Linq;
 using System.Web.Mvc;
+using Boris.BeekProject.Guis.Shared.ViewData;
 using Boris.BeekProject.Services;
 using Boris.BeekProject.Services.Search;
 using Boris.BeekProject.Model.DataAccess;
-using Boris.BeekProject.Guis.Shared.ViewModels;
 
 namespace Boris.BeekProject.Guis.Shared.Controllers
 {
     public class SearchController : BaseBeekController
     {
+        public new readonly SearchViewData ViewData = new SearchViewData { CurrentNavBlock = NavBlocks.Search };
+
         private readonly ISearchService searchService;
-        private SearchViewModel ViewModel { get { return viewModel as SearchViewModel; } }
 
         public SearchController(IUserRepository userRepository, ISearchService searchService)
-            : base(userRepository, new SearchViewModel())
+            : base(userRepository)
         {
             this.searchService = searchService;
-            viewModel.CurrentNavBlock = NavBlocks.Search;
         }
 
         // GET: /Search
         public ActionResult Index()
         {
-            return View("Search", viewModel);
+            return View("Search", ViewData);
         }
 
         // GET: /Beek/123456
@@ -34,13 +34,13 @@ namespace Boris.BeekProject.Guis.Shared.Controllers
         // GET: /Beek/Search?name=1984&author=george+orwell
         public ActionResult Search(BeekSearchbag bag, int skip, int take)
         {
-            ViewModel.FoundBeek = searchService.SearchBeek(bag, skip, take);
-            if (ViewModel.FoundBeek.Any())
+            ViewData.FoundBeek = searchService.SearchBeek(bag, skip, take);
+            if (ViewData.FoundBeek.Any())
             {
-                return View(ViewModel);
+                return View(ViewData);
             }
             // ToDo: return "noBeekFound" view
-            return View("noBeekFound", ViewModel);
+            return View("noBeekFound", ViewData);
         }
     }
 }

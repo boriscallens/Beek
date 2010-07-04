@@ -1,4 +1,5 @@
-﻿using System.Configuration;
+﻿using System;
+using System.Configuration;
 using Boris.BeekProject.Model.Accounts;
 using Boris.BeekProject.Model.DataAccess;
 using Boris.BeekProject.Model.DataAccess.Db4o;
@@ -18,6 +19,7 @@ namespace Boris.BeekProject.Guis.Shared
         private static IUnityContainer container;
         private static IKernel kernel;
 
+        [Obsolete("Use Ninject kernel instead")]
         public static IUnityContainer CreateUnityContainer()
         {
             if (container != null)
@@ -34,26 +36,8 @@ namespace Boris.BeekProject.Guis.Shared
             container.RegisterType<IAccountService, AccountService>(new ContainerControlledLifetimeManager());
             container.RegisterType<IUser, User>();
 
+            throw new NotSupportedException("container registrations are not maintained anymore. Use the Ninject one");
 
-
-            container.Configure<InjectedMembers>()
-                .ConfigureInjectionFor<UserRepository>(
-                    new InjectionConstructor(new{})
-                );
-            
-            container.RegisterType<ISearchService, SearchService>(new ContainerControlledLifetimeManager());
-            container.RegisterType<ISearchService, SearchService>("IsbnDbSearch", new ContainerControlledLifetimeManager());
-            //container.Configure<InjectedMembers>()
-            //    .ConfigureInjectionFor<SearchService>("IsbnDbSearch",
-            //    new InjectionMember[]{new InjectionMember{container.Resolve<IsbnDbBeekRepository>("IsbnDbBeeks")}});
-            //container.Configure<InjectedMembers>()
-            //    .ConfigureInjectionFor<UserRepository>(
-            //        new InjectionConstructor(new{})
-            //    );
-
-            container.RegisterInstance(ConfigurationManager.AppSettings["isbnDb.baseRequestString"]);
-
-            return container;
         }
 
         public static IKernel CreateNinjectKernel()

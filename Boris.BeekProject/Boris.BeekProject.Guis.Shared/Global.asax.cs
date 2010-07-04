@@ -1,27 +1,28 @@
 ﻿using System.Web.Mvc;
+using AutoMapper;
 using Boris.BeekProject.Guis.Shared.ModelBinding;
-using Boris.BeekProject.Guis.Shared.ViewModels.DTO;
+using Boris.BeekProject.Guis.Shared.ViewData;
+using Boris.BeekProject.Guis.Shared.ViewModels;
 using Boris.BeekProject.Model.Accounts;
 using Boris.BeekProject.Model.Beek;
 using Boris.BeekProject.Model.DataAccess;
-using Microsoft.Practices.Unity;
 using MvcTurbine.ComponentModel;
-using MvcTurbine.Unity;
+using MvcTurbine.Ninject;
 using MvcTurbine.Web;
-using AutoMapper;
+using Ninject;
 
 
 namespace Boris.BeekProject.Guis.Shared
 {
     public class MvcApplication : TurbineApplication
     {
-        private static readonly IUnityContainer container;
-        private static readonly UnityServiceLocator provider;
+        private static readonly IKernel ninjectKernel;
+        private static readonly NinjectServiceLocator provider;
 
         static MvcApplication()
         {
-            container = MvcTurbineContainerFactory.CreateUnityContainer();
-            provider = new UnityServiceLocator(container);
+            ninjectKernel = MvcTurbineContainerFactory.CreateNinjectKernel();
+            provider = new NinjectServiceLocator(ninjectKernel);
             
             ServiceLocatorManager.SetLocatorProvider(() => provider);
             ModelBinders.Binders.Add(typeof(IUser), new UserModelBinder(ServiceLocatorManager.Current.Resolve<IUserRepository>()));
@@ -32,7 +33,7 @@ namespace Boris.BeekProject.Guis.Shared
 
         private static void CreateDTOMappings()
         {
-            Mapper.CreateMap<BaseBeek, BaseBeekDTO>();
+            Mapper.CreateMap<BaseBeek, BaseBeekModel>();
         }
     }
 }

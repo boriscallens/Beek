@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using Boris.BeekProject.Model.Accounts;
 
-namespace Boris.BeekProject.Guis.Shared.ViewModels
+namespace Boris.BeekProject.Guis.Shared.ViewData
 {
-    public class BaseBeekViewModel : ViewDataDictionary
+    public class BaseBeekViewData : ViewDataDictionary
     {
         public IUser User { get; set; }
-        public Dictionary<MessageKeys, string> Messages { get; set; }
+        public Dictionary<MessageKeys, string> Messages = new Dictionary<MessageKeys, string>();
         public NavBlocks CurrentNavBlock { get; set; }
     }
 

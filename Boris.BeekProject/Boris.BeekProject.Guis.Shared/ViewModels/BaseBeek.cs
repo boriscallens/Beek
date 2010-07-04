@@ -4,8 +4,9 @@ using System.ComponentModel.DataAnnotations;
 using Boris.BeekProject.Model.Beek;
 using Boris.BeekProject.Model.Accounts;
 
-namespace Boris.BeekProject.Guis.Shared.ViewModels.DTO{
-    public class BaseBeekDTO
+namespace Boris.BeekProject.Guis.Shared.ViewModels{
+
+    public class BaseBeekModel
     {
         [ScaffoldColumn(false)]
         public int Id { get; set; }
