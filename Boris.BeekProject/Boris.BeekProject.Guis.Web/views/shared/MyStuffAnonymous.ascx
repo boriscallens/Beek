@@ -3,7 +3,7 @@
     <table id="navLoginInputs">
       <tr>
         <td>
-          <input type="text" name="username" id="navLoginUsername" value="Username" tabindex="998" id="navLoginUsername"/>
+          <input type="text" name="username" value="Username" tabindex="998" id="navLoginUsername"/>
         </td>
         <td rowspan="2">
           <input type="image" value="Log In" src="/content/pics/icons/key.png"/>

@@ -9,12 +9,20 @@ namespace Boris.BeekProject.Guis.Shared.Ioc
         public void Register(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+            routes.IgnoreRoute("content/{*pathInfo}");
 
             routes.MapRoute(
                 "Accounts",
                 "Accounts/{userName}/{action}",
                 new { controller = "Account", action = "Index" }
-                );
+            );
+
+            routes.MapRoute(
+                "SearchBeek",
+                "Search/Beek/{id}",
+                new { controller = "Search", action = "Beek" }
+            );
+
 
             routes.MapRoute(
                 "Default",                                              // Route name

@@ -10,7 +10,7 @@ namespace Boris.BeekProject.Guis.Shared.Controllers
     public class SearchController : BaseBeekController
     {
         private readonly ISearchService searchService;
-        public new SearchViewData ViewData { get { return (SearchViewData)base.ViewData.Model; } set { base.ViewData = value; } }
+        public new SearchViewData ViewData { get { return (SearchViewData)base.ViewData; } set { base.ViewData = value; } }
 
         public SearchController(IUserRepository userRepository, ISearchService searchService)
             : base(userRepository)
@@ -25,8 +25,16 @@ namespace Boris.BeekProject.Guis.Shared.Controllers
             return View("Search", ViewData);
         }
 
-        // GET: /Beek/123456
-        public ActionResult Index(int beekId)
+
+        // GET: /Search/Beek
+        public ActionResult Beek()
+        {
+            return View("Beek", ViewData);
+        }
+
+
+        // POST: /Search/Beek/123456
+        public ActionResult Beek(int beekId)
         {
             return Search(new BeekSearchbag {BeekId = beekId}, 0, 1);
         }

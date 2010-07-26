@@ -22,7 +22,7 @@ namespace Boris.BeekProject.Guis.Shared
         {
             ninjectKernel = MvcTurbineContainerFactory.CreateNinjectKernel();
             provider = new NinjectServiceLocator(ninjectKernel);
-            
+
             ServiceLocatorManager.SetLocatorProvider(() => provider);
             ModelBinders.Binders.Add(typeof(IUser), new UserModelBinder(ServiceLocatorManager.Current.Resolve<IUserRepository>()));
             ModelBinders.Binders.Add(typeof(BaseBeek), new BaseBeekModelBinder(ServiceLocatorManager.Current.Resolve<IBeekRepository>()));

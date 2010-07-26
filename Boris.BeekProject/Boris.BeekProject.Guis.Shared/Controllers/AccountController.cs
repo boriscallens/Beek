@@ -1,6 +1,6 @@
 using System;
-using System.Linq;
 using System.Web.Mvc;
+using System.Linq;
 using Boris.BeekProject.Guis.Shared.ViewData;
 using Boris.BeekProject.Model.Accounts;
 using Boris.BeekProject.Model.DataAccess;
@@ -10,7 +10,7 @@ namespace Boris.BeekProject.Guis.Shared.Controllers
     public class AccountController : BaseBeekController
     {
         private readonly IBeekRepository beekRepos;
-        public new AccountViewData ViewData { get { return (AccountViewData)base.ViewData.Model; } set { base.ViewData = value; } }
+        public new AccountViewData ViewData { get { return (AccountViewData)base.ViewData; } set { base.ViewData = value; } }
 
         public AccountController(IUserRepository userRepository, IBeekRepository beekRepository) : base(userRepository)
         {

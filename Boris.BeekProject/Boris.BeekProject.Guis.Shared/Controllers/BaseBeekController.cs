@@ -8,7 +8,7 @@ using Boris.BeekProject.Model.DataAccess;
 
 namespace Boris.BeekProject.Guis.Shared.Controllers
 {
-    [Logging]
+    [LoggingFilter]
     public abstract class BaseBeekController : Controller
     {
         protected readonly IUserRepository UserRepository;

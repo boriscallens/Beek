@@ -13,7 +13,7 @@
   <%}%>
   
   <p>
-    <%= Html.ActionLink<SearchController>(a => a.Index(), "Add beek to your collection")%>
+    <%= Html.ActionLink<SearchController>(a => a.Beek(), "Add beek to your collection")%>
   </p>
   
   <p>

@@ -7,6 +7,7 @@
         </a>
         <div id="beek" class="navBlock <%=Model.CurrentNavBlock == NavBlocks.Beek?"activeNavBlock":""%>">
           <span class="navTitle">beek</span>
+          <%=Html.ActionLink<SearchController>(a=>a.Beek(), "Search", new{@class="navSubLink"}) %>
           <%if (!Model.User.IsAnonymous){%>
             <%=Html.ActionLink<BeekController>(a=>a.Create(), "Add", new{@class="navSubLink"})%>
           <%}%>
