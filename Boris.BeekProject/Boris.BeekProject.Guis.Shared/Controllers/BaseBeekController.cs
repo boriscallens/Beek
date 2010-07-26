@@ -12,13 +12,13 @@ namespace Boris.BeekProject.Guis.Shared.Controllers
     public abstract class BaseBeekController : Controller
     {
         protected readonly IUserRepository UserRepository;
-        protected new virtual BaseBeekViewData ViewData { get; private set; }
+        public new BaseBeekViewData ViewData { get { return (BaseBeekViewData)base.ViewData.Model; } set { base.ViewData.Model = value; } }
 
         protected BaseBeekController(IUserRepository repository)
         {
             UserRepository = repository;
         }
-        
+
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             // If the user is not logged in we will either restore him from the cookie, or create an anon one

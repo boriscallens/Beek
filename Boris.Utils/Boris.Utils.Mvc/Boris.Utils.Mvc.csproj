@@ -84,12 +84,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Boris.Utils.Logging\Boris.Utils.Logging.csproj">
-      <Project>{3484159B-CFAC-44D3-A670-0DA875F44BF8}</Project>
-      <Name>Boris.Utils.Logging</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
       <Visible>False</Visible>
       <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
@@ -105,6 +99,12 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Boris.Utils.Logging\Boris.Utils.Logging.csproj">
+      <Project>{3484159B-CFAC-44D3-A670-0DA875F44BF8}</Project>
+      <Name>Boris.Utils.Logging</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

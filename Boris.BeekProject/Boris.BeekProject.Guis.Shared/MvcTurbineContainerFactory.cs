@@ -7,6 +7,8 @@ using Boris.BeekProject.Services;
 using Boris.BeekProject.Services.Accounts;
 using Boris.BeekProject.Services.Search;
 using Boris.Utils.IO;
+using Boris.Utils.Logging;
+using Boris.Utils.Logging.NLog;
 using Db4objects.Db4o;
 using Microsoft.Practices.Unity;
 using Ninject;
@@ -68,6 +70,8 @@ namespace Boris.BeekProject.Guis.Shared
                 .InSingletonScope()
                 .Named("isbnDbSearchService")
                 .WithConstructorArgument("baseRequestUrl", ConfigurationManager.AppSettings["isbnDb.baseRequestString"]);
+            kernel.Bind<ILoggingService>()
+                .To<NlogLoggingService>();
             return kernel;
         }
     }

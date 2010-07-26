@@ -20,8 +20,8 @@ namespace Boris.BeekProject.Guis.Shared.Ioc
                 "Default",                                              // Route name
                 "{controller}/{action}/{id}",                           // URL with parameters
                 new { controller = "Home", action = "Index", id = "" }  // Parameter defaults
-                );
-//            RouteDebug.RouteDebugger.RewriteRoutesForTesting(RouteTable.Routes);
+            );
+            //RouteDebug.RouteDebugger.RewriteRoutesForTesting(RouteTable.Routes);
         }
     }
 }

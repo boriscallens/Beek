@@ -7,7 +7,7 @@ namespace Boris.BeekProject.Guis.Shared.ViewData
     public class BaseBeekViewData : ViewDataDictionary
     {
         public IUser User { get; set; }
-        public Dictionary<MessageKeys, string> Messages = new Dictionary<MessageKeys, string>();
+        public readonly Dictionary<MessageKeys, string> Messages = new Dictionary<MessageKeys, string>();
         public NavBlocks CurrentNavBlock { get; set; }
     }
 

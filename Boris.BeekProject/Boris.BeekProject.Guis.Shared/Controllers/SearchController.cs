@@ -9,13 +9,13 @@ namespace Boris.BeekProject.Guis.Shared.Controllers
 {
     public class SearchController : BaseBeekController
     {
-        public new readonly SearchViewData ViewData = new SearchViewData { CurrentNavBlock = NavBlocks.Search };
-
         private readonly ISearchService searchService;
+        public new SearchViewData ViewData { get { return (SearchViewData)base.ViewData.Model; } set { base.ViewData = value; } }
 
         public SearchController(IUserRepository userRepository, ISearchService searchService)
             : base(userRepository)
         {
+            ViewData = new SearchViewData {CurrentNavBlock = NavBlocks.Search};
             this.searchService = searchService;
         }
 

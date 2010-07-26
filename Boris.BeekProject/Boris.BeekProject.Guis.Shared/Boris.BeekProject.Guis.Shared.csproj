@@ -98,6 +98,9 @@
     <Reference Include="Ninject">
       <HintPath>..\dependencies\Ninject.dll</HintPath>
     </Reference>
+    <Reference Include="RouteDebug">
+      <HintPath>..\dependencies\RouteDebug.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -148,6 +151,10 @@
     <ProjectReference Include="..\..\Boris.Utils\Boris.Utils.IO\Boris.Utils.IO.csproj">
       <Project>{ED162812-90E3-4D4F-A47E-C5D0297D51D5}</Project>
       <Name>Boris.Utils.IO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Boris.Utils\Boris.Utils.Logging\Boris.Utils.Logging.csproj">
+      <Project>{3484159B-CFAC-44D3-A670-0DA875F44BF8}</Project>
+      <Name>Boris.Utils.Logging</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Boris.Utils\Boris.Utils.Mvc\Boris.Utils.Mvc.csproj">
       <Project>{53B4AE97-8674-4A6D-96B5-42850DABF73D}</Project>

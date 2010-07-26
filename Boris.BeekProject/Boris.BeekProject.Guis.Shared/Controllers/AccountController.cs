@@ -10,10 +10,11 @@ namespace Boris.BeekProject.Guis.Shared.Controllers
     public class AccountController : BaseBeekController
     {
         private readonly IBeekRepository beekRepos;
-        private new readonly AccountViewData ViewData = new AccountViewData {CurrentNavBlock = NavBlocks.MyStuff};
+        public new AccountViewData ViewData { get { return (AccountViewData)base.ViewData.Model; } set { base.ViewData = value; } }
 
         public AccountController(IUserRepository userRepository, IBeekRepository beekRepository) : base(userRepository)
         {
+            ViewData = new AccountViewData {CurrentNavBlock = NavBlocks.MyStuff};
             beekRepos = beekRepository;
         }
 
