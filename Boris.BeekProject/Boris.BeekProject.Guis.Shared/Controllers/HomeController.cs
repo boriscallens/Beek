@@ -8,9 +8,9 @@ namespace Boris.BeekProject.Guis.Shared.Controllers
     public class HomeController : BaseBeekController
     {
         public new HomeViewData ViewData { get { return (HomeViewData)base.ViewData; } set { base.ViewData = value; } }
-        public HomeController (IUserRepository userRepository): base(userRepository)
+        public HomeController ()
         {
-            ViewData = new HomeViewData {CurrentNavBlock = NavBlocks.Home};
+            ViewData = new HomeViewData();
         }
 
         public ActionResult Index()

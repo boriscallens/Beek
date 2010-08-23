@@ -4,30 +4,31 @@ using System.Linq;
 using Boris.BeekProject.Guis.Shared.ViewData;
 using Boris.BeekProject.Model.Accounts;
 using Boris.BeekProject.Model.DataAccess;
+using Boris.BeekProject.Services.Accounts;
 
 namespace Boris.BeekProject.Guis.Shared.Controllers
 {
     public class AccountController : BaseBeekController
     {
+        private readonly IAccountService accountService;
         private readonly IBeekRepository beekRepos;
-        public new AccountViewData ViewData { get { return (AccountViewData)base.ViewData; } set { base.ViewData = value; } }
+        private readonly AccountViewData viewData = new AccountViewData();
 
-        public AccountController(IUserRepository userRepository, IBeekRepository beekRepository) : base(userRepository)
+        public AccountController(IAccountService accountService, IBeekRepository beekRepository)
         {
-            ViewData = new AccountViewData {CurrentNavBlock = NavBlocks.MyStuff};
+            this.accountService = accountService;
             beekRepos = beekRepository;
         }
 
         // GET: /accounts/register
         public ViewResult Register(Guid userId)
         {
-            base.ViewData.User = UserRepository.GetUser(userId)
-                ?? UserRepository.CreateAnonymousUser();
-            if(base.ViewData.User.IsAnonymous)
+            viewData.User = accountService.GetUserOrAnonymousUser(userId);
+            if (viewData.User.IsAnonymous)
             {
-                base.ViewData.User.Name = string.Empty;
+                viewData.User.Name = string.Empty;
             }
-            return View(ViewData);
+            return View(viewData);
         }
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Register(IUser user)
@@ -35,35 +36,28 @@ namespace Boris.BeekProject.Guis.Shared.Controllers
             if (ModelState.IsValid)
             {
                 user.RemoveRole(Roles.Anonymous);
-                UserRepository.UpdateUser(user);
+                accountService.UpdateUser(user);
             }
-            base.ViewData.User = user;
-            SetUserCookie(user);
+            viewData.User = user;
+            accountService.StartUserSession(user);
             return RedirectToAction("index", "home");
-        }
-
-        // GET: /accounts/login        
-        public ActionResult LogIn()
-        {
-            throw new NotImplementedException();
-            //return View();
         }
         // POST: /accounts/login
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult LogIn(string username, string password, string referer)
         {
-            IUser user = UserRepository.GetUser(username);
-            if (user == null || user.IsAnonymous)
+            IUser user = accountService.GetUserOrAnonymousUser(username);
+            if (user.IsAnonymous)
             {
-                base.ViewData.Messages.Add(MessageKeys.UserNameNotFound, String.Format("Couldn't find the username {0}, but feel free to register it!", username));
-                base.ViewData.User.Name = username;
-                return View("register", ViewData);
+                viewData.Messages.Add(MessageKeys.UserNameNotFound, String.Format("Couldn't find the username {0}, but feel free to register it!", username));
+                viewData.User.Name = username;
+                return View("register", viewData);
             }
 
             if(user.Challenge(password))
             {
-                base.ViewData.User = user;
-                SetUserCookie(user);
+                viewData.User = user;
+                accountService.StartUserSession(user);
                 if(!string.IsNullOrEmpty(referer))
                 {
                     // Don't know if this will work, but we essentially want to
@@ -80,9 +74,7 @@ namespace Boris.BeekProject.Guis.Shared.Controllers
         // GET: /accounts/boris
         public ActionResult Profile(IUser user)
         {
-            // If the user is the same as the current user, show an editable view
-            // else it will be the public profile
-            if(user == User)
+            if (accountService.IsUserSessionActive(user))
             {
                 return View("EditProfile");
             }
@@ -91,17 +83,17 @@ namespace Boris.BeekProject.Guis.Shared.Controllers
         // GET: /accounts/logout
         public ActionResult LogOut()
         {
-            base.ViewData.User = UserRepository.CreateAnonymousUser();
-            SetUserCookie(base.ViewData.User);
+            accountService.EndUserSession();
+            viewData.User = accountService.CreateAnonymousUser();
             return RedirectToAction("index", "home");
         }
         // GET: /accounts/myBeek
         public ActionResult MyBeek()
         {
             // Any beek where the user is involved should be listed
-            ViewData.Beek = beekRepos.GetBeek()
+            viewData.Beek = beekRepos.GetBeek()
                 .Where(b => b.Involvements.Any(
-                    i => i.Key.Equals(ViewData.User)
+                    i => i.Key.Equals(viewData.User)
                 )
             );
             return View(ViewData);

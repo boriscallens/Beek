@@ -55,6 +55,7 @@
   <ItemGroup>
     <Compile Include="ILoggingService.cs" />
     <Compile Include="NLog\NlogLoggingService.cs" />
+    <Compile Include="NullLoggingService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

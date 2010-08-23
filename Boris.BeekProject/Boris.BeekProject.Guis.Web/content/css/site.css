@@ -13,7 +13,7 @@
 {
 	width: 780px;
 	height: 100%;
-	margin: 0 auto 0 auto;
+	margin: 0 auto 0px auto;
 	background-color: White;
 }
 /***********HEADER****************/
@@ -35,7 +35,7 @@
 	background-image: url("/content/pics/logo.jpg");
 	border-bottom: 1px solid black;
 }
-#navBlocks
+#navigation
 {
 	margin-top: 10px;
 	width: 630px; /*780-150 = 630*/
@@ -45,13 +45,55 @@
 	z-index: -1;
 	border-bottom: 1px solid black;
 }
+.HomeIsActive #homeNavBlock
+{
+	background-color: #E70505;
+	height: 141px;
+}
+.HomeIsActive #homeNavBlock .navTitle
+{
+	color: White;
+}
+.HomeIsActive #homeNavBlock .navTitle:hover, .navSubLink:hover
+{
+	color: Black;
+}
+
+.BeekIsActive #beekNavBlock
+{
+	background-color: #E70505;
+	height: 141px;
+}
+.BeekIsActive #beekNavBlock .navTitle
+{
+	color: White;
+}
+.BeekIsActive #beekNavBlock .navTitle:hover, .navSubLink:hover
+{
+	color: Black;
+}
+
 /* Because the navblocks' width is in %, we get a rounding error so the total != 100%       */
 /* All browsers have a different way of handling this error so we cheat our way out         */
 /* by making the background the same color as the foreground, when the last box is selected */
-#navBlocks.lastNavBlockSelected
+.myStuffIsActive
 {
 	background-color: #E70505;
 }
+.MyStuffIsActive #myStuffNavBlock
+{
+	background-color: #E70505;
+	height: 141px;
+}
+.MyStuffIsActive #myStuffNavBlock .navTitle
+{
+	color: White;
+}
+.MyStuffIsActive #myStuffNavBlock .navTitle:hover, .navSubLink:hover
+{
+	color: Black;
+}
+
 .navBlock
 {
 	float: left;
@@ -82,20 +124,6 @@
 {
 	color: Red;
 }
-
-.activeNavBlock
-{
-	background-color: #E70505;
-	height: 141px;
-}
-.activeNavBlock .navTitle
-{
-	color: White;
-}
-.activeNavBlock .navTitle:hover, .activeNavBlock .navSubLink:hover
-{
-	color: Black;
-}
 /************navLogin***********************/
 #navLoginForm
 {
@@ -115,11 +143,10 @@
 	width: 32px;
 }
 
-
 /************CONTENT****************************/
 #content
 {
-	margin-top: -100px;
-	padding: 100px 10px 10px 10px;	
-	/*background-color: Orange;*/
-}p;px
+	/*margin-top: -1500px;*/
+	padding: 0px 10px 10px 10px;
+	background-color: White;
+}

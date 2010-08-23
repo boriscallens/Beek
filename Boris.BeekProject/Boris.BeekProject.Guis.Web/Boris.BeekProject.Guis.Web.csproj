@@ -67,6 +67,10 @@
     <Content Include="views\beek\Details.aspx" />
     <Content Include="views\beek\DisplayTemplates\ViewUserControl1.ascx" />
     <Content Include="views\beek\List.aspx" />
+    <Content Include="views\header\HeaderAnonymous.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
+    <Content Include="views\header\HeaderNotAnonymous.ascx" />
     <Content Include="views\search\Beek.aspx" />
     <Content Include="views\shared\editorTemplates\IsFiction.ascx" />
     <Content Include="Web.config">
@@ -89,9 +93,6 @@
     <Content Include="views\home\Index.aspx" />
     <Content Include="views\search\Search.aspx" />
     <Content Include="views\shared\editorTemplates\BeekTypes.ascx" />
-    <Content Include="views\shared\MyStuff.ascx" />
-    <Content Include="views\shared\Header.ascx" />
-    <Content Include="views\shared\MyStuffAnonymous.ascx" />
     <Content Include="views\shared\Site.Master" />
   </ItemGroup>
   <ItemGroup>

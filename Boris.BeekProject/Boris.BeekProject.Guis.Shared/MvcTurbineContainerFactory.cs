@@ -1,4 +1,5 @@
 ﻿using System.Configuration;
+using System.Web;
 using Boris.BeekProject.Model.Accounts;
 using Boris.BeekProject.Model.DataAccess;
 using Boris.BeekProject.Model.DataAccess.Db4o;
@@ -35,8 +36,9 @@ namespace Boris.BeekProject.Guis.Shared
                 .To<UserRepository>()
                 .InSingletonScope();
             kernel.Bind<IAccountService>()
-                .To<AccountService>()
-                .InSingletonScope();
+                .To<HttpAccountService>()
+                .InRequestScope()
+                .WithConstructorArgument("context", HttpContext.Current);
             kernel.Bind<IUser>()
                 .To<User>();
             kernel.Bind<ISearchService>()

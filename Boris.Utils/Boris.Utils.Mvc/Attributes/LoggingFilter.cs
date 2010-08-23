@@ -13,6 +13,11 @@ namespace Boris.Utils.Mvc.Attributes
         public ILoggingService LoggingService { get; set; }
         private const string className = "LoggerAttribute";
 
+        public LoggingFilter()
+        {
+            LoggingService = new NullLoggingService();
+        }
+
         //[System.Diagnostics.DebuggerHidden]
         public override void OnActionExecuted(ActionExecutedContext filterContext)
         {

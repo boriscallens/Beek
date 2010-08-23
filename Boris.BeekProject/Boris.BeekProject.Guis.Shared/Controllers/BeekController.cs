@@ -14,9 +14,8 @@ namespace Boris.BeekProject.Guis.Shared.Controllers
         public new BeekViewData ViewData { get { return (BeekViewData)base.ViewData; } set { base.ViewData = value; } }
 
         public BeekController(IUserRepository repository, IBeekRepository beekRepository) 
-            : base(repository)
         {
-            ViewData = new BeekViewData { CurrentNavBlock = NavBlocks.Beek };
+            ViewData = new BeekViewData ();
             beeks = beekRepository;
         }
 

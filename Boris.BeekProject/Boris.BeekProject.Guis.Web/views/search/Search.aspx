@@ -1,10 +1,10 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/views/shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<Boris.BeekProject.Guis.Shared.ViewData.AccountViewData>" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/views/shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<SearchViewData>" %>
 
 <asp:Content ContentPlaceHolderID="Main" runat="server">
   <h2>My Beek</h2>
-  <%if(Model.Beek.Any()){%>
+  <%if (Model.FoundBeek.Any()){%>
     <ul>
-      <%foreach (var beek in Model.Beek){%>
+      <%foreach (var beek in Model.FoundBeek){%>
         <li><%=beek.Title%></li>
       <%}%>
     </ul>

@@ -8,15 +8,11 @@ namespace Boris.BeekProject.Guis.Shared.ViewData
     {
         public IUser User { get; set; }
         public readonly Dictionary<MessageKeys, string> Messages = new Dictionary<MessageKeys, string>();
-        public NavBlocks CurrentNavBlock { get; set; }
     }
 
     public enum MessageKeys
     {
         UserNameNotFound, FirstTimeVisitor, IsAnonymous
     }
-    public enum NavBlocks
-    {
-        Home, Beek, Search, MyStuff
-    }
+
 }

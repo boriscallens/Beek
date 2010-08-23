@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<Boris.BeekProject.Guis.Shared.ViewData.SearchViewData>" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<SearchViewData>" %>
 
 <asp:Content ContentPlaceHolderID="Main" runat="server">
     <h2>Search Beek</h2>
