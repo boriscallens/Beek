@@ -1,7 +1,9 @@
 using System;
 using System.Web.Mvc;
 using System.Linq;
+using AutoMapper;
 using Boris.BeekProject.Guis.Shared.ViewData;
+using Boris.BeekProject.Guis.Shared.ViewModels;
 using Boris.BeekProject.Model.Accounts;
 using Boris.BeekProject.Model.DataAccess;
 using Boris.BeekProject.Services.Accounts;
@@ -24,22 +26,35 @@ namespace Boris.BeekProject.Guis.Shared.Controllers
         public ViewResult Register(Guid userId)
         {
             viewData.User = accountService.GetUserOrAnonymousUser(userId);
+            viewData.ViewUser = Mapper.Map<IUser, ViewUser>(viewData.User);
+
             if (viewData.User.IsAnonymous)
             {
-                viewData.User.Name = string.Empty;
+                viewData.ViewUser.Name = string.Empty;
             }
             return View(viewData);
         }
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult Register(IUser user)
+        public ActionResult Register(ViewUser viewUser)
         {
-            if (ModelState.IsValid)
-            {
-                user.RemoveRole(Roles.Anonymous);
-                accountService.UpdateUser(user);
-            }
-            viewData.User = user;
+            /* Should this testing logic be somewhere else? 
+             * Testing the equal passwords is really view related and the real duplicate username testing is already in a service*/
+            if (accountService.DoesUserExist(viewUser.Name))
+                ModelState.AddModelError("Name", string.Format("The username {0} is already in use.", viewUser.Name));
+            if( !viewUser.ArePasswordsEqual())
+                ModelState.AddModelError("Password", "The passwords do not match");
+            if (!ModelState.IsValid)
+                return View(viewData);
+
+            IUser user = accountService.GetUserOrAnonymousUser(new Guid(viewUser.Id));
+            user.Name = viewUser.Name ?? user.Name;
+            user.Email = viewUser.Email ?? user.Email;
+            user.SetPassword(viewUser.Password);
+            user.RemoveRole(Roles.Anonymous);
+
+            accountService.UpdateUser(user);
             accountService.StartUserSession(user);
+            viewData.User = user;
             return RedirectToAction("index", "home");
         }
         // POST: /accounts/login
@@ -49,8 +64,9 @@ namespace Boris.BeekProject.Guis.Shared.Controllers
             IUser user = accountService.GetUserOrAnonymousUser(username);
             if (user.IsAnonymous)
             {
-                viewData.Messages.Add(MessageKeys.UserNameNotFound, String.Format("Couldn't find the username {0}, but feel free to register it!", username));
-                viewData.User.Name = username;
+                ModelState.AddModelError("UserNameNotFound", String.Format("Couldn't find the username {0}, but feel free to register it!", username));
+                viewData.ViewUser = Mapper.Map<IUser, ViewUser>(user);
+                viewData.ViewUser.Name = username;
                 return View("register", viewData);
             }
 

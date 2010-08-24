@@ -11,11 +11,13 @@ namespace Boris.BeekProject.Model.Accounts
         private IList<Roles> roles;
         private string HashedPassword { get; set; }
 
-        [Required]
+        [Required (ErrorMessage="Id required")]
         public Guid Id { get; set; }
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Name is required")]
         public string Name { get; set; }
-        public string Salt { get; set; }
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Mail is required")]
         public string Email { get; set; }
+        public string Salt { get; set; }
 
         public DateTime CreationTime { get; set; }
         public DateTime? LastLoginAttempt { get; set; }

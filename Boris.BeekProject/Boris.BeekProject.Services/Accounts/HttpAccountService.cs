@@ -60,14 +60,14 @@ namespace Boris.BeekProject.Services.Accounts
         }
         public bool DoesUserExist(string name)
         {
-            return userRepository.GetUsers().Any(user => user.Name.Equals(name, StringComparison.CurrentCultureIgnoreCase));
+            return !string.IsNullOrWhiteSpace(name) && userRepository.GetUsers().Any(user => user.Name.Equals(name, StringComparison.CurrentCultureIgnoreCase));
         }
 
         public void StartUserSession(IUser user)
         {
             var response = context.Response;
             var request = context.Request;
-            response.Cookies["user"].Value = CreateUserCookie(user, request.ServerVariables["REMOTE_ADDR"]).ToString();
+            request.Cookies.Set(CreateUserCookie(user, request.ServerVariables["REMOTE_ADDR"]));
         }
         public void EndUserSession()
         {
@@ -100,6 +100,7 @@ namespace Boris.BeekProject.Services.Accounts
             cookie.Values["ip"] = ip;
             cookie.Values["key"] = GetCookieHash(user.Id.ToString(), ip);
             cookie.Expires = DateTime.UtcNow.AddYears(1);
+            cookie.Secure = true;
             return cookie;
         }
         private static bool IsCookieValidFor(HttpCookie cookie, IUser user, string ip)

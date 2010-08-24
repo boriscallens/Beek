@@ -12,7 +12,8 @@ namespace Boris.BeekProject.Guis.Shared.ViewData
 
     public enum MessageKeys
     {
-        UserNameNotFound, FirstTimeVisitor, IsAnonymous
+        UserNameNotFound, FirstTimeVisitor, IsAnonymous,
+        UserNameInUse
     }
 
 }

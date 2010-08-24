@@ -24,5 +24,6 @@ namespace Boris.BeekProject.Model.Accounts
         void AddRole(Roles role);
         void AddRoles(IEnumerable<Roles> roles);
         void RemoveRole(Roles role);
+        void SetPassword(string password);
     }
 }

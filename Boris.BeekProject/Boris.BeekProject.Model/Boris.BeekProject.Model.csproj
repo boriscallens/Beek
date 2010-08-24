@@ -79,7 +79,7 @@
     <Compile Include="DataAccess\Db4o\Db4oBeekRepository.cs" />
     <Compile Include="DataAccess\Db4o\UserRepository.cs" />
     <Compile Include="DataAccess\IUserRepository.cs" />
-    <Compile Include="Accounts\impl\User.cs" />
+    <Compile Include="Accounts\User.cs" />
     <Compile Include="Beek\BaseBeek.cs" />
     <Compile Include="Beek\Genres\BaseGenre.cs" />
     <Compile Include="Beek\WritingStyle.cs" />

@@ -22,7 +22,7 @@
           </tr>
           <tr>
             <td>
-              <input type="password" name="password" id="password" value="" tabindex="999" />  
+              <input type="password" name="password" id="loginpassword" value="" tabindex="999" />  
             </td>
           </tr>
         </table>

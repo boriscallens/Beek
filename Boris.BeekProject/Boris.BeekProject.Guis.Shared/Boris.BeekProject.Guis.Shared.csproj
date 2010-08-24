@@ -76,6 +76,7 @@
     <Compile Include="ViewModels\BaseBeek.cs" />
     <Compile Include="ViewData\SearchViewData.cs" />
     <Compile Include="ViewData\HomeViewData.cs" />
+    <Compile Include="ViewModels\User.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
