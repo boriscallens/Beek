@@ -1,6 +1,5 @@
 ﻿using System.Web.Mvc;
 using Boris.BeekProject.Guis.Shared.ViewData;
-using Boris.BeekProject.Model.DataAccess;
 
 namespace Boris.BeekProject.Guis.Shared.Controllers
 {

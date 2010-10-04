@@ -1,12 +1,13 @@
 using System;
-using System.Web.Mvc;
 using System.Linq;
+using System.Web.Mvc;
 using AutoMapper;
-using Boris.BeekProject.Guis.Shared.ViewData;
-using Boris.BeekProject.Guis.Shared.ViewModels;
 using Boris.BeekProject.Model.Accounts;
 using Boris.BeekProject.Model.DataAccess;
 using Boris.BeekProject.Services.Accounts;
+using Boris.BeekProject.Guis.Shared.ViewData;
+using Boris.BeekProject.Guis.Shared.ViewModels;
+
 
 namespace Boris.BeekProject.Guis.Shared.Controllers
 {
@@ -55,7 +56,8 @@ namespace Boris.BeekProject.Guis.Shared.Controllers
             accountService.UpdateUser(user);
             accountService.StartUserSession(user);
             viewData.User = user;
-            return RedirectToAction("index", "home");
+            /* ToDo: find a way to do a redirect without loosing my cookies */
+            return View("~/Views/home/index.aspx");
         }
         // POST: /accounts/login
         [AcceptVerbs(HttpVerbs.Post)]
@@ -80,8 +82,8 @@ namespace Boris.BeekProject.Guis.Shared.Controllers
                     // show the page the user was seeing before he was asked to log in
                     return View(referer);
                 }
-                // ToDo: What view do we want the user to see if we don't have a referal?
-                return RedirectToAction("index", "home");
+                /* ToDo: find a way to do a redirect without loosing my cookies */
+                return View("~/Views/home/index.aspx");
             }
             // Oh noes! wrong password or username
             // Give them another try. Should we count the number of tries?
@@ -101,7 +103,8 @@ namespace Boris.BeekProject.Guis.Shared.Controllers
         {
             accountService.EndUserSession();
             viewData.User = accountService.CreateAnonymousUser();
-            return RedirectToAction("index", "home");
+            /* ToDo: find a way to do a redirect without loosing my cookies */
+            return View("~/Views/home/index.aspx");
         }
         // GET: /accounts/myBeek
         public ActionResult MyBeek()

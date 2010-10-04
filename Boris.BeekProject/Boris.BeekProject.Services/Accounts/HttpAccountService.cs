@@ -67,11 +67,12 @@ namespace Boris.BeekProject.Services.Accounts
         {
             var response = context.Response;
             var request = context.Request;
-            request.Cookies.Set(CreateUserCookie(user, request.ServerVariables["REMOTE_ADDR"]));
+            var cookie = CreateUserCookie(user, request.ServerVariables["REMOTE_ADDR"]);
+            response.Cookies.Add(cookie);
+            response.Flush();
         }
         public void EndUserSession()
         {
-
             StartUserSession(CreateAnonymousUser());
         }
         public bool IsUserSessionActive(IUser user)
@@ -101,6 +102,7 @@ namespace Boris.BeekProject.Services.Accounts
             cookie.Values["key"] = GetCookieHash(user.Id.ToString(), ip);
             cookie.Expires = DateTime.UtcNow.AddYears(1);
             cookie.Secure = true;
+            cookie.HttpOnly = true;
             return cookie;
         }
         private static bool IsCookieValidFor(HttpCookie cookie, IUser user, string ip)

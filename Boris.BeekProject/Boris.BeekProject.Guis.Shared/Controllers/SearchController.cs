@@ -3,7 +3,6 @@ using System.Web.Mvc;
 using Boris.BeekProject.Guis.Shared.ViewData;
 using Boris.BeekProject.Services;
 using Boris.BeekProject.Services.Search;
-using Boris.Utils.Mvc.Attributes;
 
 namespace Boris.BeekProject.Guis.Shared.Controllers
 {

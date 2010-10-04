@@ -38,7 +38,7 @@ namespace Boris.BeekProject.Guis.Shared
             kernel.Bind<IAccountService>()
                 .To<HttpAccountService>()
                 .InRequestScope()
-                .WithConstructorArgument("context", HttpContext.Current);
+                .WithConstructorArgument("context",x => GetCurrentContext());
             kernel.Bind<IUser>()
                 .To<User>();
             kernel.Bind<ISearchService>()
@@ -50,7 +50,15 @@ namespace Boris.BeekProject.Guis.Shared
                 .InSingletonScope()
                 .Named("isbnDbSearchService")
                 .WithConstructorArgument("baseRequestUrl", ConfigurationManager.AppSettings["isbnDb.baseRequestString"]);
+            kernel.Bind<ILoggingService>()
+                .To<NlogLoggingService>()
+                .InSingletonScope();
             return kernel;
         }
+        private static HttpContext GetCurrentContext()
+        {
+            return HttpContext.Current;
+        }
+
     }
 }

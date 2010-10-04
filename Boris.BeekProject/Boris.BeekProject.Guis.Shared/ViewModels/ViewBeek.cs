@@ -6,13 +6,13 @@ using Boris.BeekProject.Model.Accounts;
 
 namespace Boris.BeekProject.Guis.Shared.ViewModels{
 
-    public class BaseBeekModel
+    public class ViewBeek
     {
         [ScaffoldColumn(false)]
-        public int Id { get; set; }
+        public int? Id { get; set; }
 
         [DisplayName("ISBN")]
-        [RegularExpression(@"^ISBN\s(?=[-0-9xX ]{13}$)(?:[0-9]+[- ]){3}[0-9]*[xX0-9]$")]
+        [RegularExpression(@"ISBN\x20(?=.{13}$)\d{1,5}([- ])\d{1,7}\1\d{1,6}\1(\d|X)$", ErrorMessage = "Please enter a valid ISBN number in the format of 978-0-306-40615-7")]
         public string Isbn { get; set; }
 
         [Required]

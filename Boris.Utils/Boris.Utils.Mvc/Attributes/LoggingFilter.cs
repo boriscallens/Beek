@@ -5,18 +5,21 @@ using System.Text;
 using System.Web.Mvc;
 using System.Web.Routing;
 using Boris.Utils.Logging;
+using Ninject;
 
 namespace Boris.Utils.Mvc.Attributes
 {
-    public class LoggingFilter : ActionFilterAttribute
+    public class LoggingFilter : ActionFilterAttribute, IActionFilter
     {
-        public ILoggingService LoggingService { get; set; }
-        private const string className = "LoggerAttribute";
+        private ILoggingService loggingService;
 
-        public LoggingFilter()
+        [Inject]
+        public ILoggingService LoggingService
         {
-            LoggingService = new NullLoggingService();
+            get{ return loggingService ?? new NullLoggingService();}
+            set{ loggingService = value;}
         }
+        private const string className = "LoggerAttribute";
 
         //[System.Diagnostics.DebuggerHidden]
         public override void OnActionExecuted(ActionExecutedContext filterContext)

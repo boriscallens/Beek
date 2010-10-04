@@ -24,15 +24,15 @@ namespace Boris.BeekProject.Guis.Shared
             provider = new NinjectServiceLocator(ninjectKernel);
 
             ServiceLocatorManager.SetLocatorProvider(() => provider);
-            //ModelBinders.Binders.Add(typeof(IUser), new UserModelBinder(ServiceLocatorManager.Current.Resolve<IUserRepository>()));
-            ModelBinders.Binders.Add(typeof(BaseBeek), new BaseBeekModelBinder(ServiceLocatorManager.Current.Resolve<IBeekRepository>()));
+            //ModelBinders.Binders.Add(typeof(BaseBeek), new BaseBeekModelBinder(ServiceLocatorManager.Current.Resolve<IBeekRepository>()));
 
             CreateDTOMappings();
         }
 
         private static void CreateDTOMappings()
         {
-            Mapper.CreateMap<BaseBeek, BaseBeekModel>();
+            Mapper.CreateMap<BaseBeek, ViewBeek>();
+            Mapper.CreateMap<ViewBeek, BaseBeek>();
             Mapper.CreateMap<IUser, ViewUser>();
         }
     }

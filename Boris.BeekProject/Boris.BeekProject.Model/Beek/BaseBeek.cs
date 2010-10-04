@@ -11,14 +11,13 @@ namespace Boris.BeekProject.Model.Beek
         private List<WritingStyle> writingStyles;
         private IList<KeyValuePair<IUser, Roles>> involvements;
         private IList<KeyValuePair<BaseBeek, BeekRelationTypes>> relations;
-        private BeekCollection collection;
 
         public int Id { get; set; }
         public string Isbn { get; set; }
         public string Title { get; set; }
         public BeekTypes Type { get; set; }
         public bool IsFiction { get; set; }
-        public BeekCollection Collection { get { return collection; } }
+        public BeekCollection Collection { get; private set; }
         public int VolumeNumber { get; set; }
         public char? SubVolume { get; set; }
         public int TotalVolumes { 
@@ -40,7 +39,7 @@ namespace Boris.BeekProject.Model.Beek
             writingStyles = new List<WritingStyle>();
             genres = new List<BaseGenre>();
             Type = type;
-            collection = new BeekCollection();
+            Collection = new BeekCollection();
             AddToCollection(new BeekCollection(), 1, null);
             DateCreated = DateTime.UtcNow;
         }
@@ -209,17 +208,17 @@ namespace Boris.BeekProject.Model.Beek
             {
                 if (!beekCollection.Any(b => b.Equals(this)))
                 {
-                    beekCollection.AddLast(this);
+                    beekCollection.Add(this);
                 }
-                collection = beekCollection;
+                Collection = beekCollection;
                 VolumeNumber = volumeNumber;
                 SubVolume = subVolume;
             }
         }
         public void RemoveFromCollection()
         {
-            collection.Remove(this);
-            collection = new BeekCollection();
+            Collection.Remove(this);
+            Collection = new BeekCollection();
             VolumeNumber = 0;
             SubVolume = null;
         }

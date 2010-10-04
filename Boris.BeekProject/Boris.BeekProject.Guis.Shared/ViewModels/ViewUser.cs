@@ -4,6 +4,7 @@ namespace Boris.BeekProject.Guis.Shared.ViewModels
 {
     public class ViewUser
     {
+        [ScaffoldColumn(false)]
         public string Id { get; set; }
         [Required(AllowEmptyStrings = false, ErrorMessage = "Name is required")]
         public string Name { get; set; }

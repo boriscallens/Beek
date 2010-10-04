@@ -59,6 +59,7 @@
     <Compile Include="Controllers\HeaderController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
+    <Compile Include="CurrentNavBlockFilter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -73,10 +74,10 @@
     <Compile Include="ViewData\AccountViewData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewData\HeaderViewData.cs" />
-    <Compile Include="ViewModels\BaseBeek.cs" />
+    <Compile Include="ViewModels\ViewBeek.cs" />
     <Compile Include="ViewData\SearchViewData.cs" />
     <Compile Include="ViewData\HomeViewData.cs" />
-    <Compile Include="ViewModels\User.cs" />
+    <Compile Include="ViewModels\ViewUser.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />

@@ -167,7 +167,7 @@
         </member>
         <member name="T:MvcTurbine.Web.Controllers.DefaultFilterFinder">
             <summary>
-            Default implementation for <see cref="T:MvcTurbine.Web.Controllers.IFilterFinder"/> to get all filters through IoC.
+            Default implementation to find <see cref="T:MvcTurbine.Web.Controllers.InjectableFilterAttribute"/> for a controller action.
             </summary>
         </member>
         <member name="T:MvcTurbine.Web.Controllers.IFilterFinder">

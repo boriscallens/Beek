@@ -1,7 +1,7 @@
 <%@ Control Language="C#" Inherits="ViewUserControl<HeaderViewData>" %>
 <div id="header">
   <a href="#" id="logo"></a>
-  <div id="navigation" class="navigation<%=ViewData.Model.CurrentNavBlock%>">
+  <div id="navigation" class="<%=ViewData.Model.CurrentNavBlock%>IsActive">
     <a href="/" id="homeNavBlock" class="navBlock">          
       <span class="navTitle">home</span>    
     </a>
