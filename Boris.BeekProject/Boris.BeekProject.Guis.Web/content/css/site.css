@@ -59,16 +59,30 @@
 	color: Black;
 }
 
-.BeekIsActive #beekNavBlock
+.BeekIsActive #beekNavblock
 {
 	background-color: #E70505;
 	height: 141px;
 }
-.BeekIsActive #beekNavBlock .navTitle
+.BeekIsActive #beekNavblock .navTitle
 {
 	color: White;
 }
-.BeekIsActive #beekNavBlock .navTitle:hover, .navSubLink:hover
+.BeekIsActive #beekNavblock .navTitle:hover, .navSubLink:hover
+{
+	color: Black;
+}
+
+.MyStuffIsActive #myStuffNavBlock
+{
+	background-color: #E70505;
+	height: 141px;
+}
+.MyStuffIsActive #myStuffNavBlock .navTitle
+{
+	color: White;
+}
+.MyStuffIsActive #myStuffNavBlock .navTitle:hover, .navSubLink:hover
 {
 	color: Black;
 }

@@ -1,6 +1,7 @@
 using System;
 using System.Web.Mvc;
 using AutoMapper;
+using Boris.BeekProject.Guis.Shared.Attributes;
 using Boris.BeekProject.Guis.Shared.ViewData;
 using Boris.BeekProject.Guis.Shared.ViewModels;
 using Boris.BeekProject.Model.Beek;
@@ -10,6 +11,7 @@ using BeekTypes = Boris.BeekProject.Model.Beek.BeekTypes;
 
 namespace Boris.BeekProject.Guis.Shared.Controllers
 {
+    [Navigation(NavigationBlocks.Beek)]
     public class BeekController : BaseBeekController
     {
         private readonly IBeekRepository beekRepository;

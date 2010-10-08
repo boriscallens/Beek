@@ -2,38 +2,41 @@ using System;
 using System.Linq;
 using System.Web.Mvc;
 using AutoMapper;
+using Boris.BeekProject.Guis.Shared.Attributes;
 using Boris.BeekProject.Model.Accounts;
 using Boris.BeekProject.Model.DataAccess;
 using Boris.BeekProject.Services.Accounts;
 using Boris.BeekProject.Guis.Shared.ViewData;
 using Boris.BeekProject.Guis.Shared.ViewModels;
 
-
 namespace Boris.BeekProject.Guis.Shared.Controllers
 {
+    [Navigation(NavigationBlocks.MyStuff)]
     public class AccountController : BaseBeekController
     {
         private readonly IAccountService accountService;
         private readonly IBeekRepository beekRepos;
-        private readonly AccountViewData viewData = new AccountViewData();
+        //private readonly AccountViewData viewData = new AccountViewData();
+        private new AccountViewData ViewData { get { return (AccountViewData)base.ViewData; } set { base.ViewData = value; } }
 
         public AccountController(IAccountService accountService, IBeekRepository beekRepository)
         {
             this.accountService = accountService;
             beekRepos = beekRepository;
+            ViewData = new AccountViewData();
         }
 
         // GET: /accounts/register
         public ViewResult Register(Guid userId)
         {
-            viewData.User = accountService.GetUserOrAnonymousUser(userId);
-            viewData.ViewUser = Mapper.Map<IUser, ViewUser>(viewData.User);
+            ViewData.User = accountService.GetUserOrAnonymousUser(userId);
+            ViewData.ViewUser = Mapper.Map<IUser, ViewUser>(ViewData.User);
 
-            if (viewData.User.IsAnonymous)
+            if (ViewData.User.IsAnonymous)
             {
-                viewData.ViewUser.Name = string.Empty;
+                ViewData.ViewUser.Name = string.Empty;
             }
-            return View(viewData);
+            return View(ViewData);
         }
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Register(ViewUser viewUser)
@@ -45,7 +48,7 @@ namespace Boris.BeekProject.Guis.Shared.Controllers
             if( !viewUser.ArePasswordsEqual())
                 ModelState.AddModelError("Password", "The passwords do not match");
             if (!ModelState.IsValid)
-                return View(viewData);
+                return View(ViewData);
 
             IUser user = accountService.GetUserOrAnonymousUser(new Guid(viewUser.Id));
             user.Name = viewUser.Name ?? user.Name;
@@ -55,7 +58,7 @@ namespace Boris.BeekProject.Guis.Shared.Controllers
 
             accountService.UpdateUser(user);
             accountService.StartUserSession(user);
-            viewData.User = user;
+            ViewData.User = user;
             /* ToDo: find a way to do a redirect without loosing my cookies */
             return View("~/Views/home/index.aspx");
         }
@@ -67,27 +70,27 @@ namespace Boris.BeekProject.Guis.Shared.Controllers
             if (user.IsAnonymous)
             {
                 ModelState.AddModelError("UserNameNotFound", String.Format("Couldn't find the username {0}, but feel free to register it!", username));
-                viewData.ViewUser = Mapper.Map<IUser, ViewUser>(user);
-                viewData.ViewUser.Name = username;
-                return View("register", viewData);
+                ViewData.ViewUser = Mapper.Map<IUser, ViewUser>(user);
+                ViewData.ViewUser.Name = username;
+                return View("register", ViewData);
             }
 
             if(user.Challenge(password))
             {
-                viewData.User = user;
+                ViewData.User = user;
                 accountService.StartUserSession(user);
                 if(!string.IsNullOrEmpty(referer))
                 {
                     // Don't know if this will work, but we essentially want to
                     // show the page the user was seeing before he was asked to log in
-                    return View(referer);
+                    return View(referer, ViewData);
                 }
                 /* ToDo: find a way to do a redirect without loosing my cookies */
-                return View("~/Views/home/index.aspx");
+                return View("~/Views/home/index.aspx", ViewData);
             }
             // Oh noes! wrong password or username
             // Give them another try. Should we count the number of tries?
-            return View();
+            return View(ViewData);
         }
         // GET: /accounts/boris
         public ActionResult Profile(IUser user)
@@ -102,7 +105,7 @@ namespace Boris.BeekProject.Guis.Shared.Controllers
         public ActionResult LogOut()
         {
             accountService.EndUserSession();
-            viewData.User = accountService.CreateAnonymousUser();
+            ViewData.User = accountService.CreateAnonymousUser();
             /* ToDo: find a way to do a redirect without loosing my cookies */
             return View("~/Views/home/index.aspx");
         }
@@ -110,9 +113,9 @@ namespace Boris.BeekProject.Guis.Shared.Controllers
         public ActionResult MyBeek()
         {
             // Any beek where the user is involved should be listed
-            viewData.Beek = beekRepos.GetBeek()
+            ViewData.Beek = beekRepos.GetBeek()
                 .Where(b => b.Involvements.Any(
-                    i => i.Key.Equals(viewData.User)
+                    i => i.Key.Equals(ViewData.User)
                 )
             );
             return View(ViewData);

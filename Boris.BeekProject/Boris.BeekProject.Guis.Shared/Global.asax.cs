@@ -1,13 +1,10 @@
-﻿using System.Web.Mvc;
-using AutoMapper;
-using Boris.BeekProject.Guis.Shared.ModelBinding;
-using Boris.BeekProject.Guis.Shared.ViewModels;
+﻿using Boris.BeekProject.Guis.Shared.ViewModels;
 using Boris.BeekProject.Model.Accounts;
 using Boris.BeekProject.Model.Beek;
-using Boris.BeekProject.Model.DataAccess;
 using MvcTurbine.ComponentModel;
 using MvcTurbine.Ninject;
 using MvcTurbine.Web;
+using AutoMapper;
 using Ninject;
 
 

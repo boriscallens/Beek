@@ -1,6 +1,7 @@
 using System.Web.Mvc;
-using Boris.BeekProject.Guis.Shared.ViewData;
 using Boris.BeekProject.Services.Accounts;
+using Boris.BeekProject.Guis.Shared.ViewData;
+using Boris.BeekProject.Guis.Shared.Attributes;
 
 namespace Boris.BeekProject.Guis.Shared.Controllers
 {
@@ -13,10 +14,10 @@ namespace Boris.BeekProject.Guis.Shared.Controllers
         {
             this.accountService = accountService;
         }
-        
-        public ActionResult Header()
+
+        public ActionResult Header(NavigationBlocks navBlock)
         {
-            viewData.CurrentNavBlock = NavBlocks.MyStuff;
+            viewData.CurrentNavBlock = navBlock;
             viewData.User = accountService.GetUserFromSesion();
             if (viewData.User.IsAnonymous)
             {

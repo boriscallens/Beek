@@ -26,8 +26,6 @@ namespace Boris.BeekProject.Guis.Shared
                 return kernel;
             }
             kernel = new StandardKernel();
-            kernel.Bind<ILoggingService>()
-                .To<NlogLoggingService>();
             kernel.Bind<IBeekRepository>()
                 .To<Db4oBeekRepository>()
                 .InSingletonScope()
