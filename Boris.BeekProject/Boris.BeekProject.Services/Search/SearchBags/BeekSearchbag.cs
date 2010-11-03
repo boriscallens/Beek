@@ -1,4 +1,6 @@
-﻿namespace Boris.BeekProject.Services.Search
+﻿using System.Linq;
+
+namespace Boris.BeekProject.Services.Search.SearchBags
 {
     public class BeekSearchbag
     {
@@ -19,6 +21,10 @@
         public string IsbnStartsWith { get; set; }
         public string IsbnEndsWith { get; set; }
         public string IsbnContains { get; set; }
-    }
 
+        public bool HasValues()
+        {
+            return GetType().GetProperties().Any(p => p.GetValue(this, null) != null);
+        }
+    }
 }

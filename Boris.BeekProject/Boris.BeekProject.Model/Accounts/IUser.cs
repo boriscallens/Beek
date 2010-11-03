@@ -14,16 +14,16 @@ namespace Boris.BeekProject.Model.Accounts
         DateTime? LastLoginAttempt { get; set; }
         bool IsApproved { get; set; }
         bool IsLockedOut { get; set; }
-        IEnumerable<Roles> Roles { get;}
+        IEnumerable<Contributions> Contributions { get;}
         Sources Source { get; set; }
         bool IsDefault { get; set; }
         bool IsAnonymous { get; }
 
         bool Challenge(string password);
-        bool IsInRole(Roles role);
-        void AddRole(Roles role);
-        void AddRoles(IEnumerable<Roles> roles);
-        void RemoveRole(Roles role);
+        bool IsContributingAs(Contributions contribution);
+        void AddContribution(Contributions contribution);
+        void AddContributions(IEnumerable<Contributions> contributions);
+        void RemoveContribution(Contributions contribution);
         void SetPassword(string password);
     }
 }

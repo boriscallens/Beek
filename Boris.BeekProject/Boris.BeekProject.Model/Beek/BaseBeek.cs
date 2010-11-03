@@ -9,7 +9,7 @@ namespace Boris.BeekProject.Model.Beek
     {
         private List<BaseGenre> genres;
         private List<WritingStyle> writingStyles;
-        private IList<KeyValuePair<IUser, Roles>> involvements;
+        private IList<KeyValuePair<IUser, Contributions>> involvements;
         private IList<KeyValuePair<BaseBeek, BeekRelationTypes>> relations;
 
         public int Id { get; set; }
@@ -26,7 +26,7 @@ namespace Boris.BeekProject.Model.Beek
                 return Collection.GroupBy(b => String.Format("{0}{1}", b.VolumeNumber, b.SubVolume)).Count();
             }
         }
-        public IEnumerable<KeyValuePair<IUser, Roles>> Involvements { get { return involvements; } }
+        public IEnumerable<KeyValuePair<IUser, Contributions>> Involvements { get { return involvements; } }
         public IEnumerable<BaseGenre> Genres { get { return genres; } }
         public IEnumerable<WritingStyle> WritingStyles { get { return writingStyles; } }
         public IEnumerable<KeyValuePair<BaseBeek, BeekRelationTypes>> Relations { get { return relations; } }
@@ -34,7 +34,7 @@ namespace Boris.BeekProject.Model.Beek
         
         public BaseBeek(BeekTypes type)
         {
-            involvements = new List<KeyValuePair<IUser, Roles>>();
+            involvements = new List<KeyValuePair<IUser, Contributions>>();
             relations = new List<KeyValuePair<BaseBeek, BeekRelationTypes>>();
             writingStyles = new List<WritingStyle>();
             genres = new List<BaseGenre>();
@@ -156,52 +156,52 @@ namespace Boris.BeekProject.Model.Beek
             return relations.Any(r => r.Key.Equals(relatedBeek) && r.Value.Equals(relationType));
         }
 
-        public void InvolveUser(IUser user, Roles role)
+        public void InvolveUser(IUser user, Contributions contribution)
         {
-            if(!user.IsInRole(role))
+            if(!user.IsContributingAs(contribution))
             {
-                throw new ArgumentException(String.Format("User {0} is not a {1}.", user, role), "role");
+                throw new ArgumentException(String.Format("User {0} is not a {1}.", user, contribution), "contribution");
             }
             lock (involvements)
             {
-                if (!IsUserInvolvedAs(user, role))
+                if (!IsUserInvolvedAs(user, contribution))
                 {
-                    involvements.Add(new KeyValuePair<IUser, Roles>(user, role));
+                    involvements.Add(new KeyValuePair<IUser, Contributions>(user, contribution));
                 }
             }
         }
-        public void InvolveUsers(IEnumerable<IUser>users, Roles role)
+        public void InvolveUsers(IEnumerable<IUser>users, Contributions contribution)
         {
-            if(users.Any(u=>!u.IsInRole(role)))
+            if(users.Any(u=>!u.IsContributingAs(contribution)))
             {
-                throw new ArgumentException(String.Format("At least one use is not a {0}.", role), "users");
+                throw new ArgumentException(String.Format("At least one use is not a {0}.", contribution), "users");
             }
             lock (involvements)
             {
                 involvements = involvements.Union(
-                        users.Where(u => !GetInvolvedUsersForRole(role).Contains(u))
-                        .Select(u => new KeyValuePair<IUser, Roles>(u, role))
+                        users.Where(u => !GetInvolvedUsersForContribution(contribution).Contains(u))
+                        .Select(u => new KeyValuePair<IUser, Contributions>(u, contribution))
                     ).ToList();
             }
         }
-        public void DisInvolveUser(IUser user, Roles role)
+        public void DisInvolveUser(IUser user, Contributions contribution)
         {
             lock (involvements)
             {
-                involvements = involvements.Where(i => !(i.Key.Equals(user) && i.Value.Equals(role))).ToList();
+                involvements = involvements.Where(i => !(i.Key.Equals(user) && i.Value.Equals(contribution))).ToList();
             }
         }
-        public IEnumerable<IUser> GetInvolvedUsersForRole(Roles role)
+        public IEnumerable<IUser> GetInvolvedUsersForContribution(Contributions contribution)
         {
             return involvements
-                .Where(i => i.Value.Equals(role))
+                .Where(i => i.Value.Equals(contribution))
                 .Select(i => i.Key);
         }
-        public bool IsUserInvolvedAs(IUser user, Roles role)
+        public bool IsUserInvolvedAs(IUser user, Contributions contribution)
         {
-            return involvements.Any(i => i.Key.Equals(user) && i.Value.Equals(role));
+            return involvements.Any(i => i.Key.Equals(user) && i.Value.Equals(contribution));
         }
-    
+
         public void AddToCollection(BeekCollection beekCollection, int volumeNumber, char? subVolume)
         {
             lock (Collection)

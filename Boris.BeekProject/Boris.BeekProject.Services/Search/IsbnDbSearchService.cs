@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -85,14 +85,14 @@ namespace Boris.BeekProject.Services.Search
                 {
                     //For users that don't exist yet, we'll create them..
                     accountService.CreateUsersInBatch(
-                        isbnDbBeek.Authors.Where(name => !accountService.DoesUserExist(name)), Roles.Writer, Sources.IsbnDb);
+                        isbnDbBeek.Authors.Where(name => !accountService.DoesUserExist(name)), Contributions.Writer, Sources.IsbnDb);
 
                     //now add al those users!
                     IEnumerable<UserSearchbag> bags =
                         isbnDbBeek.Authors.Select(authorName => new UserSearchbag { UserNameContains = authorName });
                     var users = accountSearchService.SearchUsers(bags);
-                    Parallel.ForEach(users, user => user.AddRole(Roles.Writer));
-                    beek.InvolveUsers(users, Roles.Writer);
+                    Parallel.ForEach(users, user => user.AddContribution(Contributions.Writer));
+                    beek.InvolveUsers(users, Contributions.Writer);
                 }
                 yield return beek;
             }

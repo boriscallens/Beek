@@ -54,7 +54,7 @@ namespace Boris.BeekProject.Guis.Shared.Controllers
             user.Name = viewUser.Name ?? user.Name;
             user.Email = viewUser.Email ?? user.Email;
             user.SetPassword(viewUser.Password);
-            user.RemoveRole(Roles.Anonymous);
+            user.RemoveContribution(Contributions.Anonymous);
 
             accountService.UpdateUser(user);
             accountService.StartUserSession(user);

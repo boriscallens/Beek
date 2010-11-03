@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using Boris.BeekProject.Model.Accounts;
 
@@ -6,7 +6,7 @@ namespace Boris.BeekProject.Services.Accounts
 {
     public interface IAccountService
     {
-        IEnumerable<IUser> CreateUsersInBatch(IEnumerable<string> names, Roles role, Sources source);
+        IEnumerable<IUser> CreateUsersInBatch(IEnumerable<string> names, Contributions contribution, Sources source);
 
         bool DoesUserExist(string name);
         IUser GetUser(string username);

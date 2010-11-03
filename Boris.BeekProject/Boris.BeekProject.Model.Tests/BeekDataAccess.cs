@@ -1,4 +1,4 @@
-﻿using System.Configuration;
+using System.Configuration;
 using System.Linq;
 using Boris.BeekProject.Model.Accounts;
 using Boris.BeekProject.Model.Beek;
@@ -149,19 +149,19 @@ namespace Boris.BeekProject.Model.Tests
             const string after = "after";
             userRepository.AddUser(user);
             user.Name = after;
-            user.AddRole(Roles.Illustrator);
+            user.AddContribution(Contributions.Illustrator);
             userRepository.UpdateUser(user);
             Assert.IsTrue(userRepository.GetUser(user.Id).Name.Equals(after));
-            Assert.IsTrue(userRepository.GetUser(user.Id).IsInRole(Roles.Illustrator));
+            Assert.IsTrue(userRepository.GetUser(user.Id).IsContributingAs(Contributions.Illustrator));
         }
         [TestMethod]
         public void UserStaysInRoleAfterAddingAndRetrieving()
         {
             IUser expected = GenerateTestUser();
-            expected.AddRole(Roles.Anonymous);
+            expected.AddContribution(Contributions.Anonymous);
             userRepository.AddUser(expected);
             IUser actual = userRepository.GetUser(expected.Id);
-            Assert.IsTrue(actual.IsInRole(Roles.Anonymous));
+            Assert.IsTrue(actual.IsContributingAs(Contributions.Anonymous));
         }
         [TestMethod]
         public void UpdatingUserAlsoUpdatesRoles()
@@ -173,7 +173,7 @@ namespace Boris.BeekProject.Model.Tests
             // Get the previously saved user but now from this second server,
             // add a role to it and update to the new repos
             expected = userRepository.GetUser(expected.Id);
-            expected.AddRole(Roles.Illustrator);
+            expected.AddContribution(Contributions.Illustrator);
             userRepository.UpdateUser(expected);
 
             // Get the user again and check if the roles are updated correctly
@@ -184,11 +184,11 @@ namespace Boris.BeekProject.Model.Tests
         public void UpdatingUserAfterRemovingRoleDoesntCreateDuplicate()
         {
             IUser user = GenerateTestUser();
-            user.AddRole(Roles.Anonymous);
+            user.AddContribution(Contributions.Anonymous);
             userRepository.AddUser(user);
             int expected = userRepository.GetUsers().Count();
 
-            user.RemoveRole(Roles.Anonymous);
+            user.RemoveContribution(Contributions.Anonymous);
             userRepository.UpdateUser(user);
             Assert.IsTrue(expected == userRepository.GetUsers().Count());
         }

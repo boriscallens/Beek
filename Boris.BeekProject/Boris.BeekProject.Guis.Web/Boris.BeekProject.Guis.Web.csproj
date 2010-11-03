@@ -28,6 +28,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <PublishDatabases>false</PublishDatabases>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -37,6 +38,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <PublishDatabases>false</PublishDatabases>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Web.Mvc, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -57,21 +59,28 @@
     <Reference Include="System.Web" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Web.Mvc, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BeekHtmlHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="content\pics\placeholders\coverArt.png" />
     <Content Include="Global.asax" />
     <Content Include="views\account\LogIn.aspx" />
     <Content Include="views\beek\Details.aspx" />
-    <Content Include="views\beek\DisplayTemplates\ViewUserControl1.ascx" />
     <Content Include="views\beek\List.aspx" />
+    <Content Include="views\beek\Single.aspx" />
+    <Content Include="views\beek\Thumb.ascx" />
     <Content Include="views\header\HeaderAnonymous.ascx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
     <Content Include="views\header\HeaderNotAnonymous.ascx" />
     <Content Include="views\search\Beek.aspx" />
+    <Content Include="views\shared\displayTemplates\BaseBeek.ascx" />
+    <Content Include="views\shared\displayTemplates\BeekSearchbag.ascx" />
+    <Content Include="views\shared\editorTemplates\BeekSearchbag.ascx" />
     <Content Include="views\shared\editorTemplates\IsFiction.ascx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -104,9 +113,13 @@
       <Project>{FC249D92-0447-4F58-8C3D-88300058957C}</Project>
       <Name>Boris.BeekProject.Guis.Shared</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Boris.BeekProject.Model\Boris.BeekProject.Model.csproj">
+      <Project>{7A10D58A-1F92-462E-B722-034EF25AE2F3}</Project>
+      <Name>Boris.BeekProject.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="views\shared\displayTemplates\" />
+    <Folder Include="views\beek\DisplayTemplates\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

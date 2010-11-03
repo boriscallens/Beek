@@ -1,8 +1,9 @@
-﻿using System.ComponentModel;
+using System.ComponentModel;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Boris.BeekProject.Model.Beek;
 using Boris.BeekProject.Model.Accounts;
+using Boris.Utils.Mvc.Attributes;
 
 namespace Boris.BeekProject.Guis.Shared.ViewModels{
 
@@ -12,7 +13,8 @@ namespace Boris.BeekProject.Guis.Shared.ViewModels{
         public int? Id { get; set; }
 
         [DisplayName("ISBN")]
-        [RegularExpression(@"ISBN\x20(?=.{13}$)\d{1,5}([- ])\d{1,7}\1\d{1,6}\1(\d|X)$", ErrorMessage = "Please enter a valid ISBN number in the format of 978-0-306-40615-7")]
+        [Isbn(ErrorMessage = "Please enter a valid ISBN number in the format of 978-0-306-40615-7")]
+        //[RegularExpression(@"ISBN\s(?=.{13}$)\d{1,5}([- ])\d{1,7}\1\d{1,6}\1(\d|X)$", ErrorMessage = "Please enter a valid ISBN number in the format of 978-0-306-40615-7")]
         public string Isbn { get; set; }
 
         [Required]
@@ -39,7 +41,7 @@ namespace Boris.BeekProject.Guis.Shared.ViewModels{
         public int TotalVolumes {get; set;}
 
         [ScaffoldColumn(false)]
-        public IEnumerable<KeyValuePair<IUser, Roles>> Involvements { get; set;}
+        public IEnumerable<KeyValuePair<IUser, Contributions>> Involvements { get; set;}
 
         [ScaffoldColumn(false)]
         public IEnumerable<BaseGenre> Genres { get; set; }

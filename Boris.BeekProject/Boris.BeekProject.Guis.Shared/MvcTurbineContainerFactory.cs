@@ -3,7 +3,6 @@ using System.Web;
 using Boris.BeekProject.Model.Accounts;
 using Boris.BeekProject.Model.DataAccess;
 using Boris.BeekProject.Model.DataAccess.Db4o;
-using Boris.BeekProject.Services;
 using Boris.BeekProject.Services.Accounts;
 using Boris.BeekProject.Services.Search;
 using Boris.Utils.IO;

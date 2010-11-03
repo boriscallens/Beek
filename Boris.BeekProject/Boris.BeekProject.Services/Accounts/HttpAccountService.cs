@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Collections.Generic;
 using System.Web;
@@ -21,7 +21,7 @@ namespace Boris.BeekProject.Services.Accounts
             this.context = context;
         }
 
-        public IEnumerable<IUser> CreateUsersInBatch(IEnumerable<string> names, Roles role, Sources source)
+        public IEnumerable<IUser> CreateUsersInBatch(IEnumerable<string> names, Contributions contribution, Sources source)
         {
             var newUsers =
                 names.Where(name => !DoesUserExist(name)).Select(
@@ -29,7 +29,7 @@ namespace Boris.BeekProject.Services.Accounts
             Parallel.ForEach(newUsers, user =>
                                            {
                                                user.Source = source;
-                                               user.AddRole(role);
+                                               user.AddContribution(contribution);
                                            });
             userRepository.AddUsers(newUsers);
             return newUsers;

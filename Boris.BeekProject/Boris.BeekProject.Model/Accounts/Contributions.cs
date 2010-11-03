@@ -1,6 +1,6 @@
 ﻿namespace Boris.BeekProject.Model.Accounts
 {
-    public enum Roles
+    public enum Contributions
     {
         Anonymous,
         Writer,

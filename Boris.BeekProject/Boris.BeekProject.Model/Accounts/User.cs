@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Security.Principal;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ namespace Boris.BeekProject.Model.Accounts
 {
     public class User: IUser
     {
-        private IList<Roles> roles;
+        private IList<Contributions> contributions;
         private string HashedPassword { get; set; }
 
         [Required (ErrorMessage="Id required")]
@@ -23,20 +23,20 @@ namespace Boris.BeekProject.Model.Accounts
         public DateTime? LastLoginAttempt { get; set; }
         public bool IsApproved { get; set; }
         public bool IsLockedOut { get; set; }
-        public IEnumerable<Roles> Roles { get{ return roles;}}
+        public IEnumerable<Contributions> Contributions { get{ return contributions;}}
         public Sources Source { get; set; }
         public bool IsDefault { get; set; }
 
         public bool IsAnonymous { 
             get
             {
-                return IsInRole("Anonymous");
+                return IsContributingAs(Accounts.Contributions.Anonymous);
             }
         }
 
         public User()
         {
-            roles = new List<Roles>{Accounts.Roles.Anonymous};
+            contributions = new List<Contributions>{Accounts.Contributions.Anonymous};
             Salt = GetSalt();
         }
         public User(string userName, string password, string email):this()
@@ -44,39 +44,40 @@ namespace Boris.BeekProject.Model.Accounts
             Name = userName;
             SetPassword(password);
             Email = email;
-            roles.Remove(Accounts.Roles.Anonymous);
+            contributions.Remove(Accounts.Contributions.Anonymous);
         }
 
-        public bool IsInRole (Roles role)
+        public bool IsContributingAs (Contributions contribution)
         {
-            return roles.Contains(role);
+            return contributions.Contains(contribution);
         }
+        // The interface requires me to call it role
         public bool IsInRole (string roleName)
         {
-            return roles.Any(r => r.ToString().Equals(roleName, StringComparison.InvariantCultureIgnoreCase));
+            return contributions.Any(r => r.ToString().Equals(roleName, StringComparison.InvariantCultureIgnoreCase));
         }
-        public void AddRole(Roles role)
+        public void AddContribution(Contributions contribution)
         {
-            lock (roles)
+            lock (contributions)
             {
-                if (!IsInRole(role))
+                if (!IsContributingAs(contribution))
                 {
-                    roles.Add(role);
+                    contributions.Add(contribution);
                 }
             }
         }
-        public void AddRoles (IEnumerable<Roles> newRoles)
+        public void AddContributions (IEnumerable<Contributions> newRoles)
         {
-            lock (roles)
+            lock (contributions)
             {
-                roles = roles.Union(newRoles).ToList();
+                contributions = contributions.Union(newRoles).ToList();
             }
         }
-        public void RemoveRole(Roles role)
+        public void RemoveContribution(Contributions contribution)
         {
-            lock (roles)
+            lock (contributions)
             {
-                roles = roles.Where(r => !r.Equals(role)).ToList();
+                contributions = contributions.Where(r => !r.Equals(contribution)).ToList();
             }
         }
         public void SetPassword(string password)

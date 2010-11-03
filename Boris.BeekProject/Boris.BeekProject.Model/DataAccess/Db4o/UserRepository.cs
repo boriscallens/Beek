@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
@@ -113,7 +113,7 @@ namespace Boris.BeekProject.Model.DataAccess.Db4o
         public IUser CreateAnonymousUser()
         {
             IUser user = new User("Username", "Password", string.Empty);
-            user.AddRole(Roles.Anonymous);
+            user.AddContribution(Contributions.Anonymous);
             user.Id = AddUser(user);
             return user;
         }

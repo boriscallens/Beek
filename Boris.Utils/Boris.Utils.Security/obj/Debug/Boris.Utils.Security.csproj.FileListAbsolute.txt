@@ -1,13 +1,3 @@
-D:\Code\Boris.BeekProject\Boris.Utils.Security\bin\Debug\Boris.Utils.Security.dll
-D:\Code\Boris.BeekProject\Boris.Utils.Security\bin\Debug\Boris.Utils.Security.pdb
-D:\Code\Boris.BeekProject\Boris.Utils.Security\obj\Debug\ResolveAssemblyReference.cache
-D:\Code\Boris.BeekProject\Boris.Utils.Security\obj\Debug\Boris.Utils.Security.dll
-D:\Code\Boris.BeekProject\Boris.Utils.Security\obj\Debug\Boris.Utils.Security.pdb
-D:\Code\Boris.Utils\Boris.Utils.Security\bin\Debug\Boris.Utils.Security.dll
-D:\Code\Boris.Utils\Boris.Utils.Security\bin\Debug\Boris.Utils.Security.pdb
-D:\Code\Boris.Utils\Boris.Utils.Security\obj\Debug\ResolveAssemblyReference.cache
-D:\Code\Boris.Utils\Boris.Utils.Security\obj\Debug\Boris.Utils.Security.dll
-D:\Code\Boris.Utils\Boris.Utils.Security\obj\Debug\Boris.Utils.Security.pdb
 D:\Code\Beek\Boris.Utils\Boris.Utils.Security\bin\Debug\Boris.Utils.Security.dll
 D:\Code\Beek\Boris.Utils\Boris.Utils.Security\bin\Debug\Boris.Utils.Security.pdb
 D:\Code\Beek\Boris.Utils\Boris.Utils.Security\obj\Debug\ResolveAssemblyReference.cache

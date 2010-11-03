@@ -5,10 +5,9 @@ using Boris.Utils.Strings;
 using Boris.BeekProject.Model.Accounts;
 using Boris.BeekProject.Model.Beek;
 using Boris.BeekProject.Model.DataAccess;
-using Boris.BeekProject.Services.Search;
 using Boris.BeekProject.Services.Search.SearchBags;
 
-namespace Boris.BeekProject.Services
+namespace Boris.BeekProject.Services.Search
 {
     public class SearchService: ISearchService
     {
@@ -27,23 +26,57 @@ namespace Boris.BeekProject.Services
         }
         public IEnumerable<BaseBeek> SearchBeek(BeekSearchbag bag)
         {
+            if(!bag.HasValues())
+            {
+                return new List<BaseBeek>();
+            }
+
             var q = beekRepository.GetBeek();
             if(bag.BeekId.HasValue)
             {
                 q = q.Where(b => b.Id.Equals(bag.BeekId));
             }
+
             if (!string.IsNullOrEmpty(bag.BeekTitleStartsWith))
             {
                 q = q.Where(b => b.Title.StartsWith(bag.BeekTitleStartsWith, StringComparison.OrdinalIgnoreCase));
             }
             if (!string.IsNullOrEmpty(bag.BeekTitleEndsWith))
             {
-                q = q.Where(b => b.Title.EndsWith(bag.BeekTitleStartsWith, StringComparison.OrdinalIgnoreCase));
+                q = q.Where(b => b.Title.EndsWith(bag.BeekTitleEndsWith, StringComparison.OrdinalIgnoreCase));
             }
             if(!string.IsNullOrEmpty(bag.BeekTitleContains))
             {
                 q = q.Where(b => b.Title.Contains(bag.BeekTitleContains, StringComparison.OrdinalIgnoreCase));
             }
+
+
+            if(!string.IsNullOrEmpty(bag.IsbnContains))
+            {
+                q = q.Where(b => b.Isbn.Contains(bag.IsbnContains, StringComparison.InvariantCultureIgnoreCase));
+            }
+            if (!string.IsNullOrEmpty(bag.IsbnStartsWith))
+            {
+                q = q.Where(b => b.Isbn.StartsWith(bag.IsbnContains, StringComparison.InvariantCultureIgnoreCase));
+            }
+            if (!string.IsNullOrEmpty(bag.IsbnEndsWith))
+            {
+                q = q.Where(b => b.Isbn.EndsWith(bag.IsbnContains, StringComparison.InvariantCultureIgnoreCase));
+            }
+
+            if(!string.IsNullOrEmpty(bag.AuthorNameContains))
+            {
+                q = q.Where(b => b.GetInvolvedUsersForContribution(Contributions.Writer).Any(u=>u.Name.Contains(bag.AuthorNameContains)));
+            }
+            if (!string.IsNullOrEmpty(bag.AuthorNameEndsWith))
+            {
+                q = q.Where(b => b.GetInvolvedUsersForContribution(Contributions.Writer).Any(u => u.Name.EndsWith(bag.AuthorNameEndsWith)));
+            }
+            if (!string.IsNullOrEmpty(bag.AuthorNameStartsWith))
+            {
+                q = q.Where(b => b.GetInvolvedUsersForContribution(Contributions.Writer).Any(u => u.Name.StartsWith(bag.AuthorNameStartsWith)));
+            }
+
             return q.AsEnumerable();
         }
 

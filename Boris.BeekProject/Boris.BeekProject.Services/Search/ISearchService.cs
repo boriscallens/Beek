@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
 using Boris.BeekProject.Model.Accounts;
 using Boris.BeekProject.Model.Beek;
-using Boris.BeekProject.Services.Search;
 using Boris.BeekProject.Services.Search.SearchBags;
 
-namespace Boris.BeekProject.Services
+namespace Boris.BeekProject.Services.Search
 {
     public interface ISearchService
     {

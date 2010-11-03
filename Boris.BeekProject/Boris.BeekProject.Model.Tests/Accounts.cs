@@ -38,25 +38,25 @@ namespace Boris.BeekProject.Model.Tests
         {
             IUser user = new User();
 
-            Assert.IsFalse(user.IsInRole(Roles.Writer));
-            user.AddRole(Roles.Writer);
-            Assert.IsTrue(user.IsInRole(Roles.Writer));
-            user.AddRole(Roles.Writer);
-            Assert.IsTrue(user.Roles.Where(r => r.Equals(Roles.Writer)).Count() == 1);
-            user.AddRole(Roles.Illustrator);
-            Assert.IsTrue(user.IsInRole(Roles.Writer) && user.IsInRole(Roles.Illustrator));
+            Assert.IsFalse(user.IsContributingAs(Contributions.Writer));
+            user.AddContribution(Contributions.Writer);
+            Assert.IsTrue(user.IsContributingAs(Contributions.Writer));
+            user.AddContribution(Contributions.Writer);
+            Assert.IsTrue(user.Contributions.Where(r => r.Equals(Contributions.Writer)).Count() == 1);
+            user.AddContribution(Contributions.Illustrator);
+            Assert.IsTrue(user.IsContributingAs(Contributions.Writer) && user.IsContributingAs(Contributions.Illustrator));
         }
 
         [TestMethod]
         public void IsInRoleShouldBeTrueWhenInThatRole()
         {
             IUser user = new User();
-            user.AddRole(Roles.Writer);
+            user.AddContribution(Contributions.Writer);
 
-            Assert.IsTrue(user.IsInRole(Roles.Writer));
-            Assert.IsTrue(user.IsInRole(Roles.Writer.ToString()));
-            Assert.IsFalse(user.IsInRole(Roles.Illustrator));
-            Assert.IsFalse(user.IsInRole(Roles.Illustrator.ToString()));
+            Assert.IsTrue(user.IsContributingAs(Contributions.Writer));
+            Assert.IsTrue(user.IsInRole(Contributions.Writer.ToString()));
+            Assert.IsFalse(user.IsContributingAs(Contributions.Illustrator));
+            Assert.IsFalse(user.IsInRole(Contributions.Illustrator.ToString()));
         }
     }
 }

@@ -8,6 +8,7 @@
     <div id="beekNavblock" class="navBlock">
       <span class="navTitle">beek</span>
       <%=Html.ActionLink<SearchController>(a=>a.Beek(), "Search", new{@class="navSubLink"}) %>
+      <%=Html.ActionLink<BeekController>(a=>a.Create(), "Add", new{@class="navSubLink"}) %>
     </div>
     <div id="myStuffNavBlock" class="navBlock">
       <%using (Html.BeginForm<AccountController>(a => a.LogIn(string.Empty, string.Empty, string.Empty), FormMethod.Post, new { id = "navLoginForm", @class="navSubLink"})){%>

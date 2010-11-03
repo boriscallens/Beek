@@ -87,7 +87,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Accounts\Roles.cs" />
+    <Compile Include="Accounts\Contributions.cs" />
     <Compile Include="Beek\BeekCollection.cs" />
     <Compile Include="Beek\Genres\BiographyGenre.cs" />
     <Compile Include="Beek\Genres\AutoBiographyGenre.cs" />

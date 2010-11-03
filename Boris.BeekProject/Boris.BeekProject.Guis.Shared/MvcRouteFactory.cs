@@ -18,21 +18,9 @@ namespace Boris.BeekProject.Guis.Shared
             );
 
             routes.MapRoute(
-                "SearchBeekIndex",
-                "Search/Beek/",
-                new { controller = "Search", action = "Beek"}
-            );
-            routes.MapRoute(
-                "SearchBeekById",
-                "Search/Beek/{id}",
-                new { controller = "Search", action = "BeekById" }
-            );
-
-
-            routes.MapRoute(
                 "Default",                                              // Route name
                 "{controller}/{action}/{id}",                           // URL with parameters
-                new { controller = "Home", action = "Index", id = "" }  // Parameter defaults
+                new { controller = "Home", action = "Index", id = UrlParameter.Optional }  // Parameter defaults
             );
             if (isDebug)
             {

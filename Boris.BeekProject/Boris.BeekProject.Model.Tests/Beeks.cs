@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Collections.Generic;
 using Boris.BeekProject.Model.Beek;
@@ -41,7 +41,7 @@ namespace Boris.BeekProject.Model.Tests
             var users = GenerateUsers().ToList();
             foreach (IUser user in users)
             {
-                user.AddRole(Roles.Writer);
+                user.AddContribution(Contributions.Writer);
             }
             return users;
         }
@@ -60,12 +60,12 @@ namespace Boris.BeekProject.Model.Tests
             BaseBeek story = new BaseBeek(BeekTypes.ShortStory);
             IUser writer = GenerateWriters().First();
 
-            story.InvolveUser(writer, Roles.Writer);
+            story.InvolveUser(writer, Contributions.Writer);
 
-            Assert.IsTrue(story.IsUserInvolvedAs(writer, Roles.Writer));
+            Assert.IsTrue(story.IsUserInvolvedAs(writer, Contributions.Writer));
             // Duplicates should be ignored
-            story.InvolveUser(writer, Roles.Writer);
-            Assert.IsTrue(story.Involvements.Where(i => i.Key.Equals(writer) && i.Value.Equals(Roles.Writer)).Count() == 1);
+            story.InvolveUser(writer, Contributions.Writer);
+            Assert.IsTrue(story.Involvements.Where(i => i.Key.Equals(writer) && i.Value.Equals(Contributions.Writer)).Count() == 1);
         }
 
         [TestMethod]
@@ -74,11 +74,11 @@ namespace Boris.BeekProject.Model.Tests
             BaseBeek story = new BaseBeek(BeekTypes.ShortStory);
             List<IUser> writers = GenerateWriters().ToList();
 
-            story.InvolveUsers(writers, Roles.Writer);
-            CollectionAssert.AreEquivalent(story.GetInvolvedUsersForRole(Roles.Writer).ToArray(), writers.ToArray());
+            story.InvolveUsers(writers, Contributions.Writer);
+            CollectionAssert.AreEquivalent(story.GetInvolvedUsersForContribution(Contributions.Writer).ToArray(), writers.ToArray());
             // Duplicates should be ignored
-            story.InvolveUsers(writers, Roles.Writer);
-            CollectionAssert.AreEquivalent(story.GetInvolvedUsersForRole(Roles.Writer).ToArray(), writers.ToArray());
+            story.InvolveUsers(writers, Contributions.Writer);
+            CollectionAssert.AreEquivalent(story.GetInvolvedUsersForContribution(Contributions.Writer).ToArray(), writers.ToArray());
         }
 
         [TestMethod]
@@ -88,21 +88,21 @@ namespace Boris.BeekProject.Model.Tests
             IUser writer = GenerateWriters().First();
 
             // Removing without adding first should not throw an exception
-            story.DisInvolveUser(writer, Roles.Writer);
+            story.DisInvolveUser(writer, Contributions.Writer);
             // Removing should remove the writer
-            story.InvolveUser(writer, Roles.Writer);
-            story.DisInvolveUser(writer, Roles.Writer);
-            Assert.IsFalse(story.IsUserInvolvedAs(writer, Roles.Writer));
+            story.InvolveUser(writer, Contributions.Writer);
+            story.DisInvolveUser(writer, Contributions.Writer);
+            Assert.IsFalse(story.IsUserInvolvedAs(writer, Contributions.Writer));
             // Removing inexisting writers should not throw an exception
-            story.DisInvolveUser(writer, Roles.Writer);
-            Assert.IsFalse(story.IsUserInvolvedAs(writer, Roles.Writer));
+            story.DisInvolveUser(writer, Contributions.Writer);
+            Assert.IsFalse(story.IsUserInvolvedAs(writer, Contributions.Writer));
             // Removing a user from one role, should not remove him from his other roles
-            writer.AddRole(Roles.Illustrator);
-            story.InvolveUser(writer, Roles.Writer);
-            story.InvolveUser(writer, Roles.Illustrator);
-            story.DisInvolveUser(writer, Roles.Writer);
-            Assert.IsTrue(story.IsUserInvolvedAs(writer, Roles.Illustrator));
-            Assert.IsFalse(story.IsUserInvolvedAs(writer, Roles.Writer));
+            writer.AddContribution(Contributions.Illustrator);
+            story.InvolveUser(writer, Contributions.Writer);
+            story.InvolveUser(writer, Contributions.Illustrator);
+            story.DisInvolveUser(writer, Contributions.Writer);
+            Assert.IsTrue(story.IsUserInvolvedAs(writer, Contributions.Illustrator));
+            Assert.IsFalse(story.IsUserInvolvedAs(writer, Contributions.Writer));
         }
    
         [TestMethod]
@@ -111,8 +111,8 @@ namespace Boris.BeekProject.Model.Tests
         {
             BaseBeek story = new BaseBeek(BeekTypes.ShortStory);
             IUser notWriter = GenerateUsers().First();
-            Assert.IsFalse(notWriter.IsInRole(Roles.Writer));
-            story.InvolveUser(notWriter, Roles.Writer);
+            Assert.IsFalse(notWriter.IsContributingAs(Contributions.Writer));
+            story.InvolveUser(notWriter, Contributions.Writer);
         }
 
         [TestMethod]
