@@ -1,7 +1,7 @@
 ﻿using System.Web.Mvc;
 using Boris.Utils.Logging;
 using Boris.BeekProject.Services.Accounts;
-using Boris.Utils.Mvc.Filters;
+using Boris.Utils.Mvc.Attributes.Filters;
 
 namespace Boris.BeekProject.Guis.Shared.Controllers
 {

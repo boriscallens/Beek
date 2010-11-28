@@ -54,12 +54,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Db4objects.Db4o, Version=7.12.156.14667, Culture=neutral, PublicKeyToken=6199cd4f203aa8eb, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\dependencies\Db4objects.Db4o.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="Db4objects.Db4o.Linq, Version=7.12.156.14667, Culture=neutral, PublicKeyToken=6199cd4f203aa8eb, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\dependencies\Db4objects.Db4o.Linq.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations">
@@ -110,9 +110,6 @@
       <Project>{541CEE5E-8BA8-486E-8FB4-6845543E2298}</Project>
       <Name>Boris.Utils.Security</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">

@@ -1,0 +1,156 @@
+﻿#columnarForm fieldset {
+display:block;
+float:left;
+margin:0 1em 1em 0;
+padding:0 1em 1em;
+width:17em;
+}
+#columnarForm fieldset.radio {
+margin:1em 0 2em;
+width:15em;
+}
+#columnarForm fieldset.radio input {
+clear:both;
+float:left;
+width:auto;
+}
+#columnarForm fieldset.radio label {
+font-weight:normal;
+}
+#columnarForm input {
+display:block;
+width:15em;
+}
+#columnarForm label {
+display:block;
+font-weight:bold;
+margin-bottom:1em;
+}
+#columnarForm label.first {
+padding-top:1em;
+}
+#columnarForm select {
+display:block;
+}
+#horizontalForm fieldset {
+display:block;
+margin:0 0 3em;
+padding:0 1em 1em;
+}
+#horizontalForm fieldset.radio {
+margin:1em 0 2em;
+}
+#horizontalForm fieldset.radio input {
+clear:both;
+float:left;
+width:auto;
+}
+#horizontalForm fieldset.radio label {
+font-weight:normal;
+}
+#horizontalForm input {
+display:block;
+width:15em;
+}
+#horizontalForm input.submit {
+clear:both;
+}
+#horizontalForm label {
+display:block;
+float:left;
+font-weight:bold;
+margin:1em 1em 0 0;
+}
+#horizontalForm select {
+display:block;
+}
+#marginForm fieldset {
+border-color:#000000 #FFFFFF #FFFFFF;
+border-right:0 solid #FFFFFF;
+border-style:solid;
+border-width:1px 0 0;
+display:block;
+margin:0 0 1em;
+padding:0 1em 1em;
+}
+#marginForm fieldset.radio {
+border:0 solid #FFFFFF;
+margin:0 0 0 -1em;
+}
+#marginForm fieldset.radio input {
+clear:both;
+float:left;
+position:static;
+}
+#marginForm fieldset.radio label {
+display:inline;
+font-weight:normal;
+margin:0 0 0 8em;
+position:relative;
+top:-1.25em;
+width:auto;
+}
+#marginForm fieldset.radio legend {
+float:left;
+font-weight:bold;
+}
+#marginForm input {
+display:block;
+left:8em;
+position:relative;
+top:-1.4em;
+}
+#marginForm input.submit {
+clear:both;
+top:0;
+}
+#marginForm label {
+clear:both;
+display:block;
+float:left;
+font-weight:bold;
+margin-top:-1em;
+width:8em;
+}
+#marginForm label.first {
+margin-top:1em;
+}
+#marginForm select {
+display:block;
+left:8em;
+position:relative;
+top:-1.4em;
+}
+#verticalForm fieldset {
+display:block;
+margin:0 0 3em;
+padding:0 1em 1em;
+width:17em;
+}
+#verticalForm fieldset.radio {
+margin:1em 0 2em;
+width:15em;
+}
+#verticalForm fieldset.radio input {
+clear:both;
+float:left;
+width:auto;
+}
+#verticalForm fieldset.radio label {
+font-weight:normal;
+}
+#verticalForm input {
+display:block;
+width:15em;
+}
+#verticalForm label {
+display:block;
+font-weight:bold;
+margin-bottom:1em;
+}
+#verticalForm label.first {
+padding-top:1em;
+}
+#verticalForm select {
+display:block;
+}

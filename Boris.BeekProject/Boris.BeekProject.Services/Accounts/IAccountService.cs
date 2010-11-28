@@ -13,6 +13,7 @@ namespace Boris.BeekProject.Services.Accounts
         IUser GetUser(Guid userId);
         IUser GetUserOrAnonymousUser(string username);
         IUser GetUserOrAnonymousUser(Guid userId);
+        IUser GetOrCreateUserWithContribution(string username, Contributions contribution);
         IUser CreateAnonymousUser();
         void UpdateUser(IUser user);
 

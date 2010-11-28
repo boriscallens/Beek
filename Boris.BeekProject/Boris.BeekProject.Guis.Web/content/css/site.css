@@ -6,7 +6,7 @@
 	width: 100%;
 	height: 100%;
 	background-color: #272222;
-	background-image: url("/content/pics/bgndStripes.png");
+	background-image: url("../../content/pics/bgndStripes.png");
 	font-family: "century gothic";
 }
 #page
@@ -21,7 +21,7 @@
 {
 	height: 150px;
 	background-color: #272222;
-	background-image: url("/content/pics/bgndStripes.png");
+	background-image: url("../../content/pics/bgndStripes.png");
 }
 #header a
 {
@@ -32,7 +32,7 @@
 	width: 150px;
 	height:150px;
 	float: left;
-	background-image: url("/content/pics/logo.jpg");
+	background-image: url("../../content/pics/logo.jpg");
 	border-bottom: 1px solid black;
 }
 #navigation

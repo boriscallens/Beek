@@ -1,4 +1,5 @@
 <%@ Control Language="C#" Inherits="ViewUserControl<HeaderViewData>" %>
+<%@ Import Namespace="Boris.BeekProject.Services.Search.SearchBags" %>
 <div id="header">
   <a href="#" id="logo"></a>
   <div id="navigation" class="<%=ViewData.Model.CurrentNavBlock%>IsActive">
@@ -7,7 +8,7 @@
     </a>
     <div id="beekNavblock" class="navBlock">
       <span class="navTitle">beek</span>
-      <%=Html.ActionLink<SearchController>(a=>a.Beek(), "Search", new{@class="navSubLink"}) %>
+      <%=Html.ActionLink<SearchController>(a=>a.Beek(new BeekSearchbag()), "Search", new{@class="navSubLink"}) %>
       <%=Html.ActionLink<BeekController>(a=>a.Create(), "Add", new{@class="navSubLink"}) %>
     </div>
     <div id="myStuffNavBlock" class="navBlock">
@@ -15,15 +16,15 @@
         <table id="navLoginInputs">
           <tr>
             <td>
-              <input type="text" name="username" value="Username" tabindex="998" id="navLoginUsername"/>
+              <input type="text" name="username" value="Username" tabindex="998" id="navLoginUsername">
             </td>
             <td rowspan="2">
-              <input type="image" value="Log In" src="/content/pics/icons/key.png"/>
+              <input type="image" value="Log In" src="/content/pics/icons/key.png">
             </td>
           </tr>
           <tr>
             <td>
-              <input type="password" name="password" id="loginpassword" value="" tabindex="999" />  
+              <input type="password" name="password" id="loginpassword" value="" tabindex="999">
             </td>
           </tr>
         </table>

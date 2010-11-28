@@ -11,7 +11,7 @@ namespace Boris.Utils.Html.Helpers
     public static class StyleSheetHelper
     {
         private const string styleSheetMask = 
-            @"<link rel='stylesheet' href='/content/css/{0}.css' type='text/css' media='{1}'/>";
+            @"<link rel='stylesheet' href='/content/css/{0}.css' type='text/css' media='{1}'>";
         public static HashSet<string> StyleSheets { get; set; }
         public static void AddStyleSheet(this HtmlHelper html, string sheetName)
         {

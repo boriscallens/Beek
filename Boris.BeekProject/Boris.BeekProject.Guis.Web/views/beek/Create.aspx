@@ -4,14 +4,10 @@
   <h2>Add Beek</h2>
    
   <% using (Html.BeginForm<BeekController>(a=>a.Create(null), FormMethod.Post, new{id="adBeekForm"})) {%>
-      <%= Html.ValidationSummary()%>
-      <fieldset>
-          <legend></legend>
-          <%=Html.EditorFor(m=>Model.Beek) %>
-          <p>
-            <input type="submit" value="Create" />
-          </p>
-      </fieldset>
-
+      <%=Html.ValidationSummary()%>
+      <%=Html.EditorFor(m=>Model.Beek) %>
+      <p>
+        <button type="submit" value="Create">Add</button>
+      </p>
   <% } %>
 </asp:Content>

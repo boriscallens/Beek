@@ -107,5 +107,9 @@ namespace Boris.BeekProject.Model.Accounts
         {
             return Id.GetHashCode();
         }
+        public override string ToString()
+        {
+            return this.Name;
+        }
     }
 }

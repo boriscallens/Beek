@@ -39,15 +39,15 @@ namespace Boris.BeekProject.Services.Search
 
             if (!string.IsNullOrEmpty(bag.BeekTitleStartsWith))
             {
-                q = q.Where(b => b.Title.StartsWith(bag.BeekTitleStartsWith, StringComparison.OrdinalIgnoreCase));
+                q = q.Where(b => b.Title.StartsWith(bag.BeekTitleStartsWith, StringComparison.InvariantCultureIgnoreCase));
             }
             if (!string.IsNullOrEmpty(bag.BeekTitleEndsWith))
             {
-                q = q.Where(b => b.Title.EndsWith(bag.BeekTitleEndsWith, StringComparison.OrdinalIgnoreCase));
+                q = q.Where(b => b.Title.EndsWith(bag.BeekTitleEndsWith, StringComparison.InvariantCultureIgnoreCase));
             }
             if(!string.IsNullOrEmpty(bag.BeekTitleContains))
             {
-                q = q.Where(b => b.Title.Contains(bag.BeekTitleContains, StringComparison.OrdinalIgnoreCase));
+                q = q.Where(b => b.Title.Contains(bag.BeekTitleContains, StringComparison.InvariantCultureIgnoreCase));
             }
 
 
@@ -66,15 +66,15 @@ namespace Boris.BeekProject.Services.Search
 
             if(!string.IsNullOrEmpty(bag.AuthorNameContains))
             {
-                q = q.Where(b => b.GetInvolvedUsersForContribution(Contributions.Writer).Any(u=>u.Name.Contains(bag.AuthorNameContains)));
+                q = q.Where(b => b.GetInvolvedUsersForContribution(Contributions.Writer).Any(u=>u.Name.Contains(bag.AuthorNameContains, StringComparison.InvariantCultureIgnoreCase)));
             }
             if (!string.IsNullOrEmpty(bag.AuthorNameEndsWith))
             {
-                q = q.Where(b => b.GetInvolvedUsersForContribution(Contributions.Writer).Any(u => u.Name.EndsWith(bag.AuthorNameEndsWith)));
+                q = q.Where(b => b.GetInvolvedUsersForContribution(Contributions.Writer).Any(u => u.Name.EndsWith(bag.AuthorNameEndsWith, StringComparison.InvariantCultureIgnoreCase)));
             }
             if (!string.IsNullOrEmpty(bag.AuthorNameStartsWith))
             {
-                q = q.Where(b => b.GetInvolvedUsersForContribution(Contributions.Writer).Any(u => u.Name.StartsWith(bag.AuthorNameStartsWith)));
+                q = q.Where(b => b.GetInvolvedUsersForContribution(Contributions.Writer).Any(u => u.Name.StartsWith(bag.AuthorNameStartsWith, StringComparison.InvariantCultureIgnoreCase)));
             }
 
             return q.AsEnumerable();

@@ -34,6 +34,9 @@ namespace Boris.BeekProject.Services.Accounts
             userRepository.AddUsers(newUsers);
             return newUsers;
         }
+
+
+
         public IUser CreateAnonymousUser()
         {
             return userRepository.CreateAnonymousUser();
@@ -57,6 +60,18 @@ namespace Boris.BeekProject.Services.Accounts
         public IUser GetUserOrAnonymousUser(Guid userId)
         {
             return GetUser(userId) ?? CreateAnonymousUser();
+        }
+        public IUser GetOrCreateUserWithContribution(string username, Contributions contribution)
+        {
+            IUser user = GetUser(username);
+            if(user == null)
+            {
+                user = CreateAnonymousUser();
+                user.Name = username;
+            }
+            user.AddContribution(contribution);
+            userRepository.UpdateUser(user);
+            return user;
         }
         public bool DoesUserExist(string name)
         {

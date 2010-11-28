@@ -7,7 +7,7 @@ using System.Web.Routing;
 using Boris.Utils.Logging;
 using Ninject;
 
-namespace Boris.Utils.Mvc.Filters
+namespace Boris.Utils.Mvc.Attributes.Filters
 {
     public class LoggingFilter : ActionFilterAttribute
     {

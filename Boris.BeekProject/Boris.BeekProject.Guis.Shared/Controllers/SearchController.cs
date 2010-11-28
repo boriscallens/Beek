@@ -1,9 +1,9 @@
-using System.Collections.Specialized;
 using System.Linq;
 using System.Web.Mvc;
-using Boris.BeekProject.Guis.Shared.Attributes;
-using Boris.BeekProject.Guis.Shared.ViewData;
+using System.Collections.Specialized;
 using Boris.BeekProject.Services.Search;
+using Boris.BeekProject.Guis.Shared.ViewData;
+using Boris.BeekProject.Guis.Shared.Attributes;
 using Boris.BeekProject.Services.Search.SearchBags;
 
 namespace Boris.BeekProject.Guis.Shared.Controllers
@@ -27,9 +27,9 @@ namespace Boris.BeekProject.Guis.Shared.Controllers
         }
 
         // GET: /Search/Beek
-        public ActionResult Beek()
+        public ActionResult Beek(BeekSearchbag searchbag)
         {
-            ViewData.UsedBeekSearchBag = (TempData["beekSearchBag"] as BeekSearchbag)??GetBeekSearchBag(Request.QueryString);
+            ViewData.UsedBeekSearchBag = searchbag ?? new BeekSearchbag();
             ViewData.FoundBeek = searchService.SearchBeek(ViewData.UsedBeekSearchBag, 0, 20).ToList();
             
             return View("Beek", ViewData);
@@ -37,10 +37,9 @@ namespace Boris.BeekProject.Guis.Shared.Controllers
 
         // POST: /Search/Beek + all kinds of things
         [HttpPost]
-        public ActionResult ProcessBeek(BeekSearchbag beekSearchBag)
+        public ActionResult ProcessBeek(BeekSearchbag searchBag)
         {
-            TempData["beekSearchBag"] = beekSearchBag;
-            return RedirectToAction("Beek");
+            return RedirectToAction("Beek", searchBag);
         }
 
         private static BeekSearchbag GetBeekSearchBag(NameValueCollection queryString)
@@ -52,16 +51,5 @@ namespace Boris.BeekProject.Guis.Shared.Controllers
             }
             return bag;
         }
-
-        //// GET: /Beek/Search?name=1984&author=george+orwell
-        //public ActionResult Search(BeekSearchbag bag, int skip, int take)
-        //{
-        //    ViewData.FoundBeek = searchService.SearchBeek(bag, skip, take);
-        //    if (ViewData.FoundBeek.Any())
-        //    {
-        //        return View(ViewData);
-        //    }
-        //    return View("noBeekFound", ViewData);
-        //}
     }
 }

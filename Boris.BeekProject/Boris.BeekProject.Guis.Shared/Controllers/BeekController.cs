@@ -4,9 +4,11 @@ using AutoMapper;
 using Boris.BeekProject.Guis.Shared.Attributes;
 using Boris.BeekProject.Guis.Shared.ViewData;
 using Boris.BeekProject.Guis.Shared.ViewModels;
+using Boris.BeekProject.Model.Accounts;
 using Boris.BeekProject.Model.Beek;
 using Boris.BeekProject.Model.DataAccess;
 using System.Linq;
+using Boris.BeekProject.Services.Accounts;
 using BeekTypes = Boris.BeekProject.Model.Beek.BeekTypes;
 
 namespace Boris.BeekProject.Guis.Shared.Controllers
@@ -15,11 +17,14 @@ namespace Boris.BeekProject.Guis.Shared.Controllers
     public class BeekController : BaseBeekController
     {
         private readonly IBeekRepository beekRepository;
+        private readonly IAccountService accountService;
+
         private new BeekViewData ViewData { get { return (BeekViewData)base.ViewData; } set { base.ViewData = value; } }
 
-        public BeekController(IBeekRepository beekRepository) 
+        public BeekController(IBeekRepository beekRepository, IAccountService accountService) 
         {
             this.beekRepository = beekRepository;
+            this.accountService = accountService;
             ViewData = new BeekViewData();
         }
 
@@ -46,6 +51,12 @@ namespace Boris.BeekProject.Guis.Shared.Controllers
             newBeek.Title = beek.Title.Trim();
             newBeek.Isbn = (beek.Isbn??"").Trim().ToUpper();
             newBeek.IsFiction = beek.IsFiction;
+
+            if (!string.IsNullOrEmpty(beek.Author))
+            {
+                IUser author = accountService.GetOrCreateUserWithContribution(beek.Author, Contributions.Writer);
+                newBeek.InvolveUser(author, Contributions.Writer);
+            }
 
             try
             {
@@ -95,6 +106,7 @@ namespace Boris.BeekProject.Guis.Shared.Controllers
         public ActionResult Thumb(int id)
         {
             ViewData.Beek = Mapper.Map<BaseBeek, ViewBeek>(beekRepository.GetBeek().Where(b => b.Id == id).SingleOrDefault());
+            ViewData.Beek.CoverArtPath = "/content/pics/placeholders/coverArt.png";
             return View(ViewData);
         }
     }

@@ -1,4 +1,6 @@
-﻿using Boris.BeekProject.Guis.Shared.ViewModels;
+﻿using System.Linq;
+using System.Web.Mvc;
+using Boris.BeekProject.Guis.Shared.ViewModels;
 using Boris.BeekProject.Model.Accounts;
 using Boris.BeekProject.Model.Beek;
 using MvcTurbine.ComponentModel;
@@ -21,15 +23,21 @@ namespace Boris.BeekProject.Guis.Shared
             provider = new NinjectServiceLocator(ninjectKernel);
 
             ServiceLocatorManager.SetLocatorProvider(() => provider);
-            //ModelBinders.Binders.Add(typeof(BaseBeek), new BaseBeekModelBinder(ServiceLocatorManager.Current.Resolve<IBeekRepository>()));
+            
 
             CreateDTOMappings();
         }
-
         private static void CreateDTOMappings()
         {
             Mapper.CreateMap<BaseBeek, ViewBeek>();
             Mapper.CreateMap<ViewBeek, BaseBeek>();
+            Mapper.CreateMap<BaseBeek, ViewBeek>()
+                .ForMember(
+                    v => v.Author,
+                    b => b.MapFrom(
+                        v => v.GetInvolvedUsersForContribution(Contributions.Writer)
+                            .FirstOrDefault())
+                );
             Mapper.CreateMap<IUser, ViewUser>();
         }
     }

@@ -39,6 +39,8 @@
     <WarningLevel>4</WarningLevel>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <PublishDatabases>false</PublishDatabases>
+    <FilesToIncludeForPublish>OnlyFilesToRunTheApp</FilesToIncludeForPublish>
+    <ExcludeGeneratedDebugSymbol>true</ExcludeGeneratedDebugSymbol>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Web.Mvc, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -66,6 +68,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="content\css\beek.css" />
+    <Content Include="content\css\search.css" />
+    <Content Include="content\css\forms.css" />
     <Content Include="content\pics\placeholders\coverArt.png" />
     <Content Include="Global.asax" />
     <Content Include="views\account\LogIn.aspx" />
@@ -78,10 +83,10 @@
     </Content>
     <Content Include="views\header\HeaderNotAnonymous.ascx" />
     <Content Include="views\search\Beek.aspx" />
-    <Content Include="views\shared\displayTemplates\BaseBeek.ascx" />
-    <Content Include="views\shared\displayTemplates\BeekSearchbag.ascx" />
-    <Content Include="views\shared\editorTemplates\BeekSearchbag.ascx" />
-    <Content Include="views\shared\editorTemplates\IsFiction.ascx" />
+    <Content Include="views\Shared\DisplayTemplates\BaseBeek.ascx" />
+    <Content Include="views\Shared\DisplayTemplates\BeekSearchbag.ascx" />
+    <Content Include="views\Shared\EditorTemplates\BeekSearchbag.ascx" />
+    <Content Include="views\Shared\EditorTemplates\IsFiction.ascx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -101,8 +106,8 @@
     <Content Include="views\beek\Create.aspx" />
     <Content Include="views\home\Index.aspx" />
     <Content Include="views\search\Search.aspx" />
-    <Content Include="views\shared\editorTemplates\BeekTypes.ascx" />
-    <Content Include="views\shared\Site.Master" />
+    <Content Include="views\Shared\EditorTemplates\BeekTypes.ascx" />
+    <Content Include="views\Shared\Site.Master" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Boris.Utils\Boris.Utils.Html\Boris.Utils.Html.csproj">
@@ -135,7 +140,7 @@
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
-          <AutoAssignPort>False</AutoAssignPort>
+          <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>1234</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
