@@ -19,3 +19,7 @@
     <%}%>
     </div>
 </asp:Content>
+
+<asp:Content ContentPlaceHolderID="Js" runat="server">
+  <%=Html.PrintScript("search")%>
+</asp:Content>

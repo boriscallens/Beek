@@ -1,8 +1,8 @@
-﻿$(function() {
-    
-    $('#titleStartsWith').keyup(function(event) {
-        $.idle(function() {
-            jQuery.getJSON("test", ($('#titleStartsWith').val());
-        }, 700);
+﻿$(document).ready(function () {
+    $("#BeekTitleContains").autocomplete({
+        source: "/Search/TitleNames/"
+    });
+    $("#AuthorNameContains").autocomplete({
+        source: "/Search/AuthorNames/"
     });
 });

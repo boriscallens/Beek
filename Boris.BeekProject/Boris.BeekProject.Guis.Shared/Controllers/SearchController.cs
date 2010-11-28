@@ -1,6 +1,8 @@
 using System.Linq;
 using System.Web.Mvc;
-using System.Collections.Specialized;
+using System.Collections.Generic;
+using Boris.BeekProject.Model.Accounts;
+using Boris.BeekProject.Model.Beek;
 using Boris.BeekProject.Services.Search;
 using Boris.BeekProject.Guis.Shared.ViewData;
 using Boris.BeekProject.Guis.Shared.Attributes;
@@ -42,14 +44,19 @@ namespace Boris.BeekProject.Guis.Shared.Controllers
             return RedirectToAction("Beek", searchBag);
         }
 
-        private static BeekSearchbag GetBeekSearchBag(NameValueCollection queryString)
+        public JsonResult TitleNames(string term) //variable name dedicated by jquery UI lib
         {
-            BeekSearchbag bag = new BeekSearchbag();
-            if(queryString.AllKeys.Contains("isbn"))
-            {
-                bag.IsbnContains = queryString["isbn"];
-            }
-            return bag;
+            BeekSearchbag searchbag = new BeekSearchbag { BeekTitleContains = term.Trim() };
+            IEnumerable<BaseBeek> beek = searchService.SearchBeek(searchbag);
+            //No sensitive data is returned so we can safely allow GET: http://haacked.com/archive/2009/06/25/json-hijacking.aspx
+            return Json(beek.Select(u => u.Title), JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult AuthorNames(string term) //variable name dedicated by jquery UI lib
+        {
+            UserSearchbag searchbag = new UserSearchbag{UserNameContains = term.Trim()};
+            IEnumerable<IUser> users = searchService.SearchUsers(searchbag);
+            //No sensitive data is returned so we can safely allow GET: http://haacked.com/archive/2009/06/25/json-hijacking.aspx
+            return Json(users.Select(u=>u.Name), JsonRequestBehavior.AllowGet);
         }
     }
 }

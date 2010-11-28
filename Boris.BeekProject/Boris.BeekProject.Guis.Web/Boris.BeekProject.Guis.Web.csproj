@@ -71,6 +71,7 @@
     <Content Include="content\css\beek.css" />
     <Content Include="content\css\search.css" />
     <Content Include="content\css\forms.css" />
+    <Content Include="content\js\search.js" />
     <Content Include="content\pics\placeholders\coverArt.png" />
     <Content Include="Global.asax" />
     <Content Include="views\account\LogIn.aspx" />
