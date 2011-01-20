@@ -5,13 +5,13 @@ using System.Web.Mvc;
 using System.ComponentModel;
 using System.Collections.Generic;
 
-
 namespace Boris.Utils.Html.Helpers
 {
     public static class StyleSheetHelper
     {
-        private const string styleSheetMask = 
-            @"<link rel='stylesheet' href='/content/css/{0}.css' type='text/css' media='{1}'>";
+        private const string styleSheetMask = @"<link rel='stylesheet' href='{0}' type='text/css' media='{1}'>";
+        private const string hrefMask = "~/content/css/{0}.css";
+
         public static HashSet<string> StyleSheets { get; set; }
         public static void AddStyleSheet(this HtmlHelper html, string sheetName)
         {
@@ -23,7 +23,8 @@ namespace Boris.Utils.Html.Helpers
         }
         public static string PrintStyleSheet(this HtmlHelper html, string styleSheetName)
         {
-            return string.Format(styleSheetMask, styleSheetName, "all");
+            var href = string.Format(UrlHelper.GenerateContentUrl(hrefMask, html.ViewContext.HttpContext), styleSheetName);
+            return string.Format(styleSheetMask, href, "all");
         }
         public static string OutputStyleSheet(this HtmlHelper html)
         {
@@ -84,7 +85,9 @@ namespace Boris.Utils.Html.Helpers
 
     public static class ScriptHelper
     {
-        private const string scriptMask = @"<script src='/content/js/{0}.js' type='{1}'></script>";
+        private const string scriptMask = @"<script src='{0}' type='{1}'></script>";
+        private const string hrefMask = "~/content/js/{0}.js";
+
         public static HashSet<string> Scripts { get; set; }
         public static void AddScript(string scriptName)
         {
@@ -96,7 +99,8 @@ namespace Boris.Utils.Html.Helpers
         }
         public static string PrintScript(this HtmlHelper html, string scriptName)
         {
-            return string.Format(scriptMask, scriptName, "text/javascript");
+            var href = String.Format(hrefMask, scriptName);
+            return string.Format(scriptMask, href, "text/javascript");
         }
         public static string OutputScripts()
         {

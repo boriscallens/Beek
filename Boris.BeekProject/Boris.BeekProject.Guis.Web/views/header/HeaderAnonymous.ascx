@@ -19,7 +19,7 @@
               <input type="text" name="username" value="Username" tabindex="998" id="navLoginUsername">
             </td>
             <td rowspan="2">
-              <input type="image" value="Log In" src="/content/pics/icons/key.png">
+              <input type="image" value="Log In" src="<%=Url.Content("~/content/pics/icons/key.png") %>">
             </td>
           </tr>
           <tr>
@@ -33,4 +33,3 @@
     </div>
   </div>
 </div>
-
