@@ -5,13 +5,13 @@
   <div id="navigation" class="<%=ViewData.Model.CurrentNavBlock%>IsActive">
 
     <div id="homeNavBlock" class="navBlock">
-      <a href="<%=Request.ApplicationPath%>" class="navTitle">home</a>
+      <a href="<%=Url.Action("Index", "Home")%>" class="navTitle">home</a>
     </div>
 
     <div id="beekNavblock" class="navBlock">
-      <a href="#" class="navTitle">beek</a>
-      <%=Html.ActionLink<SearchController>(a=>a.Beek(new BeekSearchbag()), "Search", new{@class="navSubLink"}) %>
-      <%=Html.ActionLink<BeekController>(a=>a.Create(), "Add", new{@class="navSubLink"}) %>
+      <a href="<%=Url.Action("Index", "Search")%>" class="navTitle">beek</a>
+      <a href="<%=Url.Action("Index", "Search")%>" class="navSubLink">Search</a>
+      <a href="<%=Url.Action("Create", "Beek")%>" class="navSubLink">Add</a>
     </div>
 
     <div id="myStuffNavBlock" class="navBlock">

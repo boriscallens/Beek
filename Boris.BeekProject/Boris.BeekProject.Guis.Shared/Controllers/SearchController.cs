@@ -25,7 +25,7 @@ namespace Boris.BeekProject.Guis.Shared.Controllers
         // GET: /Search
         public ActionResult Index()
         {
-            return View("Search", ViewData);
+            return View("Beek", ViewData);
         }
 
         // GET: /Search/Beek
