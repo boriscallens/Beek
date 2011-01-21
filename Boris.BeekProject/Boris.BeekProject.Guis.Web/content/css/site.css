@@ -9,6 +9,8 @@
 	background-image: url("../../content/pics/bgndStripes.png");
 	font-family: "century gothic";
 }
+a{ font-size: small; }
+a:hover { color: #E70505; }
 #page
 {
 	width: 780px;
@@ -45,99 +47,7 @@
 	z-index: -1;
 	border-bottom: 1px solid black;
 }
-.HomeIsActive #homeNavBlock
-{
-	background-color: #E70505;
-	height: 141px;
-}
-.HomeIsActive #homeNavBlock .navTitle
-{
-	color: White;
-}
-.HomeIsActive #homeNavBlock .navTitle:hover, .navSubLink:hover
-{
-	color: Black;
-}
 
-.BeekIsActive #beekNavblock
-{
-	background-color: #E70505;
-	height: 141px;
-}
-.BeekIsActive #beekNavblock .navTitle
-{
-	color: White;
-}
-.BeekIsActive #beekNavblock .navTitle:hover, .navSubLink:hover
-{
-	color: Black;
-}
-
-.MyStuffIsActive #myStuffNavBlock
-{
-	background-color: #E70505;
-	height: 141px;
-}
-.MyStuffIsActive #myStuffNavBlock .navTitle
-{
-	color: White;
-}
-.MyStuffIsActive #myStuffNavBlock .navTitle:hover, .navSubLink:hover
-{
-	color: Black;
-}
-
-/* Because the navblocks' width is in %, we get a rounding error so the total != 100%       */
-/* All browsers have a different way of handling this error so we cheat our way out         */
-/* by making the background the same color as the foreground, when the last box is selected */
-.myStuffIsActive
-{
-	background-color: #E70505;
-}
-.MyStuffIsActive #myStuffNavBlock
-{
-	background-color: #E70505;
-	height: 141px;
-}
-.MyStuffIsActive #myStuffNavBlock .navTitle
-{
-	color: White;
-}
-.MyStuffIsActive #myStuffNavBlock .navTitle:hover, .navSubLink:hover
-{
-	color: Black;
-}
-
-.navBlock
-{
-	float: left;
-	height: 140px;
-	width: 33%;
-	border-left: 1px solid black;
-	background-color: White;
-}
-.navTitle
-{
-	display: block;	
-	margin: 5px auto 5px auto;
-	text-align: center;
-	
-	font: 2em black;
-	font-variant: small-caps;
-	color: Black;	
-}
-.navSubLink
-{
-	display: block;
-	display: block;	
-	margin: 5px auto 5px auto;
-	text-align: center;
-	color: Black;
-}
-.navSubLink:hover,.navTitle:hover
-{
-	color: Red;
-}
 /************navLogin***********************/
 #navLoginForm
 {
@@ -155,11 +65,55 @@
 	float: right;
 	width: 32px;
 }
+.navBlock
+{
+	float: left;
+	height: 140px;
+	width: 33%;
+	border-left: 1px solid black;
+	background-color: White;
+}
+.navTitle, .navSubLink
+{
+	display: block;
+	margin: 5px auto 5px auto;
+	text-align: center;	
+	color: Black;
+}
+.navTitle
+{
+	font: 2.5em black;
+	font-variant: small-caps;
+}
+.HomeIsActive #homeNavBlock,
+.BeekIsActive #beekNavblock,
+.MyStuffIsActive #myStuffNavBlock
+{
+	background-color: #E70505; /* Make it red */
+	height: 141px; /* No bottom border and make the background run down to the content block*/
+}
 
+.HomeIsActive #homeNavBlock .navTitle,
+.BeekIsActive #beekNavblock .navTitle,
+.MyStuffIsActive #myStuffNavBlock .navTitle
+{
+	color: white;	
+}
+.HomeIsActive #homeNavBlock .navTitle:hover,
+.BeekIsActive #beekNavblock .navTitle:hover,
+.MyStuffIsActive #myStuffNavBlock .navTitle:hover
+{
+	color: Black;
+}
+.HomeIsActive #homeNavBlock .navSubLink:hover,
+.BeekIsActive #beekNavblock .navSubLink:hover,
+.MyStuffIsActive #myStuffNavBlock .navSubLink:hover
+{
+	color:White;
+}
 /************CONTENT****************************/
 #content
 {
-	/*margin-top: -1500px;*/
 	padding: 0px 10px 10px 10px;
 	background-color: White;
 }

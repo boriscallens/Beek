@@ -3,14 +3,17 @@
 <div id="header">
   <a href="#" id="logo"></a>
   <div id="navigation" class="<%=ViewData.Model.CurrentNavBlock%>IsActive">
-    <a href="/" id="homeNavBlock" class="navBlock">          
-      <span class="navTitle">home</span>    
-    </a>
+
+    <div id="homeNavBlock" class="navBlock">
+      <a href="<%=Request.ApplicationPath%>" class="navTitle">home</a>
+    </div>
+
     <div id="beekNavblock" class="navBlock">
-      <span class="navTitle">beek</span>
+      <a href="#" class="navTitle">beek</a>
       <%=Html.ActionLink<SearchController>(a=>a.Beek(new BeekSearchbag()), "Search", new{@class="navSubLink"}) %>
       <%=Html.ActionLink<BeekController>(a=>a.Create(), "Add", new{@class="navSubLink"}) %>
     </div>
+
     <div id="myStuffNavBlock" class="navBlock">
       <%using (Html.BeginForm<AccountController>(a => a.LogIn(string.Empty, string.Empty, string.Empty), FormMethod.Post, new { id = "navLoginForm", @class="navSubLink"})){%>
         <table id="navLoginInputs">

@@ -7,7 +7,7 @@
 </asp:Content>
 
 <asp:Content ContentPlaceHolderID="Main" runat="server">
-  <form action="/Search/ProcessBeek" method="post" id="searchBeekForm">
+  <form action="<%=Url.Action("ProcessBeek")%>" method="post" id="searchBeekForm">
     <%=Html.EditorFor(m => m.UsedBeekSearchBag) %>
     <p>
       <input type="submit" name="submit" value="Search" />

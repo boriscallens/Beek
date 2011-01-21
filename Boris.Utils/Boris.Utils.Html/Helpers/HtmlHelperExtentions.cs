@@ -99,7 +99,7 @@ namespace Boris.Utils.Html.Helpers
         }
         public static string PrintScript(this HtmlHelper html, string scriptName)
         {
-            var href = String.Format(hrefMask, scriptName);
+            var href = String.Format(UrlHelper.GenerateContentUrl(hrefMask, html.ViewContext.HttpContext), scriptName);
             return string.Format(scriptMask, href, "text/javascript");
         }
         public static string OutputScripts()

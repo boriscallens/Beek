@@ -1,14 +1,14 @@
 using System;
+using System.Linq;
 using System.Web.Mvc;
 using AutoMapper;
-using Boris.BeekProject.Guis.Shared.Attributes;
-using Boris.BeekProject.Guis.Shared.ViewData;
-using Boris.BeekProject.Guis.Shared.ViewModels;
-using Boris.BeekProject.Model.Accounts;
 using Boris.BeekProject.Model.Beek;
+using Boris.BeekProject.Model.Accounts;
 using Boris.BeekProject.Model.DataAccess;
-using System.Linq;
 using Boris.BeekProject.Services.Accounts;
+using Boris.BeekProject.Guis.Shared.ViewData;
+using Boris.BeekProject.Guis.Shared.Attributes;
+using Boris.BeekProject.Guis.Shared.ViewModels;
 using BeekTypes = Boris.BeekProject.Model.Beek.BeekTypes;
 
 namespace Boris.BeekProject.Guis.Shared.Controllers
@@ -106,7 +106,7 @@ namespace Boris.BeekProject.Guis.Shared.Controllers
         public ActionResult Thumb(int id)
         {
             ViewData.Beek = Mapper.Map<BaseBeek, ViewBeek>(beekRepository.GetBeek().Where(b => b.Id == id).SingleOrDefault());
-            ViewData.Beek.CoverArtPath = "/content/pics/placeholders/coverArt.png";
+            ViewData.Beek.CoverArtPath = Url.Content("~/content/pics/placeholders/coverArt.png");
             return View(ViewData);
         }
     }
