@@ -19,7 +19,7 @@ namespace Boris.BeekProject.Model.DataAccess.Db4o
         private Db4oBeekRepository (string db4oFilePath) 
         {
             FileInfo file = new FileInfo(db4oFilePath);
-            if (file.Directory != null && !file.Directory.Exists)
+            if (!file.Directory.Exists)
             {
                 file.Directory.Create();
             }
@@ -93,6 +93,11 @@ namespace Boris.BeekProject.Model.DataAccess.Db4o
         {
             return client.Cast<BaseBeek>().AsQueryable();
         }
+        public BaseBeek GetBeekById(int id)
+        {
+            return GetBeek().Where(b => b.Id.Equals(id)).FirstOrDefault();
+        }
+
         public int AddBeek (BaseBeek beek)
         {
             lock (beekLock)

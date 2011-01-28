@@ -5,6 +5,7 @@
   <div class="beekThumbInfo">
     <div class="title"><%=Model.Beek.Title%></div>
     <div class="author">by <%=Model.Beek.Author%></div>
-    <a href="#" title="edit">edit</a>
+    <a href="<%=Url.Action("Edit", "Beek", new{id=Model.Beek.Id})%>" title="edit">edit</a>
   </div>
+  <br class="clearBoth" />
 </div>

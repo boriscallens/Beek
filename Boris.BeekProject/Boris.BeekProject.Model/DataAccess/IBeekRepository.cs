@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using Boris.BeekProject.Model.Beek;
 
 namespace Boris.BeekProject.Model.DataAccess
@@ -16,6 +16,7 @@ namespace Boris.BeekProject.Model.DataAccess
         void UpdateWritingStyle(WritingStyle w);
 
         IQueryable<BaseBeek> GetBeek();
+        BaseBeek GetBeekById(int id);
         int AddBeek(BaseBeek b);
         void RemoveBeek(BaseBeek b);
         void UpdateBeek(BaseBeek b);

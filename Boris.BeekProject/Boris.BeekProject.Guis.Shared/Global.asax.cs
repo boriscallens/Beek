@@ -1,14 +1,13 @@
 ﻿using System.Linq;
-using System.Web.Mvc;
-using Boris.BeekProject.Guis.Shared.ViewModels;
-using Boris.BeekProject.Model.Accounts;
-using Boris.BeekProject.Model.Beek;
-using MvcTurbine.ComponentModel;
-using MvcTurbine.Ninject;
-using MvcTurbine.Web;
-using AutoMapper;
 using Ninject;
-
+using AutoMapper;
+using MvcTurbine.Web;
+using MvcTurbine.Ninject;
+using MvcTurbine.ComponentModel;
+using Boris.BeekProject.Model.Beek;
+using Boris.BeekProject.Model.Accounts;
+using Boris.BeekProject.Guis.Shared.ViewModels;
+using BeekTypes = Boris.BeekProject.Model.Beek.BeekTypes;
 
 namespace Boris.BeekProject.Guis.Shared
 {
@@ -24,13 +23,13 @@ namespace Boris.BeekProject.Guis.Shared
 
             ServiceLocatorManager.SetLocatorProvider(() => provider);
             
-
             CreateDTOMappings();
         }
         private static void CreateDTOMappings()
         {
             Mapper.CreateMap<BaseBeek, ViewBeek>();
-            Mapper.CreateMap<ViewBeek, BaseBeek>();
+            Mapper.CreateMap<ViewBeek, BaseBeek>()
+                .ConstructUsing(x => new BaseBeek((BeekTypes) x.Type)); ;
             Mapper.CreateMap<BaseBeek, ViewBeek>()
                 .ForMember(
                     v => v.Author,

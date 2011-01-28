@@ -9,7 +9,7 @@
 	float: left;
 	margin-right: 5px;
 }
-.beekThumb.beekThumbInfo
+.beekThumb .beekThumbInfo
 {
 	float :left;
 }
@@ -21,6 +21,12 @@
 .beekThumb .author
 {
 	font-size: small;
+}
+
+/*Ad Beek*/
+#adBeekForm
+{
+	padding: 1em 0;
 }
 
 /* Detail */

@@ -1,9 +1,12 @@
 ﻿$(document).ready(function () {
     $("#BeekTitleContains").autocomplete({
-        source: "/Search/TitleNames/"
+        source: ResolveUrl("/Search/TitleNames")
     });
     $("#AuthorNameContains").autocomplete({
-        source: "/Search/AuthorNames/"
+        source: ResolveUrl("/Search/AuthorNames/")
     });
 });
 
+function ResolveUrl(url) {
+    return ($('#applicationRoot').text() + url).replace("//", "/");
+}

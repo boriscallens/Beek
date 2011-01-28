@@ -49,14 +49,14 @@ namespace Boris.BeekProject.Guis.Shared.Controllers
             BeekSearchbag searchbag = new BeekSearchbag { BeekTitleContains = term.Trim() };
             IEnumerable<BaseBeek> beek = searchService.SearchBeek(searchbag);
             //No sensitive data is returned so we can safely allow GET: http://haacked.com/archive/2009/06/25/json-hijacking.aspx
-            return Json(beek.Select(u => u.Title), JsonRequestBehavior.AllowGet);
+            return Json(beek.Select(u => u.Title).Distinct(), JsonRequestBehavior.AllowGet);
         }
         public JsonResult AuthorNames(string term) //variable name dedicated by jquery UI lib
         {
             UserSearchbag searchbag = new UserSearchbag{UserNameContains = term.Trim()};
             IEnumerable<IUser> users = searchService.SearchUsers(searchbag);
             //No sensitive data is returned so we can safely allow GET: http://haacked.com/archive/2009/06/25/json-hijacking.aspx
-            return Json(users.Select(u=>u.Name), JsonRequestBehavior.AllowGet);
+            return Json(users.Select(u=>u.Name).Distinct(), JsonRequestBehavior.AllowGet);
         }
     }
 }

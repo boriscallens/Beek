@@ -77,6 +77,7 @@
     <Content Include="content\pics\placeholders\coverArt.png" />
     <Content Include="Global.asax" />
     <Content Include="views\account\LogIn.aspx" />
+    <Content Include="views\beek\Edit.aspx" />
     <Content Include="views\beek\Details.aspx" />
     <Content Include="views\beek\List.aspx" />
     <Content Include="views\beek\Single.aspx" />
@@ -89,6 +90,7 @@
     <Content Include="views\Shared\DisplayTemplates\BaseBeek.ascx" />
     <Content Include="views\Shared\DisplayTemplates\BeekSearchbag.ascx" />
     <Content Include="views\Shared\EditorTemplates\BeekSearchbag.ascx" />
+    <Content Include="views\Shared\EditorTemplates\ViewBeek.ascx" />
     <Content Include="views\Shared\EditorTemplates\IsFiction.ascx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

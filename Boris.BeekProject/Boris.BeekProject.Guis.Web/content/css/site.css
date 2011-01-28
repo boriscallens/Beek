@@ -18,6 +18,10 @@ a:hover { color: #E70505; }
 	margin: 0 auto 0px auto;
 	background-color: White;
 }
+.clearBoth
+{
+	clear: both;
+}
 /***********HEADER****************/
 #header
 {

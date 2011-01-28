@@ -31,7 +31,7 @@ namespace Boris.BeekProject.Guis.Shared.Controllers
         // GET: /Beek/Details/5
         public ActionResult Details(int id)
         {
-            ViewData.Beek = Mapper.Map<BaseBeek, ViewBeek>(beekRepository.GetBeek().Where(b => b.Id == id).SingleOrDefault());
+            ViewData.Beek = Mapper.Map<BaseBeek, ViewBeek>(beekRepository.GetBeekById(id));
             return View(ViewData);
         }
 
@@ -75,19 +75,19 @@ namespace Boris.BeekProject.Guis.Shared.Controllers
             ViewData.Beek = Mapper.Map<BaseBeek, ViewBeek>(beekRepository.GetBeek().Where(b => b.Id == id).SingleOrDefault());
             return View(ViewData);
         }
-        // POST: /Beek/Edit/5
+        // POST: /Beek/Edit/
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult Edit(BaseBeek updatedBeek)
+        public ActionResult Edit(ViewBeek beek)
         {
-            try
+            if(beek.Id.HasValue)
             {
-                beekRepository.UpdateBeek(updatedBeek);
-                return RedirectToAction("Details", new{id = updatedBeek.Id});
+                BaseBeek originalBeek = beekRepository.GetBeekById(beek.Id.Value);
+                originalBeek.Title = beek.Title;
+                //BaseBeek updatedBeek = Mapper.Map<ViewBeek, BaseBeek>(beek);
+                beekRepository.UpdateBeek(originalBeek);
+                return RedirectToAction("Details", new {id = beek.Id});
             }
-            catch
-            {
-                return View("Edit", new { id = updatedBeek.Id });
-            }
+            throw new ArgumentException("Couldn't find beek");
         }
     
         // GET: /Beek/Latest/20
@@ -105,7 +105,7 @@ namespace Boris.BeekProject.Guis.Shared.Controllers
         // GET: /Beek/Thumb/20
         public ActionResult Thumb(int id)
         {
-            ViewData.Beek = Mapper.Map<BaseBeek, ViewBeek>(beekRepository.GetBeek().Where(b => b.Id == id).SingleOrDefault());
+            ViewData.Beek = Mapper.Map<BaseBeek, ViewBeek>(beekRepository.GetBeekById(id));
             ViewData.Beek.CoverArtPath = Url.Content("~/content/pics/placeholders/coverArt.png");
             return View(ViewData);
         }
