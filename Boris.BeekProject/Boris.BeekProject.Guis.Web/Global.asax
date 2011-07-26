@@ -1,1 +1,1 @@
-﻿<%@ Application Inherits="Boris.BeekProject.Guis.Shared.MvcApplication" Language="C#" %>
+<%@ Application Codebehind="Global.asax.cs" Inherits="Boris.BeekProject.Guis.Web.MvcApplication" Language="C#" %>

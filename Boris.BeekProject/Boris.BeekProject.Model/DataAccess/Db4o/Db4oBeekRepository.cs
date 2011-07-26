@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Configuration;
 using Boris.BeekProject.Model.Beek;
 using Db4objects.Db4o;
+using Db4objects.Db4o.CS;
 using Db4objects.Db4o.Linq;
 
 namespace Boris.BeekProject.Model.DataAccess.Db4o
@@ -14,20 +16,27 @@ namespace Boris.BeekProject.Model.DataAccess.Db4o
         private readonly IObjectContainer client;
         private readonly object genreLock;
         private readonly object beekLock;
+        private static readonly IDictionary<string, IObjectServer> servers = new Dictionary<string, IObjectServer>();
 
         public Db4oBeekRepository (): this(ConfigurationManager.AppSettings["beekRepository.path.db4o"]){}
         private Db4oBeekRepository (string db4oFilePath) 
         {
-            FileInfo file = new FileInfo(db4oFilePath);
-            if (!file.Directory.Exists)
+            db4oFilePath = EnsureDb4OFilePath(db4oFilePath);
+            lock (servers)
             {
-                file.Directory.Create();
+                if (!servers.ContainsKey(db4oFilePath))
+                {
+                    server = Db4oClientServer.OpenServer(db4oFilePath, 0);
+                    servers.Add(db4oFilePath, server);
+                }
             }
-            server = Db4oFactory.OpenServer(db4oFilePath, 0);
+
+            server = servers[db4oFilePath];
             client = server.OpenClient(); 
             genreLock = new object();
             beekLock = new object();
         }
+
         public Db4oBeekRepository (IObjectServer beekServer)
         {
             server = beekServer;
@@ -38,8 +47,7 @@ namespace Boris.BeekProject.Model.DataAccess.Db4o
 
         public IQueryable<BaseGenre> GetGenres()
         {
-            // ToDo: down the latest db4o and use client.AsQueryable() straight from the bottle
-            return client.Cast<BaseGenre>().AsQueryable();
+            return client.AsQueryable<BaseGenre>();
         }
         public int AddGenre (BaseGenre genre)
         {
@@ -74,7 +82,7 @@ namespace Boris.BeekProject.Model.DataAccess.Db4o
 
         public IQueryable<WritingStyle> GetWritingStyles ()
         {
-            throw new NotImplementedException();
+            return client.AsQueryable<WritingStyle>();
         }
         public int AddWritingStyle (WritingStyle w)
         {
@@ -91,7 +99,7 @@ namespace Boris.BeekProject.Model.DataAccess.Db4o
 
         public IQueryable<BaseBeek> GetBeek ()
         {
-            return client.Cast<BaseBeek>().AsQueryable();
+            return client.AsQueryable<BaseBeek>();
         }
         public BaseBeek GetBeekById(int id)
         {
@@ -123,6 +131,24 @@ namespace Boris.BeekProject.Model.DataAccess.Db4o
                 client.Store(b);
                 client.Commit();
             }
+        }
+
+        private static string EnsureDb4OFilePath(string db4oFilePath)
+        {
+            if (!Path.IsPathRooted(db4oFilePath))
+            {
+                var appDataPath = (string)AppDomain.CurrentDomain.GetData("DataDirectory") ??
+                                  AppDomain.CurrentDomain.SetupInformation.ApplicationBase;
+                db4oFilePath = Path.Combine(appDataPath, db4oFilePath);
+            }
+
+            FileInfo file = new FileInfo(db4oFilePath);
+            if (!file.Exists)
+            {
+                file.Directory.Create();
+                file.Create();
+            }
+            return db4oFilePath;
         }
     }
 }

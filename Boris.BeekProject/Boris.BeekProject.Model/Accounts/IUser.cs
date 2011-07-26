@@ -18,6 +18,7 @@ namespace Boris.BeekProject.Model.Accounts
         Sources Source { get; set; }
         bool IsDefault { get; set; }
         bool IsAnonymous { get; }
+        string AvatarFileName { get; set; }
 
         bool Challenge(string password);
         bool IsContributingAs(Contributions contribution);

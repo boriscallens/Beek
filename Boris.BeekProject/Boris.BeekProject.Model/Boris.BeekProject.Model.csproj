@@ -53,13 +53,20 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Db4objects.Db4o, Version=7.12.156.14667, Culture=neutral, PublicKeyToken=6199cd4f203aa8eb, processorArchitecture=MSIL">
-      <HintPath>..\dependencies\Db4objects.Db4o.dll</HintPath>
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="Db4objects.Db4o, Version=8.1.184.15492, Culture=neutral, PublicKeyToken=6199cd4f203aa8eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\db4o-devel.8.1.184.15492\lib\net40\Db4objects.Db4o.dll</HintPath>
     </Reference>
-    <Reference Include="Db4objects.Db4o.Linq, Version=7.12.156.14667, Culture=neutral, PublicKeyToken=6199cd4f203aa8eb, processorArchitecture=MSIL">
-      <HintPath>..\dependencies\Db4objects.Db4o.Linq.dll</HintPath>
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="Db4objects.Db4o.CS">
+      <HintPath>..\packages\db4o-cs-devel.8.1.184.15492\lib\net40\Db4objects.Db4o.CS.dll</HintPath>
+    </Reference>
+    <Reference Include="Db4objects.Db4o.Data.Services, Version=8.1.184.15492, Culture=neutral, PublicKeyToken=6199cd4f203aa8eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\db4o-devel.8.1.184.15492\lib\net40\Db4objects.Db4o.Data.Services.dll</HintPath>
+    </Reference>
+    <Reference Include="Db4objects.Db4o.Linq, Version=8.1.184.15492, Culture=neutral, PublicKeyToken=6199cd4f203aa8eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\db4o-devel.8.1.184.15492\lib\net40\Db4objects.Db4o.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Reflection, Version=1.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <HintPath>..\packages\db4o-devel.8.1.184.15492\lib\net40\Mono.Reflection.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations">
@@ -77,13 +84,15 @@
     <Compile Include="Accounts\Sources.cs" />
     <Compile Include="Beek\IsbnDbBeek.cs" />
     <Compile Include="DataAccess\Db4o\Db4oBeekRepository.cs" />
-    <Compile Include="DataAccess\Db4o\UserRepository.cs" />
+    <Compile Include="DataAccess\Db4o\Db4oUserRepository.cs" />
     <Compile Include="DataAccess\IUserRepository.cs" />
     <Compile Include="Accounts\User.cs" />
     <Compile Include="Beek\BaseBeek.cs" />
     <Compile Include="Beek\Genres\BaseGenre.cs" />
     <Compile Include="Beek\WritingStyle.cs" />
     <Compile Include="DataAccess\IBeekRepository.cs" />
+    <Compile Include="DataAccess\Memory\MemoryBeekRepository.cs" />
+    <Compile Include="DataAccess\Memory\MemoryUserRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -127,6 +136,9 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

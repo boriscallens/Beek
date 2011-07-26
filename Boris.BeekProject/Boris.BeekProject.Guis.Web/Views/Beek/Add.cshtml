@@ -1,0 +1,29 @@
+﻿@{Page.Title = "Beek - Add a beek";}
+
+@using Boris.BeekProject.Guis.Web.ViewModels
+@model BeekViewModel
+
+@if (!string.IsNullOrWhiteSpace(Model.Title))
+{
+  <span>@Model.Title has been added</span>
+}
+  
+
+<form action="/Beek/AddSubmit" method="POST">
+  <fieldset >
+    <legend>How about adding that book you just read?</legend>
+    <ol>
+      <li>
+        <label for="title">Title</label>
+        <input id="title" name="title" type="text" placeholder="What was the title of the book?" required autofocus/>
+      </li>
+      <li>
+        <label for="author">Author</label>
+        <input id="author" name="author" type="text" placeholder="And who wrote it?" required/>
+      </li>
+    </ol>
+    <fieldset>
+      <button type=submit>Add It!</button>
+    </fieldset>
+  </fieldset>
+</form>

@@ -3,11 +3,12 @@ using System.Linq;
 using Boris.BeekProject.Model.Accounts;
 using Boris.BeekProject.Model.Beek;
 using Boris.Utils.IO;
+using Db4objects.Db4o;
+using Db4objects.Db4o.CS;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Boris.BeekProject.Model.DataAccess;
 using Boris.BeekProject.Model.DataAccess.Db4o;
 using User=Boris.BeekProject.Model.Accounts.User;
-using Db4objects.Db4o;
 using System.IO;
 
 namespace Boris.BeekProject.Model.Tests
@@ -23,8 +24,6 @@ namespace Boris.BeekProject.Model.Tests
         private static IObjectServer userServer;
         private static IUserRepository userRepository;
 
-        public TestContext TestContext { get; set; }
-
         public BeekDataAccess()
         {
             string beekPath = IOHelper.MakeAbsolute(ConfigurationManager.AppSettings["beekRepository.path.db4o"]);
@@ -37,33 +36,13 @@ namespace Boris.BeekProject.Model.Tests
             {
                 new FileInfo(userPath).Directory.Create();
             }
-            beekServer = Db4oFactory.OpenServer(beekPath, 0);
-            userServer = Db4oFactory.OpenServer(userPath, 0);
+            
+            beekServer = beekServer ?? Db4oClientServer.OpenServer(beekPath, 0);
+            userServer = beekServer ?? Db4oClientServer.OpenServer(userPath, 0);
             beekRepos = new Db4oBeekRepository(beekServer);
-            userRepository = new UserRepository(userServer);
+            userRepository = new Db4oUserRepository(userServer);
         }
 
-       #region Additional test attributes
-        //
-        // You can use the following additional attributes as you write your tests:
-        //
-        // Use ClassInitialize to run code before running the first test in the class
-        // [ClassInitialize()]
-        // public static void MyClassInitialize(TestContext testContext) { }
-        //
-        // Use ClassCleanup to run code after all tests in a class have run
-        // [ClassCleanup()]
-        // public static void MyClassCleanup() { }
-        //
-        // Use TestInitialize to run code before running each test 
-        // [TestInitialize()]
-        // public void MyTestInitialize() { }
-        //
-        // Use TestCleanup to run code after each test has run
-        // [TestCleanup()]
-        // public void MyTestCleanup() { }
-        //
-        #endregion
 
         [TestMethod]
         public void CanAddGenre()
@@ -72,7 +51,7 @@ namespace Boris.BeekProject.Model.Tests
             beekRepos.AddGenre(genre);
             Assert.IsTrue(beekRepos.GetGenres().Any(g=>g.Equals(genre)));
             beekRepos.AddGenre(genre);
-            Assert.IsTrue(beekRepos.GetGenres().Count()==1);
+            Assert.AreEqual(1, beekRepos.GetGenres().Count(g=>g.Equals(genre)));
             beekRepos.RemoveGenre(genre);
         }
         [TestMethod]
@@ -103,6 +82,7 @@ namespace Boris.BeekProject.Model.Tests
             Assert.IsTrue(beekRepos.GetBeek().Contains(beek));
             beekRepos.RemoveBeek(beek);
         }
+
         [TestMethod]
         public void CanRemoveBeek()
         {
@@ -121,8 +101,9 @@ namespace Boris.BeekProject.Model.Tests
             beekRepos.AddBeek(beek);
             beek.Title = after;
             beekRepos.UpdateBeek(beek);
-            Assert.IsFalse(beekRepos.GetBeek().Any(b=>b.Title.Equals(before)));
-            Assert.IsTrue(beekRepos.GetBeek().Any(b => b.Title.Equals(after)));
+
+            Assert.IsFalse(beekRepos.GetBeek().Any(b=>(b.Title ?? string.Empty).Equals(before)));
+            Assert.IsTrue(beekRepos.GetBeek().Any(b =>(b.Title ?? string.Empty).Equals(after)));
         }
     
         [TestMethod]

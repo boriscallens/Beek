@@ -26,6 +26,7 @@ namespace Boris.BeekProject.Model.Accounts
         public IEnumerable<Contributions> Contributions { get{ return contributions;}}
         public Sources Source { get; set; }
         public bool IsDefault { get; set; }
+        public string AvatarFileName { get; set; }
 
         public bool IsAnonymous { 
             get
